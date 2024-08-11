@@ -17,5 +17,4 @@ Style : 코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경�
 close #'해당 이슈번호' + '해당하는 스크린의 캡쳐본 및 설명'\
 Reviewers : whdmldus1116 설정\
 Assignees : 본인 설정\
-Labels : 해당하는 라벨 선택\
-Projects : 3팀 빅 브라더 선택\
+Labels : 해당하는 라벨 선택
