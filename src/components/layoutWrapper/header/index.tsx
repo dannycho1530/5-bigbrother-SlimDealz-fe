@@ -9,16 +9,18 @@ import {
   SearchContainer
 } from './styles';
 import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
+  const history = useHistory();
 
   const handleLogoClick = () => {
     navigate('/main');
   };
 
   const handleBackClick = () => {
-    navigate(-1); // 이전 방문 페이지로 돌아감
+    history.goBack(); // Goes to the previous page
   };
 
   return (
