@@ -18,17 +18,17 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="/main" />} />
         <Route path="/" element={<OutLetContainer />}>
-          <Route path="main" element={<MainPage />} />
-          <Route path="category" element={<CategoryPage />} />
-          <Route path="detail" element={<DetailPage />} />
-          <Route path="searchInitial" element={<SearchInitialPage />} />
-          <Route path="searchResults" element={<SearchResultsPage />} />
-          <Route path="signIn" element={<SignInPage />} />
-          <Route path="signUp" element={<SignUpPage />} />
-          <Route path="alarm" element={<UserAlarmPage />} />
-          <Route path="bookmark" element={<UserBookmarkPage />} />
-          <Route path="information" element={<UserInformationPage />} />
-          <Route path="recentlyView" element={<UserRecentlyViewPage />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/category/:productId" element={<DetailPage />} />
+          <Route path="/searchInitial" element={<SearchInitialPage />} />
+          <Route path="/searchResults" element={<SearchResultsPage />} />
+          <Route path="/signIn" element={<SignInPage />} />
+          <Route path="/signUp" element={<SignUpPage />} />
+          <Route path="/alarm" element={<UserAlarmPage />} />
+          <Route path="/bookmark" element={<UserBookmarkPage />} />
+          <Route path="/information" element={<UserInformationPage />} />
+          <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
