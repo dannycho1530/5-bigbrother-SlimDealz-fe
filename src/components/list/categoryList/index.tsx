@@ -12,10 +12,10 @@ import {
   SmallText
 } from './styles';
 
-type CategoryListProps = {
+type Props = {
+  id: number;
   image: string;
   name: string;
-  brand: string;
   price: number;
   per100gPrice: string;
   shipping: string;
@@ -23,16 +23,16 @@ type CategoryListProps = {
   bookmarkCount: number;
 };
 
-const CategoryList: React.FC<CategoryListProps> = ({
+const CategoryList = ({
+  id,
   image,
   name,
-  brand,
   price,
   per100gPrice,
   shipping,
   rating,
   bookmarkCount
-}) => {
+}: Props) => {
   const [bookmarked, setBookmarked] = useState(false);
   const navigate = useNavigate();
 
@@ -40,12 +40,12 @@ const CategoryList: React.FC<CategoryListProps> = ({
     setBookmarked((prev) => !prev);
   };
 
-  const handleClick = () => {
-    navigate('/detail');
+  const handleClick = (productId: number) => {
+    navigate(`/product/${productId}`);
   };
 
   return (
-    <Container onClick={handleClick}>
+    <Container onClick={() => handleClick(id)}>
       <ImageContainer>
         <img
           src={image}
