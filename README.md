@@ -11,7 +11,7 @@ Refactor : 프로덕션 코드 리팩토링\
 Style : 코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우
 
 ## 브랜치 전략
-main: 최종 배포시 merge 및 release 작성하여 tag 붙임
+main: 최종 배포시 merge 및 release 작성하여 tag 붙임\
 dev: 개발단계의 최종 병합지. 개발 시 모든 브랜치는 해당 브랜치에서 가져와서 만듦
 
 ## pull requests 작성 규칙
