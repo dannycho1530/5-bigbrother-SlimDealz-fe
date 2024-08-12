@@ -1,9 +1,7 @@
 import React from 'react';
 import { AudioOutlined } from '@ant-design/icons';
 import { Input, Space } from 'antd';
-import type { GetProps } from 'antd';
-
-type SearchProps = GetProps<typeof Input.Search>;
+import { useNavigate } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -16,13 +14,20 @@ const suffix = (
   />
 );
 
-const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
-  console.log(info?.source, value);
+const SearchBar: React.FC = () => {
+  const navigate = useNavigate();
 
-const SearchBar: React.FC = () => (
-  <Space direction="vertical">
-    <Search allowClear onSearch={onSearch} style={{ width: 325 }} />
-  </Space>
-);
+  const onSearch = (value: string) => {
+    if (value) {
+      navigate(`/searchResults?query=${encodeURIComponent(value)}`);
+    }
+  };
+
+  return (
+    <Space direction="vertical">
+      <Search allowClear onSearch={onSearch} style={{ width: 330 }} />
+    </Space>
+  );
+};
 
 export default SearchBar;
