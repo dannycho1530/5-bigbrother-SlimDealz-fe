@@ -21,12 +21,7 @@ const onSearch: SearchProps['onSearch'] = (value, _e, info) =>
 
 const SearchBar: React.FC = () => (
   <Space direction="vertical">
-    <Search
-      placeholder="input search text"
-      allowClear
-      onSearch={onSearch}
-      style={{ width: 200 }}
-    />
+    <Search allowClear onSearch={onSearch} style={{ width: 325 }} />
   </Space>
 );
 

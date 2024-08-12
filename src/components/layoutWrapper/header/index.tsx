@@ -1,6 +1,6 @@
 import React from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import slimdealzlogo from '../../../assets/slimdealzlogo2.png';
+import slimdealzlogo from '../../../../public/assets/slimdealzlogo2.png';
 import SearchBar from './SearchBar';
 import {
   HeaderContainer,
