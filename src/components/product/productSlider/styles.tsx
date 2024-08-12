@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: var(--background-color);
   position: relative;
 
   &:hover .arrow {
@@ -18,6 +18,7 @@ export const ProductSliderContainer = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  background-color: var(--background-color);
 `;
 
 export const ProductsWrapper = styled.div`
@@ -61,4 +62,5 @@ export const ProductImage = styled.img`
 export const PriceInfo = styled.div`
   text-align: center;
   font-size: 14px;
+  margin-top: 10px;
 `;
