@@ -9,7 +9,7 @@ import {
   ProductImage,
   PriceInfo
 } from './styles';
-import { LeftArrow, RightArrow } from '@/components/utils/arrow';
+import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 
 const mockProducts = [
   {
