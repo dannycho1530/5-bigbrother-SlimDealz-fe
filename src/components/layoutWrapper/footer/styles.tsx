@@ -2,7 +2,9 @@ import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  z-index: 50;
 `;

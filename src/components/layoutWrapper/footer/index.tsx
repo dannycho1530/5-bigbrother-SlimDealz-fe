@@ -14,7 +14,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <Box sx={{ width: 390 }}>
+      <Box sx={{ width: 330 }}>
         <BottomNavigation
           showLabels
           value={value}
@@ -22,21 +22,21 @@ const Footer = () => {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="홈" icon={<HomeOutlinedIcon />} />
+          <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />
           <BottomNavigationAction
-            label="최근 본 상품"
+            label="Recents"
             icon={<ArchiveOutlinedIcon />}
           />
           <BottomNavigationAction
-            label="알림"
+            label="Notifications"
             icon={<NotificationsRoundedIcon />}
           />
           <BottomNavigationAction
-            label="북마크"
+            label="Bookmarks"
             icon={<BookmarkRoundedIcon />}
           />
           <BottomNavigationAction
-            label="마이 페이지"
+            label="My page"
             icon={<AccountCircleOutlinedIcon />}
           />
         </BottomNavigation>
