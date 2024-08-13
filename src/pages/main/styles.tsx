@@ -8,7 +8,6 @@ export const Container = styled.div`
 export const ChickenChestWrapper = styled.div`
   display: flex;
   gap: 10px;
-  padding: 20px;
   background-color: var(--background-color);
   border-radius: 10px;
   margin-bottom: 20px;
