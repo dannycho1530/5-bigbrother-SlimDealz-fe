@@ -1,12 +1,14 @@
+import React from 'react';
 import { Container } from './styles';
 import { useParams } from 'react-router-dom';
+import PriceAlertSetting from '../../components/priceAlertSetting';
 
 const DetailPage = () => {
   const { productId } = useParams<{ productId: string }>();
+
   return (
     <Container>
-      <h1>Product Detail Page</h1>
-      <p>Product ID: {productId}</p>
+      <PriceAlertSetting />
     </Container>
   );
 };
