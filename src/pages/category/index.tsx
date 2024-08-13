@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container } from './styles';
 import CategoryList from '../../components/list/categoryList';
+import PageNameTag from '../../components/utils/pageName';
+import { ChickenChestWrapper } from '../main/styles';
+import IconCategory from '../../components/icon/iconCategory';
 
 const CategoryPage = () => {
   const mockData = [
@@ -63,6 +66,11 @@ const CategoryPage = () => {
 
   return (
     <Container>
+      <ChickenChestWrapper>
+        <IconCategory />
+        {/* 나중에 map을 통해 IconCategory 컴포넌트를 4개로 늘릴 수 있음 */}
+      </ChickenChestWrapper>
+      <PageNameTag pageName="추천 페이지" /> {/* 2번 위치에 PageNameTag 추가 */}
       {mockData.map((item, index) => (
         <CategoryList key={index} {...item} />
       ))}

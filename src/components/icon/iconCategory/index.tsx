@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ItemContainer, ChickenImage } from './styles';
+import { ItemContainer, ChickenImage, Label } from './styles';
 import chickenChest from '/public/assets/chickenChest.png';
 
 const IconCategory = () => {
@@ -13,6 +13,7 @@ const IconCategory = () => {
   return (
     <ItemContainer onClick={handleClick}>
       <ChickenImage src={chickenChest} alt="Chicken Chest" />
+      <Label>닭가슴살</Label>
     </ItemContainer>
   );
 };
