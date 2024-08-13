@@ -1,12 +1,19 @@
-import { Container } from './styles';
+import React from 'react';
+import { Container, Title } from './styles';
 import { useParams } from 'react-router-dom';
+import PriceAlertSetting from '../../components/priceAlertSetting';
+import TabsComponent from '../../components/tab';
+import ReviewList from '@/components/list/reviewList';
 
 const DetailPage = () => {
   const { productId } = useParams<{ productId: string }>();
+
   return (
     <Container>
-      <h1>Product Detail Page</h1>
-      <p>Product ID: {productId}</p>
+      <PriceAlertSetting />
+      <TabsComponent />
+      <Title>리뷰</Title>
+      <ReviewList />
     </Container>
   );
 };

@@ -1,40 +1,73 @@
 import React from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import slimdealzlogo from '../../../../public/assets/slimdealzlogo2.png';
+
 import SearchBar from './SearchBar';
 import {
   HeaderContainer,
   IconContainer,
   LogoContainer,
+  PageTitle,
   SearchContainer
 } from './styles';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const slimdealzlogo = '/assets/slimdealzlogo2.png';
+
+type HeaderProps = {
+  pageTitle?: string;
+};
+
+const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogoClick = () => {
     navigate('/main');
   };
 
   const handleBackClick = () => {
-    navigate(-1); // 이전 페이지로 이동
+    navigate(-1);
   };
+
+  const isMainPage = location.pathname === '/main';
+  const isSpecialPage = ['/category/', '/searchInitial', '/searchResults'].some(
+    (path) => location.pathname.startsWith(path)
+  );
+  const isSimplePage = [
+    '/alarm',
+    '/bookmark',
+    '/information',
+    '/recentlyView',
+    '/signUp',
+    '/signIn'
+  ].includes(location.pathname);
 
   return (
     <HeaderContainer>
-      <IconContainer onClick={handleBackClick}>
+      <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
         <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
       </IconContainer>
-      <LogoContainer>
-        <img
-          src={slimdealzlogo}
-          alt="Slimdealz logo"
-          onClick={handleLogoClick}
-          style={{ cursor: 'pointer' }}
-        />
+      <LogoContainer
+        $isCentered={isMainPage}
+        $isSpecialPage={isSpecialPage}
+        $isSimplePage={isSimplePage}
+      >
+        {isMainPage && (
+          <img
+            src={slimdealzlogo}
+            alt="Slimdealz logo"
+            onClick={handleLogoClick}
+            style={{ cursor: 'pointer' }}
+          />
+        )}
       </LogoContainer>
-      <SearchContainer>
+      <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
+        {pageTitle || 'Page Title'}
+      </PageTitle>
+      <SearchContainer
+        $isSpecialPage={isSpecialPage}
+        $isSimplePage={isSimplePage}
+      >
         <SearchBar />
       </SearchContainer>
     </HeaderContainer>
