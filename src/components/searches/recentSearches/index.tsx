@@ -6,7 +6,8 @@ import Button from '@mui/material/Button';
 import {
   NameContainer,
   RecentSearchesContainer,
-  SearchWordsContainer
+  SearchWordsContainer,
+  NoSearchWordsText
 } from './styles';
 
 const RecentSearches = () => {
@@ -43,30 +44,38 @@ const RecentSearches = () => {
     <RecentSearchesContainer>
       <NameContainer>
         <SearchName searchName="최근 검색어" />
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: '#f2f2f7',
-            textAlign: 'center',
-            fontSize: '13px',
-            fontWeight: 'bold',
-            color: 'black',
-            padding: '5px',
-            borderRadius: '15px',
-            boxShadow: 'none',
-            '&:hover': {
-              backgroundColor: '#e0e0e0'
-            }
-          }}
-          onClick={handleDeleteAll} // 버튼 클릭 시 handleDeleteAll 함수 호출
-        >
-          전체 삭제
-        </Button>
+        {searchWords.length > 0 && (
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: '#f2f2f7',
+              textAlign: 'center',
+              fontSize: '13px',
+              fontWeight: 'bold',
+              color: 'black',
+              padding: '5px',
+              borderRadius: '15px',
+              boxShadow: 'none',
+              '&:hover': {
+                backgroundColor: '#e0e0e0'
+              }
+            }}
+            onClick={handleDeleteAll} // 버튼 클릭 시 handleDeleteAll 함수 호출
+          >
+            전체 삭제
+          </Button>
+        )}
       </NameContainer>
       <SearchWordsContainer>
-        {searchWords.map((word, index) => (
-          <SearchWord key={index} searchWord={word} />
-        ))}
+        {searchWords.length > 0 ? (
+          searchWords.map((word, index) => (
+            <SearchWord key={index} searchWord={word} showClearIcon={true} /> // showClearIcon prop 전달
+          ))
+        ) : (
+          <NoSearchWordsText>
+            최근 검색어가 존재하지 않습니다.
+          </NoSearchWordsText>
+        )}
       </SearchWordsContainer>
     </RecentSearchesContainer>
   );

@@ -31,3 +31,9 @@ export const SearchWordsContainer = styled.div`
   -ms-overflow-style: none; /* IE 및 Edge에서 스크롤바 숨기기 */
   scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
 `;
+
+export const NoSearchWordsText = styled.div`
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+`;
