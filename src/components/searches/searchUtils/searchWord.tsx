@@ -5,20 +5,22 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 type Props = {
   searchWord: string;
   isPopular?: boolean; // 인기 검색어 여부를 나타내는 선택적 prop
+  showClearIcon?: boolean; // RecentSearch에서 사용할 때만 아이콘을 노출하는 prop
 };
 
 const SearchWord = ({
   searchWord: initialSearchWord,
-  isPopular = false
+  isPopular = false,
+  showClearIcon = false // 기본값은 false
 }: Props) => {
-  const [isVisible, setIsVisible] = useState(true); // 컴포넌트의 가시성 상태 관리
+  const [isVisible, setIsVisible] = useState(true);
   const [searchWord, setSearchWord] = useState(initialSearchWord);
 
   const handleClear = () => {
-    setIsVisible(false); // 컴포넌트를 삭제하여 화면에서 숨김
+    setIsVisible(false);
   };
 
-  if (!isVisible) return null; // isVisible이 false일 경우 아무것도 렌더링하지 않음
+  if (!isVisible) return null;
 
   const displayedWord =
     searchWord.length > 10 ? searchWord.slice(0, 10) + '...' : searchWord;
@@ -28,10 +30,11 @@ const SearchWord = ({
   return (
     <Container>
       <WordTextContainer>{displayedWord}</WordTextContainer>
-      <IconContainer onClick={handleClear}>
-        <ClearRoundedIcon sx={{ fontSize: 15, display: 'none' }} />{' '}
-        {/* 아이콘 숨김 */}
-      </IconContainer>
+      {showClearIcon && ( // showClearIcon이 true일 때만 아이콘을 노출
+        <IconContainer onClick={handleClear}>
+          <ClearRoundedIcon sx={{ fontSize: 15 }} />
+        </IconContainer>
+      )}
     </Container>
   );
 };
