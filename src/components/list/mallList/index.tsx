@@ -21,7 +21,7 @@ const mockData = [
     logo: '/path/to/logo2.png',
     name: '쇼핑몰 2',
     price: 899999,
-    coupon: '' // 쿠폰 정보 없음
+    coupon: ''
   },
   {
     id: 3,
