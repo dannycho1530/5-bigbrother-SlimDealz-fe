@@ -4,9 +4,13 @@ import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 
 type Props = {
   searchWord: string;
+  isPopular?: boolean; // 인기 검색어 여부를 나타내는 선택적 prop
 };
 
-const SearchWord = ({ searchWord: initialSearchWord }: Props) => {
+const SearchWord = ({
+  searchWord: initialSearchWord,
+  isPopular = false
+}: Props) => {
   const [isVisible, setIsVisible] = useState(true); // 컴포넌트의 가시성 상태 관리
   const [searchWord, setSearchWord] = useState(initialSearchWord);
 
@@ -19,19 +23,22 @@ const SearchWord = ({ searchWord: initialSearchWord }: Props) => {
   const displayedWord =
     searchWord.length > 10 ? searchWord.slice(0, 10) + '...' : searchWord;
 
+  const Container = isPopular ? RankWordContainer : SearchWordContainer;
+
   return (
-    <SearchWordContainer>
+    <Container>
       <WordTextContainer>{displayedWord}</WordTextContainer>
       <IconContainer onClick={handleClear}>
-        <ClearRoundedIcon sx={{ fontSize: 15 }} />
+        <ClearRoundedIcon sx={{ fontSize: 15, display: 'none' }} />{' '}
+        {/* 아이콘 숨김 */}
       </IconContainer>
-    </SearchWordContainer>
+    </Container>
   );
 };
 
 export default SearchWord;
 
-const SearchWordContainer = styled.div`
+export const SearchWordContainer = styled.div`
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -39,6 +46,11 @@ const SearchWordContainer = styled.div`
   height: 30px;
   padding: 5px 10px 5px 15px;
   border-radius: 10px;
+  background-color: #f2f2f7;
+`;
+
+const RankWordContainer = styled(SearchWordContainer)`
+  width: 140px;
   background-color: #f2f2f7;
 `;
 
