@@ -65,7 +65,7 @@ export const BookmarkCountWrapper = styled.div`
 export const BookmarkCount = styled.div`
   font-size: 16px;
   color: #000;
-  text-align: right;
-  min-width: 35px;
+  text-align: left;
+  width: 40px;
   white-space: nowrap;
 `;
