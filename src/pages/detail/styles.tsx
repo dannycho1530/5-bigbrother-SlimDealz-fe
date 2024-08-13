@@ -12,8 +12,8 @@ export const Title = styled.h2`
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  margin-top: 32px; /* Tabs와 간격 조절 */
+  margin-top: 32px;
   margin-bottom: 16px;
-  border-bottom: 2px solid #ddd; /* 제목 아래에 경계선을 추가 */
-  padding-bottom: 8px; /* 경계선과 제목 간의 간격 조절 */
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 8px;
 `;
