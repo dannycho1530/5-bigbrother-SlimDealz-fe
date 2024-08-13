@@ -49,3 +49,23 @@ export const BookmarkContainer = styled.div`
   margin-top: 10px;
   width: 100%;
 `;
+
+export const RatingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+export const BookmarkCountWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+`;
+
+export const BookmarkCount = styled.div`
+  font-size: 16px;
+  color: #000;
+  text-align: right;
+  min-width: 35px;
+  white-space: nowrap;
+`;

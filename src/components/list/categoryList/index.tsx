@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Rate, Button } from 'antd';
-import { BookOutlined, BookFilled } from '@ant-design/icons';
+import { Rating, IconButton } from '@mui/material';
+import { BookmarkBorder, Bookmark } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -9,7 +9,9 @@ import {
   PriceContainer,
   BookmarkContainer,
   PriceText,
-  SmallText
+  SmallText,
+  BookmarkCount,
+  BookmarkCountWrapper
 } from './styles';
 
 type Props = {
@@ -31,13 +33,18 @@ const CategoryList = ({
   per100gPrice,
   shipping,
   rating,
-  bookmarkCount
+  bookmarkCount: initialBookmarkCount
 }: Props) => {
   const [bookmarked, setBookmarked] = useState(false);
+  const [bookmarkCount, setBookmarkCount] =
+    useState<number>(initialBookmarkCount);
   const navigate = useNavigate();
 
   const handleBookmarkClick = () => {
     setBookmarked((prev) => !prev);
+    setBookmarkCount((prevCount) =>
+      bookmarked ? prevCount - 1 : prevCount + 1
+    );
   };
 
   const handleClick = (productId: number) => {
@@ -61,15 +68,16 @@ const CategoryList = ({
         <SmallText>[100g 당 {per100gPrice}원]</SmallText>
         <SmallText>{shipping}</SmallText>
         <BookmarkContainer onClick={(e) => e.stopPropagation()}>
-          <Rate disabled defaultValue={rating} />
-          <Button
-            type="text"
-            icon={bookmarked ? <BookFilled /> : <BookOutlined />}
-            onClick={handleBookmarkClick}
-            style={{ fontSize: '16px', color: '#000', paddingLeft: '10px' }}
-          >
-            {bookmarkCount}
-          </Button>
+          <Rating value={rating} readOnly />
+          <BookmarkCountWrapper>
+            <IconButton
+              onClick={handleBookmarkClick}
+              style={{ paddingLeft: '10px' }}
+            >
+              {bookmarked ? <Bookmark /> : <BookmarkBorder />}
+            </IconButton>
+            <BookmarkCount>{bookmarkCount}</BookmarkCount>
+          </BookmarkCountWrapper>
         </BookmarkContainer>
       </InfoContainer>
     </Container>
