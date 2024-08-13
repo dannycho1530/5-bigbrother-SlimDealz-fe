@@ -1,42 +1,46 @@
-import HomeIcon from '@mui/icons-material/Home';
-import RecentIcon from '@mui/icons-material/Archive';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import BookmarkIcon from '@mui/icons-material/Bookmark';
-import UserIcon from '@mui/icons-material/Person';
-import { useNavigate } from 'react-router-dom';
-
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
+import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
+import BookmarkRoundedIcon from '@mui/icons-material/BookmarkRounded';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { FooterContainer } from './styles';
 
 const Footer = () => {
-  const navigate = useNavigate();
+  const [value, setValue] = React.useState(0);
 
   return (
     <FooterContainer>
-      <HomeIcon
-        fontSize="large"
-        onClick={() => navigate('/main')}
-        style={{ cursor: 'pointer' }}
-      />
-      <RecentIcon
-        fontSize="large"
-        onClick={() => navigate('/recentlyView')}
-        style={{ cursor: 'pointer' }}
-      />
-      <NotificationsIcon
-        fontSize="large"
-        onClick={() => navigate('/alarm')}
-        style={{ cursor: 'pointer' }}
-      />
-      <BookmarkIcon
-        fontSize="large"
-        onClick={() => navigate('/bookmark')}
-        style={{ cursor: 'pointer' }}
-      />
-      <UserIcon
-        fontSize="large"
-        onClick={() => navigate('/information')}
-        style={{ cursor: 'pointer' }}
-      />
+      <Box sx={{ width: 330 }}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />
+          <BottomNavigationAction
+            label="Recents"
+            icon={<ArchiveOutlinedIcon />}
+          />
+          <BottomNavigationAction
+            label="Notifications"
+            icon={<NotificationsRoundedIcon />}
+          />
+          <BottomNavigationAction
+            label="Bookmarks"
+            icon={<BookmarkRoundedIcon />}
+          />
+          <BottomNavigationAction
+            label="My page"
+            icon={<AccountCircleOutlinedIcon />}
+          />
+        </BottomNavigation>
+      </Box>
     </FooterContainer>
   );
 };
