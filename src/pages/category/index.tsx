@@ -1,9 +1,10 @@
 import React from 'react';
 import { Container } from './styles';
 import CategoryList from '../../components/list/categoryList';
-import PageNameTag from '../../components/utils/pageName';
+
 import { ChickenChestWrapper } from '../main/styles';
 import IconCategory from '../../components/icon/iconCategory';
+import PageNameTag from '../../components/tag/pageNameTag';
 
 const CategoryPage = () => {
   const mockData = [
