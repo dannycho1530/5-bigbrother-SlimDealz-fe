@@ -9,15 +9,30 @@ const PriceAlertSetting = () => {
   const [isAlertEnabled, setIsAlertEnabled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
+  const formatPrice = (value: string) => {
+    return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  const handleToggleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = event.target.value.replace(/,/g, '');
+    const numericValue = rawValue.replace(/[^0-9]/g, '');
+
+    if (numericValue) {
+      setPrice(formatPrice(numericValue));
+    } else {
+      setPrice('');
+    }
+  };
+
+  const handleToggleChange = () => {
     if (!isAlertEnabled) {
       setIsModalOpen(true);
     }
-    setIsAlertEnabled(event.target.checked);
+    setIsAlertEnabled(!isAlertEnabled);
+  };
+
+  const handleIconClick = () => {
+    handleToggleChange();
   };
 
   return (
@@ -29,14 +44,17 @@ const PriceAlertSetting = () => {
         placeholder="희망 가격"
         sx={{
           width: '100px',
-          height: '30px', // 높이를 줄임
+          height: '30px',
           '& .MuiInputBase-root': {
-            height: '30px' // 내부 입력 높이를 줄임
+            height: '30px'
           }
         }}
       />
       <Typography>원 에 알려 주세요!</Typography>
-      <IconButton sx={{ marginLeft: 'auto', marginRight: '-15px' }}>
+      <IconButton
+        onClick={handleIconClick}
+        sx={{ marginLeft: 'auto', marginRight: '-15px' }}
+      >
         <NotificationsActiveIcon
           sx={{
             color: isAlertEnabled ? '#1565C0' : '#ccc',
