@@ -1,8 +1,6 @@
-import { ChickenChestWrapper } from '@/pages/main/styles';
 import { Container } from './styles';
-import IconCategory from '@/components/icon/iconCategory';
-import PageNameTag from '@/components/tag/pageNameTag';
-import CategoryList from '@/components/list/categoryList';
+import PageNameTag from '../../../components/tag/pageNameTag';
+import CategoryList from '../../../components/list/categoryList';
 
 const UserBookmarkPage = () => {
   const mockData = [

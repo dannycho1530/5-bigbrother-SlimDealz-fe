@@ -5,7 +5,6 @@ export const Container = styled.div`
 `;
 
 export const Section = styled.div`
-  border: 2px solid #e74c3c;
   border-radius: 8px;
   margin-bottom: 20px;
   padding: 15px;
@@ -14,7 +13,6 @@ export const Section = styled.div`
 `;
 
 export const SectionTitle = styled.div`
-  background-color: #e74c3c;
   color: white;
   font-weight: bold;
   padding: 10px;
