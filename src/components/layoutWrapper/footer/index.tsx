@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -14,7 +13,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <Box sx={{ width: 390 }}>
+      <div style={{ width: 390 }}>
         <BottomNavigation
           showLabels
           value={value}
@@ -40,7 +39,7 @@ const Footer = () => {
             icon={<AccountCircleOutlinedIcon />}
           />
         </BottomNavigation>
-      </Box>
+      </div>
     </FooterContainer>
   );
 };
