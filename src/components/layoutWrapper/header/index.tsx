@@ -61,9 +61,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
           />
         )}
       </LogoContainer>
-      <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
-        {pageTitle}
-      </PageTitle>
+      {/* <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
+        {pageTitle || 'Page Title'}
+      </PageTitle> */}
       <SearchContainer
         $isSpecialPage={isSpecialPage}
         $isSimplePage={isSimplePage}
