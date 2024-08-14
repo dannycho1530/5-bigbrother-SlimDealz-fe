@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
-  display: flex;
   position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 390px;
+  height: auto;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 390px;
-  height: 100px;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
 `;
 
 export const IconContainer = styled.div<{ $isHidden: boolean }>`
@@ -21,12 +28,10 @@ export const LogoContainer = styled.div<{
   $isSpecialPage: boolean;
   $isSimplePage: boolean;
 }>`
-  flex-grow: 1;
-  display: ${({ $isSpecialPage, $isSimplePage }) =>
-    $isSpecialPage || $isSimplePage ? 'none' : 'flex'};
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: ${({ $isCentered }) =>
-    $isCentered ? 'center' : 'flex-start'};
+  margin-top: 20px;
 
   img {
     width: 300px;
@@ -38,11 +43,12 @@ export const SearchContainer = styled.div<{
   $isSpecialPage: boolean;
   $isSimplePage: boolean;
 }>`
-  flex-grow: 2;
   display: ${({ $isSimplePage }) => ($isSimplePage ? 'none' : 'flex')};
-  position: relative;
-  top: ${({ $isSpecialPage }) => ($isSpecialPage ? 'none' : '40px')};
-  right: ${({ $isSpecialPage }) => ($isSpecialPage ? '0' : '325px')};
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 20px 0px;
+  box-sizing: border-box;
 `;
 
 export const PageTitle = styled.div<{

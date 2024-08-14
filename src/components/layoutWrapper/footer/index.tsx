@@ -14,7 +14,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <Box sx={{ width: 330 }}>
+      <Box sx={{ width: 390 }}>
         <BottomNavigation
           showLabels
           value={value}

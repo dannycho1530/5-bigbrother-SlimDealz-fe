@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  z-index: 50;
+  background-color: white;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 `;
