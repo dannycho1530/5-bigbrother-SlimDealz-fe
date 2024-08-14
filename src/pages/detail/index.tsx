@@ -3,7 +3,7 @@ import { Container, Title } from './styles';
 import { useParams } from 'react-router-dom';
 import PriceAlertSetting from '../../components/priceAlertSetting';
 import TabsComponent from '../../components/tab';
-import ReviewList from '@/components/list/reviewList';
+import ReviewList from '../../components/list/reviewList';
 
 const DetailPage = () => {
   const { productId } = useParams<{ productId: string }>();
