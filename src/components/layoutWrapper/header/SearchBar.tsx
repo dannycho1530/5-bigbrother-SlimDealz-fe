@@ -5,25 +5,30 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 
-const SearchBar = () => {
-  const [searchValue, setSearchValue] = React.useState('');
+type SearchBarProps = {
+  searchValue: string;
+  onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearch: (value: string) => void;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({
+  searchValue,
+  onSearchChange,
+  onSearch
+}) => {
   const navigate = useNavigate();
-
-  const onSearch = (value: string) => {
-    if (value) {
-      navigate(`/searchResults?query=${encodeURIComponent(value)}`);
-    }
-  };
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-  };
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       onSearch(searchValue);
+      navigate(`/searchResults?query=${encodeURIComponent(searchValue)}`);
     }
+  };
+
+  const handleSearchClick = () => {
+    onSearch(searchValue);
+    navigate(`/searchResults?query=${encodeURIComponent(searchValue)}`);
   };
 
   return (
@@ -39,25 +44,25 @@ const SearchBar = () => {
       }}
       onSubmit={(event) => {
         event.preventDefault();
-        onSearch(searchValue);
+        handleSearchClick();
       }}
     >
       <InputBase
         sx={{
           ml: 1,
           flex: 1,
-          width: '100%', // 너비 조절
-          height: '20px' // 높이 조절
+          width: '100%',
+          height: '20px'
         }}
         value={searchValue}
-        onChange={handleInputChange}
+        onChange={onSearchChange}
         onKeyPress={handleKeyPress}
       />
       <IconButton
         type="button"
         sx={{ p: '10px', marginLeft: 'auto' }}
         aria-label="search"
-        onClick={() => onSearch(searchValue)}
+        onClick={handleSearchClick}
       >
         <SearchIcon />
       </IconButton>
