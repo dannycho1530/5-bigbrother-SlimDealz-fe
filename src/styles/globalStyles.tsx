@@ -14,6 +14,11 @@ const GlobalStyles = createGlobalStyle`
     padding-top: 120px;
     padding-bottom: 50px;
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-color: var(--background-color);
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
   }
   html,
   body,

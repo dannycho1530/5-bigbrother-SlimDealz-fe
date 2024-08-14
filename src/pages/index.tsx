@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const OutLetContainer = () => {
   return (
-    <div style={{ backgroundColor: '#f4f4f4', }}>
+    <div>
       <Header />
       <div className="container">
         <Outlet />

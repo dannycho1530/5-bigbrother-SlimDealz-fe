@@ -13,14 +13,17 @@ export const HeaderContainer = styled.div`
   z-index: 1000;
   background-color: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `;
 
 export const IconContainer = styled.div<{ $isHidden: boolean }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'flex')};
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 5px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
 `;
 
 export const LogoContainer = styled.div<{
@@ -31,11 +34,12 @@ export const LogoContainer = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   margin-top: 20px;
 
   img {
-    width: 300px;
-    height: 30px;
+    width: 200px; /* 로고 크기를 조정 */
+    height: auto;
   }
 `;
 
@@ -47,8 +51,9 @@ export const SearchContainer = styled.div<{
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 20px 20px 0px;
+  padding: 10px 20px 0px; /* 패딩을 조정하여 검색바 위치 조정 */
   box-sizing: border-box;
+  margin-top: 10px; /* 로고와의 간격을 조정 */
 `;
 
 export const PageTitle = styled.div<{

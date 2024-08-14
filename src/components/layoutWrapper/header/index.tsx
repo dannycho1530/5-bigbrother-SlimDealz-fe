@@ -5,7 +5,8 @@ import {
   HeaderContainer,
   IconContainer,
   LogoContainer,
-  SearchContainer
+  SearchContainer,
+  PageTitle,
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -13,24 +14,21 @@ const slimdealzlogo = '/assets/slimdealzlogo2.png';
 
 type HeaderProps = {
   pageTitle?: string;
+  onBackNavigation?: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
+const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 사용자가 입력한 검색어를 관리할 상태 추가
   const [searchValue, setSearchValue] = useState('');
 
-  // 검색어 변경 시 호출되는 함수
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
   };
 
-  // 검색 시 호출되는 함수
   const handleSearch = (value: string) => {
-    // 검색 결과 페이지로 이동
-    navigate(`/searchResults?query=${encodeURIComponent(value)}`);
+    navigate(`/searchResults/${encodeURIComponent(value)}`);
   };
 
   const handleLogoClick = () => {
@@ -38,11 +36,14 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const handleBackClick = () => {
+    if (onBackNavigation) {
+      onBackNavigation();
+    }
     navigate(-1);
   };
 
   const isMainPage = location.pathname === '/main';
-  const isSpecialPage = ['/category/', '/searchInitial', '/searchResults'].some(
+  const isSpecialPage = ['/category', '/searchInitial', '/searchResults'].some(
     (path) => location.pathname.startsWith(path)
   );
   const isSimplePage = [
@@ -59,30 +60,40 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
       <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
         <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
       </IconContainer>
-      <LogoContainer
-        $isCentered={isMainPage}
-        $isSpecialPage={isSpecialPage}
-        $isSimplePage={isSimplePage}
-      >
-        {isMainPage && (
+      
+      {(isMainPage || isSpecialPage) && ( // 로고를 메인 페이지와 isSpecialPage인 경우에만 표시
+        <LogoContainer
+          $isCentered={isMainPage}
+          $isSpecialPage={isSpecialPage}
+          $isSimplePage={isSimplePage}
+        >
           <img
             src={slimdealzlogo}
             alt="Slimdealz logo"
             onClick={handleLogoClick}
             style={{ cursor: 'pointer' }}
           />
-        )}
-      </LogoContainer>
-      <SearchContainer
-        $isSpecialPage={isSpecialPage}
-        $isSimplePage={isSimplePage}
-      >
-        <SearchBar 
-          searchValue={searchValue} 
-          onSearchChange={handleSearchChange} 
-          onSearch={handleSearch} 
-        />
-      </SearchContainer>
+        </LogoContainer>
+      )}
+
+      {isSimplePage && ( // isSimplePage인 경우에만 제목을 보여줌
+        <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
+          {pageTitle}
+        </PageTitle>
+      )}
+
+      {!isSimplePage && (
+        <SearchContainer
+          $isSpecialPage={isSpecialPage}
+          $isSimplePage={isSimplePage}
+        >
+          <SearchBar 
+            searchValue={searchValue} 
+            onSearchChange={handleSearchChange} 
+            onSearch={handleSearch} 
+          />
+        </SearchContainer>
+      )}
     </HeaderContainer>
   );
 };
