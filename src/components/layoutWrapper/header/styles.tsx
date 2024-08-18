@@ -16,13 +16,17 @@ export const HeaderContainer = styled.div`
   padding-bottom: 10px;
 `;
 
-export const IconContainer = styled.div<{ $isHidden: boolean }>`
+export const IconContainer = styled.div<{
+  $isHidden: boolean;
+  $isSpecialPage?: boolean; // 이 부분을 수정하여 선택적 props로 만듦
+}>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'flex')};
   align-items: center;
   justify-content: flex-start;
   margin: 5px;
   position: absolute;
-  left: 10px;
+  left: ${({ $isSpecialPage }) =>
+    $isSpecialPage ? '20px' : '10px'}; /* 간격 조정 */
   top: 15px;
 `;
 
@@ -32,13 +36,14 @@ export const LogoContainer = styled.div<{
   $isSimplePage: boolean;
 }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ $isCentered }) =>
+    $isCentered ? 'center' : 'flex-start'};
   align-items: center;
   width: 100%;
   margin-top: 20px;
 
   img {
-    width: 200px; /* 로고 크기를 조정 */
+    width: 200px;
     height: auto;
   }
 `;
@@ -54,6 +59,12 @@ export const SearchContainer = styled.div<{
   padding: 10px 20px 0px; /* 패딩을 조정하여 검색바 위치 조정 */
   box-sizing: border-box;
   margin-top: 10px; /* 로고와의 간격을 조정 */
+
+  ${({ $isSpecialPage }) =>
+    $isSpecialPage &&
+    `
+      margin-left: auto; /* DetailPage에서 검색 버튼 위치 조정 */
+    `}
 `;
 
 export const PageTitle = styled.div<{
@@ -69,4 +80,11 @@ export const PageTitle = styled.div<{
   font-size: 20px;
   font-weight: 20px;
   margin: 5px;
+
+  ${({ $isSimplePage }) =>
+    $isSimplePage &&
+    `
+      display: flex; /* 제목이 표시되도록 설정 */
+      justify-content: center;
+    `}
 `;

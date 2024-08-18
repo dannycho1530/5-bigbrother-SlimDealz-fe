@@ -6,7 +6,7 @@ import {
   IconContainer,
   LogoContainer,
   SearchContainer,
-  PageTitle,
+  PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -60,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
       <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
         <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
       </IconContainer>
-      
+
       {(isMainPage || isSpecialPage) && ( // 로고를 메인 페이지와 isSpecialPage인 경우에만 표시
         <LogoContainer
           $isCentered={isMainPage}
@@ -87,10 +87,10 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
           $isSpecialPage={isSpecialPage}
           $isSimplePage={isSimplePage}
         >
-          <SearchBar 
-            searchValue={searchValue} 
-            onSearchChange={handleSearchChange} 
-            onSearch={handleSearch} 
+          <SearchBar
+            searchValue={searchValue}
+            onSearchChange={handleSearchChange}
+            onSearch={handleSearch}
           />
         </SearchContainer>
       )}

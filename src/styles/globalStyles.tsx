@@ -19,6 +19,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--background-color);
     border-left: 1px solid #dcdcdc;
     border-right: 1px solid #dcdcdc;
+    box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.1), 2px 0px 4px rgba(0, 0, 0, 0.1);
   }
   html,
   body,
