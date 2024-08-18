@@ -45,9 +45,11 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
 
   return (
     <HeaderContainer>
-      <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
-        <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
-      </IconContainer>
+      {!isMainPage && (
+        <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
+          <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
+        </IconContainer>
+      )}
       <LogoContainer
         $isCentered={isMainPage || isCategoryPage}
         $isSpecialPage={isSpecialPage}
@@ -62,18 +64,19 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
           />
         )}
       </LogoContainer>
-      {/* Conditionally render PageTitle except on category page */}
-      {!isCategoryPage && (
+      {!isMainPage && !isCategoryPage && (
         <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
           {pageTitle || 'Page Title'}
         </PageTitle>
       )}
-      <SearchContainer
-        $isSpecialPage={isSpecialPage}
-        $isSimplePage={isSimplePage}
-      >
-        <SearchBar />
-      </SearchContainer>
+      {(isMainPage || isCategoryPage) && (
+        <SearchContainer
+          $isSpecialPage={isSpecialPage}
+          $isSimplePage={isSimplePage}
+        >
+          <SearchBar />
+        </SearchContainer>
+      )}
     </HeaderContainer>
   );
 };
