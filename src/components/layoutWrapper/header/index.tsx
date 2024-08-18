@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 import SearchBar from './SearchBar';
@@ -18,6 +18,8 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
+  const [searchValue, setSearchValue] = useState('');
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,6 +29,15 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearch = (value: string) => {
+    // 검색을 처리하는 로직 추가
+    console.log(`Search for: ${value}`);
   };
 
   const isMainPage = location.pathname === '/main';
@@ -45,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
 
   return (
     <HeaderContainer>
-      {!isMainPage && (
+      {(isSpecialPage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
         </IconContainer>
@@ -69,12 +80,16 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
           {pageTitle || 'Page Title'}
         </PageTitle>
       )}
-      {(isMainPage || isCategoryPage) && (
+      {(isMainPage || isCategoryPage || isSpecialPage) && (
         <SearchContainer
           $isSpecialPage={isSpecialPage}
           $isSimplePage={isSimplePage}
         >
-          <SearchBar />
+          <SearchBar
+            searchValue={searchValue}
+            onSearchChange={handleSearchChange}
+            onSearch={handleSearch}
+          />
         </SearchContainer>
       )}
     </HeaderContainer>
