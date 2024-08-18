@@ -16,6 +16,13 @@ export const HeaderContainer = styled.div`
   padding-bottom: 20px;
 `;
 
+export const SubContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+`;
+
 export const IconContainer = styled.div<{ $isHidden: boolean }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'flex')};
   align-items: center;

@@ -36,15 +36,17 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const handleSearch = (value: string) => {
-    // 검색을 처리하는 로직 추가
     console.log(`Search for: ${value}`);
   };
 
   const isMainPage = location.pathname === '/main';
   const isCategoryPage = location.pathname.startsWith('/category');
-  const isSpecialPage = ['/searchInitial', '/searchResults'].some((path) =>
-    location.pathname.startsWith(path)
-  );
+  const isProductPage = /^\/product\/\d+$/.test(location.pathname);
+  const isSpecialPage =
+    ['/searchInitial', '/searchResults'].some((path) =>
+      location.pathname.startsWith(path)
+    ) || isProductPage;
+
   const isSimplePage = [
     '/alarm',
     '/bookmark',
@@ -56,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
 
   return (
     <HeaderContainer>
-      {(isSpecialPage || !isMainPage) && (
+      {(isSpecialPage || isSimplePage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
         </IconContainer>
@@ -75,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
           />
         )}
       </LogoContainer>
-      {!isMainPage && !isCategoryPage && (
+      {isSimplePage && !isCategoryPage && (
         <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
           {pageTitle || 'Page Title'}
         </PageTitle>
