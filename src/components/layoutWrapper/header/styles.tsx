@@ -16,6 +16,13 @@ export const HeaderContainer = styled.div`
   padding-bottom: 10px;
 `;
 
+export const SubContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+`;
+
 export const IconContainer = styled.div<{
   $isHidden: boolean;
   $isSpecialPage?: boolean; // 이 부분을 수정하여 선택적 props로 만듦
@@ -35,9 +42,9 @@ export const LogoContainer = styled.div<{
   $isSpecialPage: boolean;
   $isSimplePage: boolean;
 }>`
-  display: flex;
-  justify-content: ${({ $isCentered }) =>
-    $isCentered ? 'center' : 'flex-start'};
+  display: ${({ $isSpecialPage, $isSimplePage }) =>
+    $isSpecialPage || $isSimplePage ? 'none' : 'flex'};
+  justify-content: center;
   align-items: center;
   width: 100%;
   margin-top: 20px;

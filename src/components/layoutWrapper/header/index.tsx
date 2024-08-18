@@ -17,11 +17,11 @@ type HeaderProps = {
   onBackNavigation?: () => void;
 };
 
-const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
+const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
+  const [searchValue, setSearchValue] = useState('');
+
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [searchValue, setSearchValue] = useState('');
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
@@ -43,9 +43,13 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
   };
 
   const isMainPage = location.pathname === '/main';
-  const isSpecialPage = ['/category', '/searchInitial', '/searchResults'].some(
-    (path) => location.pathname.startsWith(path)
-  );
+  const isCategoryPage = location.pathname.startsWith('/category');
+  const isProductPage = /^\/product\/\d+$/.test(location.pathname);
+  const isSpecialPage =
+    ['/searchInitial', '/searchResults'].some((path) =>
+      location.pathname.startsWith(path)
+    ) || isProductPage;
+
   const isSimplePage = [
     '/alarm',
     '/bookmark',
@@ -57,32 +61,31 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
 
   return (
     <HeaderContainer>
-      <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
-        <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
-      </IconContainer>
-
-      {(isMainPage || isSpecialPage) && ( // 로고를 메인 페이지와 isSpecialPage인 경우에만 표시
-        <LogoContainer
-          $isCentered={isMainPage}
-          $isSpecialPage={isSpecialPage}
-          $isSimplePage={isSimplePage}
-        >
+      {(isSpecialPage || isSimplePage || !isMainPage) && (
+        <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
+          <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
+        </IconContainer>
+      )}
+      <LogoContainer
+        $isCentered={isMainPage || isCategoryPage}
+        $isSpecialPage={isSpecialPage}
+        $isSimplePage={isSimplePage}
+      >
+        {(isMainPage || isCategoryPage) && (
           <img
             src={slimdealzlogo}
             alt="Slimdealz logo"
             onClick={handleLogoClick}
             style={{ cursor: 'pointer' }}
           />
-        </LogoContainer>
-      )}
-
-      {isSimplePage && ( // isSimplePage인 경우에만 제목을 보여줌
+        )}
+      </LogoContainer>
+      {isSimplePage && !isCategoryPage && (
         <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
-          {pageTitle}
+          {pageTitle || 'Page Title'}
         </PageTitle>
       )}
-
-      {!isSimplePage && (
+      {(isMainPage || isCategoryPage || isSpecialPage) && (
         <SearchContainer
           $isSpecialPage={isSpecialPage}
           $isSimplePage={isSimplePage}
@@ -99,3 +102,6 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, onBackNavigation }) => {
 };
 
 export default Header;
+function onBackNavigation() {
+  throw new Error('Function not implemented.');
+}
