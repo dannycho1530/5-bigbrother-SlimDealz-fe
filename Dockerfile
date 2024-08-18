@@ -2,6 +2,8 @@ FROM node:18 AS build
 
 WORKDIR /app
 
+RUN npm install -g npm@10.8.2
+
 COPY package.json yarn.lock ./
 RUN yarn install
 
