@@ -12,10 +12,12 @@ import UserBookmarkPage from './pages/user/bookmark';
 import UserInformationPage from './pages/user/information';
 import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
+import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Navigate replace to="/main" />} />
         <Route path="/" element={<OutLetContainer />}>
