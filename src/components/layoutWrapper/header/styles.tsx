@@ -16,13 +16,6 @@ export const HeaderContainer = styled.div`
   padding-bottom: 10px;
 `;
 
-export const SubContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float: left;
-`;
-
 export const IconContainer = styled.div<{
   $isHidden: boolean;
   $isSpecialPage?: boolean; // 이 부분을 수정하여 선택적 props로 만듦

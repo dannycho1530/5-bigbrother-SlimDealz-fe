@@ -36,9 +36,6 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const handleBackClick = () => {
-    if (onBackNavigation) {
-      onBackNavigation();
-    }
     navigate(-1);
   };
 
