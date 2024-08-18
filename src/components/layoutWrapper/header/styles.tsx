@@ -28,7 +28,8 @@ export const LogoContainer = styled.div<{
   $isSpecialPage: boolean;
   $isSimplePage: boolean;
 }>`
-  display: flex;
+  display: ${({ $isSpecialPage, $isSimplePage }) =>
+    $isSpecialPage || $isSimplePage ? 'none' : 'flex'};
   justify-content: center;
   align-items: center;
   margin-top: 20px;

@@ -30,8 +30,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const isMainPage = location.pathname === '/main';
-  const isSpecialPage = ['/category/', '/searchInitial', '/searchResults'].some(
-    (path) => location.pathname.startsWith(path)
+  const isCategoryPage = location.pathname.startsWith('/category');
+  const isSpecialPage = ['/searchInitial', '/searchResults'].some((path) =>
+    location.pathname.startsWith(path)
   );
   const isSimplePage = [
     '/alarm',
@@ -48,11 +49,11 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
         <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
       </IconContainer>
       <LogoContainer
-        $isCentered={isMainPage}
+        $isCentered={isMainPage || isCategoryPage}
         $isSpecialPage={isSpecialPage}
         $isSimplePage={isSimplePage}
       >
-        {isMainPage && (
+        {(isMainPage || isCategoryPage) && (
           <img
             src={slimdealzlogo}
             alt="Slimdealz logo"
@@ -61,9 +62,12 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
           />
         )}
       </LogoContainer>
-      {/* <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
-        {pageTitle || 'Page Title'}
-      </PageTitle> */}
+      {/* Conditionally render PageTitle except on category page */}
+      {!isCategoryPage && (
+        <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
+          {pageTitle || 'Page Title'}
+        </PageTitle>
+      )}
       <SearchContainer
         $isSpecialPage={isSpecialPage}
         $isSimplePage={isSimplePage}
