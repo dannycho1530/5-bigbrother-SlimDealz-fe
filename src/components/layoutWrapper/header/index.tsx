@@ -36,6 +36,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const handleBackClick = () => {
+    // if (onBackNavigation) {
+    //   onBackNavigation();
+    // }
     navigate(-1);
   };
 
@@ -99,6 +102,3 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
 };
 
 export default Header;
-function onBackNavigation() {
-  throw new Error('Function not implemented.');
-}

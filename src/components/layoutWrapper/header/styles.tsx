@@ -25,6 +25,7 @@ export const IconContainer = styled.div<{
   justify-content: flex-start;
   margin: 5px;
   position: absolute;
+  padding-top: 5px;
   left: ${({ $isSpecialPage }) =>
     $isSpecialPage ? '20px' : '10px'}; /* 간격 조정 */
   top: 15px;
@@ -75,7 +76,7 @@ export const PageTitle = styled.div<{
     $isSimplePage ? 'flex' : $isSpecialPage ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
-  width: 290px;
+  width: 100%; /* width를 100%로 변경 */
   height: 30px;
   font-size: 20px;
   font-weight: 20px;
@@ -84,7 +85,7 @@ export const PageTitle = styled.div<{
   ${({ $isSimplePage }) =>
     $isSimplePage &&
     `
-      display: flex; /* 제목이 표시되도록 설정 */
+      display: flex;
       justify-content: center;
     `}
 `;

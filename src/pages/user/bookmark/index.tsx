@@ -1,10 +1,6 @@
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
-import {
-  HeaderContainer,
-  PageTitle
-} from '../../../components/layoutWrapper/header/styles';
 
 const UserBookmarkPage = () => {
   const mockData = [
@@ -66,20 +62,12 @@ const UserBookmarkPage = () => {
   ];
 
   return (
-    <>
-      <HeaderContainer>
-        <PageTitle $isSpecialPage={false} $isSimplePage={true}>
-          북마크 페이지
-        </PageTitle>
-      </HeaderContainer>
-
-      <Container>
-        <PageNameTag pageName="전체 0개" />
-        {mockData.map((item, index) => (
-          <CategoryList key={index} {...item} />
-        ))}
-      </Container>
-    </>
+    <Container>
+      <PageNameTag pageName="전체 0개" />
+      {mockData.map((item, index) => (
+        <CategoryList key={index} {...item} />
+      ))}
+    </Container>
   );
 };
 
