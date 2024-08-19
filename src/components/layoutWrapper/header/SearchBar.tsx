@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
@@ -16,19 +16,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSearchChange,
   onSearch
 }) => {
-  const navigate = useNavigate();
-
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       onSearch(searchValue);
-      navigate(`/searchResults?query=${encodeURIComponent(searchValue)}`);
     }
   };
 
   const handleSearchClick = () => {
     onSearch(searchValue);
-    navigate(`/searchResults?query=${encodeURIComponent(searchValue)}`);
   };
 
   return (

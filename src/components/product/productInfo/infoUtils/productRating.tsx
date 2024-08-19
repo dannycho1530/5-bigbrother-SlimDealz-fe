@@ -1,16 +1,15 @@
 import * as React from 'react';
 import Rating from '@mui/material/Rating';
-import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 
 const ProductRating = () => {
   const [value] = React.useState<number | null>(2.5); // 기본값을 2.5로 설정
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: 'flex',
-        width: 'auto'
+        width: 'auto',
       }}
     >
       <Rating
@@ -23,19 +22,19 @@ const ProductRating = () => {
         }
       />
       {value !== null && (
-        <Box
-          sx={{
-            ml: 0.5,
+        <div
+          style={{
+            marginLeft: '0.5rem',
             fontSize: 12,
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           {value}
-        </Box>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
 

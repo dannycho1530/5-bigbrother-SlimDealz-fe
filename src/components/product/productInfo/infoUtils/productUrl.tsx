@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
-import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
@@ -27,13 +26,13 @@ const ProductUrl = () => {
   };
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
+    <div
+      style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%'
+        width: '100%',
+        position: 'relative',
       }}
     >
       <IconButton
@@ -44,25 +43,25 @@ const ProductUrl = () => {
         <ShareIcon />
       </IconButton>
       {showLink && (
-        <Box
-          sx={{
+        <div
+          style={{
             position: 'absolute',
             right: '100%',
             top: '100%',
             transform: 'translateY(-20%)',
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
           }}
         >
           <Typography
             variant="body2"
-            sx={{ display: 'flex', alignItems: 'center' }}
+            style={{ display: 'flex', alignItems: 'center' }}
           >
             {window.location.href}
             <Tooltip title="링크 복사">
               <IconButton
                 onClick={handleCopyClick}
                 size="small"
-                sx={{ marginLeft: '4px' }}
+                style={{ marginLeft: '4px' }}
               >
                 <ContentCopyRoundedIcon fontSize="small" />
               </IconButton>
@@ -72,14 +71,14 @@ const ProductUrl = () => {
             <Typography
               variant="body2"
               color="success"
-              sx={{ marginLeft: '3px' }}
+              style={{ marginLeft: '3px' }}
             >
               복사 완료!
             </Typography>
           )}
-        </Box>
+        </div>
       )}
-    </Box>
+    </div>
   );
 };
 

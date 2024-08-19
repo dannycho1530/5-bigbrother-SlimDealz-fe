@@ -4,9 +4,24 @@ const GlobalStyles = createGlobalStyle`
   @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
   :root {
-    --background-color: #f2f2f2;
+    --background-color: white;
+    /* --background-color: #; */
+  
   }
-
+  .container {
+    width: 390px;
+    height: auto;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding-top: 120px;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background-color: var(--background-color);
+    border-left: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.1), 2px 0px 4px rgba(0, 0, 0, 0.1);
+}
   html,
   body,
   div,
