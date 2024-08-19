@@ -20,12 +20,6 @@ export const SectionTitle = styled.div`
   color: #000000;
 `;
 
-export const SectionContent = styled.div`
-  font-size: 14px;
-  color: #808080;
-  margin-top: 5px;
-`;
-
 export const ArrowIcon = styled.div`
   font-size: 35px;
   color: #808080;

@@ -9,13 +9,11 @@ export const AutoCompleteList = styled.ul`
   height: auto;
   overflow-y: auto;
   z-index: 1;
-  background-color: #d9d9d9;
 `;
 
 export const AutoCompleteItem = styled.li`
   padding: 10px;
   border-radius: 25px;
-  background-color: #f2f2f7;
   margin-bottom: 10px;
   font-size: 12px;
   cursor: pointer;
