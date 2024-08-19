@@ -18,6 +18,7 @@ const SearchInitialPage: React.FC<SearchInitialPageProps> = ({
   };
 
   useEffect(() => {
+    // SearchInitialPage로 진입할 때 기록을 남기지 않음
     navigate(location.pathname, { replace: true });
   }, [navigate]);
 

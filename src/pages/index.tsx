@@ -43,6 +43,8 @@ const OutLetContainer = () => {
     pageTitle = '마이페이지';
   } else if (location.pathname.includes('/alarm')) {
     pageTitle = '알람';
+  } else if (location.pathname.includes('/information')) {
+    pageTitle = '회원가입 추가 정보';
   }
 
   return (
