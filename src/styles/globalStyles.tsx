@@ -1,17 +1,10 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
   @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
 
   :root {
-    --error-color: #F00001;
-    --default-border-color: #D1D1D1;
-    --focus-border-color: #64a8ef;
-    
-    --active-button-color: #64a8ef;
-    --inactive-button-color: #9AC5F4;
-    --logout-color: #959595;
-
+    --background-color: #f2f2f2;
   }
 
   html,
