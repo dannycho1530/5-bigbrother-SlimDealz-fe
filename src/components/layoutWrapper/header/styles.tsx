@@ -7,6 +7,7 @@ export const HeaderContainer = styled.div`
   transform: translateX(-50%);
   width: 100%;
   max-width: 390px;
+  min-height: 8vh;
   height: auto;
   flex-direction: column;
   align-items: center;
@@ -76,10 +77,13 @@ export const PageTitle = styled.div<{
     $isSimplePage ? 'flex' : $isSpecialPage ? 'none' : 'flex'};
   align-items: center;
   justify-content: center;
-  width: 100%; /* width를 100%로 변경 */
+  width: 100%;
+  max-width: 380px;
   height: 30px;
   font-size: 20px;
   font-weight: 20px;
+  padding-top: 35px;
+  padding-bottom: 20px;
   margin: 5px;
 
   ${({ $isSimplePage }) =>

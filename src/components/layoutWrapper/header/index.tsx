@@ -53,6 +53,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   const isSimplePage = [
     '/alarm',
     '/bookmark',
+    '/myPage',
     '/information',
     '/recentlyView',
     '/signUp',

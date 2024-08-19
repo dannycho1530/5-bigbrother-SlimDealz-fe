@@ -9,13 +9,13 @@ const MyMainPage = () => {
 
   const handleBookmarkClick = () => {
     if (bookmarkCount < 100) {
-      setBookmarkCount(prevCount => prevCount + 1);
+      setBookmarkCount((prevCount) => prevCount + 1);
     }
     navigate('/bookmark');
   };
 
   const handleAlarmClick = () => {
-    setAlarmCount(prevCount => prevCount + 1);
+    setAlarmCount((prevCount) => prevCount + 1);
     navigate('/alarm');
   };
 

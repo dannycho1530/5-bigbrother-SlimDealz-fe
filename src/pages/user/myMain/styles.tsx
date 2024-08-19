@@ -34,7 +34,7 @@ export const LogoutButton = styled.button`
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
-  
+
   &:hover {
     background-color: #d3d3d3;
   }
