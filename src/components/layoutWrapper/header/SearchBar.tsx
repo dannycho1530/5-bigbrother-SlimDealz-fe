@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { AutoCompleteItem, AutoCompleteList } from './styles';
+import { AutoCompleteItem, AutoCompleteList, CustomInput } from './styles';
 
 type SearchBarProps = {
   words: string[];
@@ -98,13 +97,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
           handleSearchClick();
         }}
       >
-        <InputBase
-          sx={{
-            ml: 1,
-            flex: 1,
-            width: '100%',
-            height: '20px'
-          }}
+        <CustomInput
           value={searchValue}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
@@ -112,7 +105,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
         />
         <IconButton
           type="button"
-          sx={{ p: '10px', marginLeft: 'auto' }}
+          sx={{ p: '10px' }}
           aria-label="search"
           onClick={handleSearchClick}
         >

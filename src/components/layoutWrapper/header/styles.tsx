@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import InputBase from '@mui/material/InputBase';
 
 export const HeaderContainer = styled.div`
   position: fixed;
@@ -82,8 +83,8 @@ export const PageTitle = styled.div<{
   width: 100%;
   max-width: 380px;
   height: 30px;
-  font-size: 20px;
-  font-weight: 20px;
+  font-size: 30px;
+  font-weight: bold;
   padding-top: 35px;
   padding-bottom: 20px;
   margin: 5px;
@@ -95,6 +96,12 @@ export const PageTitle = styled.div<{
       justify-content: center;
     `}
 `;
+export const CustomInput = styled(InputBase)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    width: '250px'
+  }
+}));
+
 export const AutoCompleteList = styled.ul`
   margin-top: 100px;
   padding: 10px;

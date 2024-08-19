@@ -75,7 +75,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
             $isSpecialPage={isSpecialPage}
             $isSimplePage={isSimplePage}
           >
-            {pageTitle || 'Page Title'}
+            {pageTitle}
           </PageTitle>
         )}
         {(isMainPage || isCategoryPage || isSpecialPage) && (
