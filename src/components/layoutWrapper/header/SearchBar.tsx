@@ -60,8 +60,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
   };
 
   const handleInputClick = () => {
-    // 검색창을 클릭하면 SearchInitialPage로 이동
-    navigate('/searchInitial', { replace: true });
+    navigate('/searchInitial');
   };
 
   useEffect(() => {
@@ -69,7 +68,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
     if (location.pathname.startsWith('/searchResults')) {
       navigate(location.pathname, { replace: true });
     } else {
-      setFilteredWords([]);
       setSearchValue(''); // 다른 페이지로 이동할 때 searchValue 초기화
     }
   }, [location.pathname, navigate]);
@@ -81,10 +79,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
         sx={{
           display: 'flex',
           alignItems: 'center',
-          width: 320,
+          width: 300,
           height: 35,
           border: '0.1px solid #ccc',
-          boxShadow: 'none'
+          boxShadow: 'none',
+          paddingLeft: '10px'
         }}
         onSubmit={(event) => {
           event.preventDefault();
@@ -101,7 +100,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
           value={searchValue}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
-          onClick={handleInputClick} // 클릭 시 페이지 이동
+          onClick={handleInputClick}
         />
         <IconButton
           type="button"
