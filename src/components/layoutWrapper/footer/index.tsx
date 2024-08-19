@@ -61,7 +61,13 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <div style={{ width: 390 }}>
+      <div
+        style={{
+          width: 390,
+          borderTopLeftRadius: '5px',
+          borderTopRightRadius: '5px'
+        }}
+      >
         <BottomNavigation
           showLabels
           value={value}
@@ -75,7 +81,9 @@ const Footer = () => {
             },
             '& .MuiBottomNavigationAction-root': {
               color: '#5c5b5b' // 기본 아이콘 및 텍스트 색상 변경
-            }
+            },
+            borderTopLeftRadius: '5px',
+            borderTopRightRadius: '5px'
           }}
         >
           <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />

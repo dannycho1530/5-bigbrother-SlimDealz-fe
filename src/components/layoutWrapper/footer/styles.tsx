@@ -12,4 +12,6 @@ export const FooterContainer = styled.div`
   position: fixed;
   bottom: 0;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 `;

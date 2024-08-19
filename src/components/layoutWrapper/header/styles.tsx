@@ -15,6 +15,8 @@ export const HeaderContainer = styled.div`
   background-color: #c0f9a9;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding-bottom: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
 
 export const IconContainer = styled.div<{
