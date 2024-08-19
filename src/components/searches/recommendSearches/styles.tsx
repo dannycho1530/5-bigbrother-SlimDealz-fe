@@ -18,7 +18,7 @@ export const AutoCompleteItem = styled.li`
   background-color: #f2f2f7;
   margin-bottom: 10px;
   font-size: 12px;
-  cursor: pointer; /* Add a cursor pointer to indicate it's clickable */
+  cursor: pointer;
   &:last-child {
     border-bottom: none;
   }
