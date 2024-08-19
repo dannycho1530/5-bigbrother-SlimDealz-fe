@@ -14,9 +14,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
   const [searchValue, setSearchValue] = useState('');
   const [previousSearchValue, setPreviousSearchValue] = useState('');
   const [filteredWords, setFilteredWords] = useState<string[]>([]);
+  const [prevPathname, setPrevPathname] = useState('');
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    // 페이지가 변경될 때 previousSearchValue를 초기화
+    setPreviousSearchValue('');
+    setPrevPathname(location.pathname); // 현재 경로를 기록
+  }, [location.pathname]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -34,8 +41,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ words }) => {
   };
 
   const handleSearch = (value: string) => {
-    // 같은 검색어라면 리렌더링하지 않음
-    if (previousSearchValue === value) return;
+    // 같은 검색어라면 리렌더링하지 않음 (단, 페이지 이동이 있으면 리렌더링)
+    if (previousSearchValue === value && location.pathname === prevPathname)
+      return;
 
     setPreviousSearchValue(value);
     setFilteredWords([]);
