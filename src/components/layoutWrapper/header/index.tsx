@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -17,7 +17,7 @@ type HeaderProps = {
   onBackNavigation?: () => void;
 };
 
-const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
+const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const navigate = useNavigate();
@@ -36,6 +36,9 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   };
 
   const handleBackClick = () => {
+    // if (onBackNavigation) {
+    //   onBackNavigation();
+    // }
     navigate(-1);
   };
 
@@ -58,7 +61,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   ].includes(location.pathname);
 
   return (
-    <HeaderContainer ref={ref}>
+    <HeaderContainer>
       {(isSpecialPage || isSimplePage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
@@ -97,6 +100,6 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
       )}
     </HeaderContainer>
   );
-});
+};
 
-export default React.memo(Header);
+export default Header;
