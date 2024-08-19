@@ -1,7 +1,15 @@
-import { Container } from './styles';
+import PopularSearch from '../../../components/searches/popularSearches';
+import RecentSearches from '../../../components/searches/recentSearches';
+import RecommendSearch from '../../../components/searches/recommendSearches';
 
 const SearchInitialPage = () => {
-  return <Container></Container>;
+  return (
+    <>
+    <RecommendSearch/>
+    <RecentSearches/>
+    <PopularSearch/>
+    </>
+  );
 };
 
 export default SearchInitialPage;

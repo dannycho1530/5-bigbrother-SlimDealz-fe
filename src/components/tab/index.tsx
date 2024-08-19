@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tabs, Tab, Box } from '@mui/material';
+import { Tabs, Tab } from '@mui/material';
 import MallList from '../list/mallList';
 import ChartView from '../chart';
 
@@ -11,14 +11,14 @@ const TabsComponent = () => {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <div style={{ width: '100%' }}>
       <Tabs value={value} onChange={handleChange} centered>
         <Tab label="최저가 비교" />
         <Tab label="상품 시세 차트" />
       </Tabs>
       {value === 0 && <MallList />}
       {value === 1 && <ChartView />}
-    </Box>
+    </div>
   );
 };
 

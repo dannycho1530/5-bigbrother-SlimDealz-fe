@@ -1,22 +1,24 @@
 import Footer from '../components/layoutWrapper/footer';
 import Header from '../components/layoutWrapper/header';
-import { Outlet } from 'react-router-dom';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  width: 390px;
-  height: 100vh;
-  padding-top: 120px;
-  /* padding-bottom: 100px; Footer 높이만큼 패딩 추가 */
-`;
+import { Outlet, useLocation } from 'react-router-dom';
 
 const OutLetContainer = () => {
+  const location = useLocation();
+  let pageTitle = '';
+
+  if (location.pathname.includes('/bookmark')) {
+    pageTitle = '북마크';
+  } else if (location.pathname.includes('/myPage')) {
+    pageTitle = '마이페이지';
+  } else if (location.pathname.includes('/alarm')) {
+    pageTitle = '알람';
+  }
   return (
     <div>
-      <Header />
-      <Container>
+      <Header pageTitle={pageTitle} />
+      <div className="container">
         <Outlet />
-      </Container>
+      </div>
       <Footer />
     </div>
   );

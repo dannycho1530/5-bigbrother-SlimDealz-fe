@@ -1,5 +1,4 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
+import React, { useEffect } from 'react';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
@@ -8,18 +7,66 @@ import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import BookmarkRoundedIcon from '@mui/icons-material/BookmarkRounded';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { FooterContainer } from './styles';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    switch (location.pathname) {
+      case '/main':
+        setValue(0);
+        break;
+      case '/recentlyView':
+        setValue(1);
+        break;
+      case '/notifications':
+        setValue(2);
+        break;
+      case '/bookmark':
+        setValue(3);
+        break;
+      case '/myPage':
+        setValue(4);
+        break;
+      default:
+        setValue(0);
+    }
+  }, [location.pathname]);
+
+  const handleNavigation = (newValue: number) => {
+    setValue(newValue);
+    switch (newValue) {
+      case 0:
+        navigate('/main');
+        break;
+      // case 1:
+      //   navigate('/recentlyView');
+      //   break;
+      // case 2:
+      //   navigate('/notifications');
+      //   break;
+      case 3:
+        navigate('/bookmark');
+        break;
+      case 4:
+        navigate('/myPage');
+        break;
+      default:
+        navigate('/main');
+    }
+  };
 
   return (
     <FooterContainer>
-      <Box sx={{ width: 390 }}>
+      <div style={{ width: 390 }}>
         <BottomNavigation
           showLabels
           value={value}
           onChange={(event, newValue) => {
-            setValue(newValue);
+            handleNavigation(newValue);
           }}
         >
           <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />
@@ -40,7 +87,7 @@ const Footer = () => {
             icon={<AccountCircleOutlinedIcon />}
           />
         </BottomNavigation>
-      </Box>
+      </div>
     </FooterContainer>
   );
 };
