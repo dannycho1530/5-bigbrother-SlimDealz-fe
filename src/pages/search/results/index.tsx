@@ -1,76 +1,74 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 
-const SearchResultsPage = () => {
- 
-  const mockData = [
-    {
-      id: 1,
-      image: '/path/to/image1.jpg',
-      name: '바르닭 수비드 닭가슴살 (5가지맛) 30종 허닭',
-      brand: '바르닭',
-      price: 999999,
-      per100gPrice: '2,130',
-      shipping: '무료 배송',
-      rating: 4,
-      bookmarkCount: 2145
-    },
-    {
-      id: 2,
-      image: '/path/to/image2.jpg',
-      name: '바르닭 소금구이 닭가슴살',
-      brand: '바르닭',
-      price: 150000,
-      per100gPrice: '2,500',
-      shipping: '무료 배송',
-      rating: 5,
-      bookmarkCount: 500
-    },
-    {
-      id: 3,
-      image: '/path/to/image3.jpg',
-      name: '허닭 닭가슴살 스테이크',
-      brand: '허닭',
-      price: 120000,
-      per100gPrice: '1,800',
-      shipping: '무료 배송',
-      rating: 3,
-      bookmarkCount: 350
-    },
-    {
-      id: 4,
-      image: '/path/to/image4.jpg',
-      name: '맛있는 닭가슴살',
-      brand: '맛닭',
-      price: 100000,
-      per100gPrice: '2,000',
-      shipping: '유료 배송',
-      rating: 4,
-      bookmarkCount: 1200
-    },
-    {
-      id: 5,
-      image: '/path/to/image5.jpg',
-      name: '다이어트용 닭가슴살',
-      brand: '다이어트',
-      price: 130000,
-      per100gPrice: '2,100',
-      shipping: '무료 배송',
-      rating: 5,
-      bookmarkCount: 800
-    }
-  ];
+const SearchResultsPage = ({ searchQuery }: { searchQuery: string }) => {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/api/v1/search', {
+          params: { query: searchQuery }
+        });
+
+        if (response.status === 200) {
+          setData(response.data); // API로부터 데이터를 받아오면 상태에 저장합니다.
+        }
+      } catch (err: any) {
+        if (err.response) {
+          // 서버에서 응답이 온 경우
+          if (err.response.status === 404) {
+            setError('Keyword not found.');
+          } else if (err.response.status === 500) {
+            setError('Server error occurred.');
+          }
+        } else {
+          // 서버로부터 응답이 오지 않은 경우
+          setError('Network error.');
+        }
+      } finally {
+        setLoading(false); // 로딩 상태 종료
+      }
+    };
+
+    fetchData();
+  }, [searchQuery]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Container>
-      <PageNameTag pageName="234" /> {/* 2번 위치에 PageNameTag 추가 */}
-      {mockData.map((item, index) => (
-        <CategoryList key={index} {...item} />
-      ))}
+      <PageNameTag pageName="Search Results" />
+      {data.length > 0 ? (
+        data.map((item: any, index: number) => (
+          <CategoryList
+            key={index}
+            id={item.id}
+            image={item.image}
+            name={item.name}
+            // price={item.price} // 주석 처리: API에서 제공되지 않음
+            // per100gPrice="N/A" // 주석 처리: API에서 제공되지 않음
+            shipping={item.shippingFee}
+            // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
+            // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
+          />
+        ))
+      ) : (
+        <div>No results found.</div>
+      )}
     </Container>
   );
 };
-
 
 export default SearchResultsPage;

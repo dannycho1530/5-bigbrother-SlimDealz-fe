@@ -13,6 +13,12 @@ import UserInformationPage from './pages/user/information';
 import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
+import { useParams } from 'react-router-dom';
+
+const SearchResultsWrapper = () => {
+  const { query } = useParams<{ query: string }>();
+  return <SearchResultsPage searchQuery={query || ''} />;
+};
 
 const Router = () => {
   return (
@@ -25,7 +31,10 @@ const Router = () => {
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/product/:productId" element={<DetailPage />} />
           <Route path="/searchInitial" element={<SearchInitialPage />} />
-          <Route path="/searchResults/:query" element={<SearchResultsPage />} />
+          <Route
+            path="/searchResults/:query"
+            element={<SearchResultsWrapper />}
+          />
           <Route path="/signIn" element={<SignInPage />} />
           <Route path="/signUp" element={<SignUpPage />} />
           <Route path="/myPage" element={<MyMainPage />} />
