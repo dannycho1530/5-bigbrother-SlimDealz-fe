@@ -24,7 +24,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   const location = useLocation();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value); // 전역 상태 업데이트
+    setSearchQuery(event.target.value);
   };
 
   const handleSearch = (value: string) => {
