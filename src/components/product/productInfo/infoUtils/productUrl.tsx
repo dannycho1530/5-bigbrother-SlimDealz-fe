@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
 
 const ProductUrl = () => {
-  const [showLink, setShowLink] = useState(false);
   const [copySuccess, setCopySuccess] = useState(false);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
-  const handleShareClick = () => {
-    setShowLink((prev) => !prev);
+  const handleTooltipOpen = () => {
+    setTooltipOpen(true);
   };
 
   const handleCopyClick = () => {
@@ -18,7 +19,8 @@ const ProductUrl = () => {
       .writeText(window.location.href)
       .then(() => {
         setCopySuccess(true);
-        setTimeout(() => setCopySuccess(false), 1000);
+        setTooltipOpen(false); // 툴팁 닫기
+        setTimeout(() => setCopySuccess(false), 2000); // 2초 후에 Alert 사라짐
       })
       .catch((err) => {
         console.error('Failed to copy: ', err);
@@ -32,51 +34,44 @@ const ProductUrl = () => {
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        position: 'relative',
+        position: 'relative'
       }}
     >
-      <IconButton
-        onClick={handleShareClick}
-        style={{ cursor: 'pointer', color: 'black' }}
-        disableRipple
+      <Tooltip
+        title={
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <ContentCopyRoundedIcon fontSize="small" />
+            <span style={{ marginLeft: '4px' }}>URL복사</span>
+          </div>
+        }
+        open={tooltipOpen}
+        onOpen={handleTooltipOpen}
+        onClose={() => setTooltipOpen(false)}
+        placement="top"
+        arrow
       >
-        <ShareIcon />
-      </IconButton>
-      {showLink && (
-        <div
+        <IconButton
+          onClick={handleCopyClick}
+          style={{ cursor: 'pointer', color: 'black' }}
+          disableRipple
+        >
+          <ShareIcon />
+        </IconButton>
+      </Tooltip>
+
+      {copySuccess && (
+        <Alert
+          severity="success"
           style={{
-            position: 'absolute',
-            right: '100%',
-            top: '100%',
-            transform: 'translateY(-20%)',
-            whiteSpace: 'nowrap',
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1000
           }}
         >
-          <Typography
-            variant="body2"
-            style={{ display: 'flex', alignItems: 'center' }}
-          >
-            {window.location.href}
-            <Tooltip title="링크 복사">
-              <IconButton
-                onClick={handleCopyClick}
-                size="small"
-                style={{ marginLeft: '4px' }}
-              >
-                <ContentCopyRoundedIcon fontSize="small" />
-              </IconButton>
-            </Tooltip>
-          </Typography>
-          {copySuccess && (
-            <Typography
-              variant="body2"
-              color="success"
-              style={{ marginLeft: '3px' }}
-            >
-              복사 완료!
-            </Typography>
-          )}
-        </div>
+          {'      복사 완료!      '}
+        </Alert>
       )}
     </div>
   );
