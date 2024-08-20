@@ -57,11 +57,11 @@ const ProductSlider = ({ title }: Props) => {
 
   const handleTitleClick = () => {
     // title에 따라 다른 페이지로 이동하도록 설정
-    if (title === "나의 북마크 제품들") {
+    if (title === 'MY BOOKMARKS') {
       navigate(`/bookmark`);
-    } else if (title === "최저가") {
+    } else if (title === '최저가') {
       navigate(`/lowest-price`);
-    } else if (title === "맞춤상품추천") {
+    } else if (title === '맞춤상품추천') {
       navigate(`/recommended`);
     }
   };
@@ -72,9 +72,7 @@ const ProductSlider = ({ title }: Props) => {
 
   return (
     <Container>
-      <Title onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
-        {title}
-      </Title>
+      <Title onClick={handleTitleClick}>{title}</Title>
       <ProductSliderContainer>
         <LeftArrow onClick={scrollLeft} />
         <ProductsWrapper ref={scrollRef}>

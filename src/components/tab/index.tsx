@@ -11,7 +11,7 @@ const TabsComponent = () => {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', paddingBottom: '20px' }}>
       <Tabs value={value} onChange={handleChange} centered>
         <Tab label="최저가 비교" />
         <Tab label="상품 시세 차트" />
