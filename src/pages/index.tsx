@@ -7,7 +7,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 const Container = styled.div<{ paddingTop: number }>`
   width: 390px;
   height: auto;
-  min-height: 100vh;
+  min-height: 100dvh; //현재 보여지는 뷰포트 높이를 동적으로 가져오기
   margin: 0 auto;
   padding-top: ${({ paddingTop }) => `${paddingTop}px`};
   padding-bottom: 50px;
