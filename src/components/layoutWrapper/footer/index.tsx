@@ -63,9 +63,7 @@ const Footer = () => {
     <FooterContainer>
       <div
         style={{
-          width: 390,
-          borderTopLeftRadius: '5px',
-          borderTopRightRadius: '5px'
+          width: 390
         }}
       >
         <BottomNavigation
@@ -75,15 +73,12 @@ const Footer = () => {
             handleNavigation(newValue);
           }}
           sx={{
-            backgroundColor: '#c0f9a9', // Footer 배경색 변경
             '& .Mui-selected': {
-              color: '#FFCC00 !important' // 선택된 아이콘과 텍스트 색상 변경
+              color: '#112f08 !important' // 선택된 아이콘과 텍스트 색상 변경
             },
             '& .MuiBottomNavigationAction-root': {
               color: '#5c5b5b' // 기본 아이콘 및 텍스트 색상 변경
-            },
-            borderTopLeftRadius: '5px',
-            borderTopRightRadius: '5px'
+            }
           }}
         >
           <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />

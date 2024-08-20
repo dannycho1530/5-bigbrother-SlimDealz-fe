@@ -13,11 +13,9 @@ export const HeaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 1000;
-  background-color: #c0f9a9;
+  background-color: #112f08;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding-bottom: 10px;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 `;
 
 export const IconContainer = styled.div<{
