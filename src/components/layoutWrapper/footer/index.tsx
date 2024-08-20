@@ -42,12 +42,14 @@ const Footer = () => {
       case 0:
         navigate('/main');
         break;
-      // case 1:
-      //   navigate('/recentlyView');
-      //   break;
-      // case 2:
-      //   navigate('/notifications');
-      //   break;
+      case 1:
+        navigate('/comingSoon');
+        // navigate('/recentlyView');
+        break;
+      case 2:
+        navigate('/comingSoon');
+        // navigate('/notifications');
+        break;
       case 3:
         navigate('/bookmark');
         break;

@@ -1,13 +1,18 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+  @font-face {
+    font-family: 'Oswald';
+    src: url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap');
+    font-weight: normal;
+    font-style: normal;
+  }
   @import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
-
+  
   :root {
     --background-color: white;
-    /* --background-color: #; */
-  
   }
+
   html,
   body,
   div,
@@ -97,6 +102,7 @@ const GlobalStyles = createGlobalStyle`
     vertical-align: baseline;
     box-sizing: border-box;
   }
+
   article,
   aside,
   details,
@@ -110,32 +116,39 @@ const GlobalStyles = createGlobalStyle`
   section {
     display: block;
   }
+
   body {
     line-height: 1;
     font-family: 'Spoqa Han Sans Neo', sans-serif;
   }
+
   ol,
   ul {
     list-style: none;
   }
+
   blockquote,
   q {
     quotes: none;
   }
+
   blockquote:before,
   blockquote:after {
     content: '';
     content: none;
   }
+
   q:before,
   q:after {
     content: '';
     content: none;
   }
+
   table {
     border-collapse: collapse;
     border-spacing: 0;
   }
+
   a {
     text-decoration: none;
     color: inherit;

@@ -13,6 +13,7 @@ import UserInformationPage from './pages/user/information';
 import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
+import ComingSoon from './components/utils/comingSoon';
 
 const Router = () => {
   return (
@@ -36,6 +37,7 @@ const Router = () => {
           <Route path="/bookmark" element={<UserBookmarkPage />} />
           <Route path="/information" element={<UserInformationPage />} />
           <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
+          <Route path="/comingSoon" element={<ComingSoon />} />
         </Route>
       </Routes>
     </BrowserRouter>
