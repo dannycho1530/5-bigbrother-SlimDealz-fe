@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -9,6 +9,7 @@ import {
   PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { SearchContext } from '../../../components/utils/searchContext';
 
 const slimdealzlogo = '/assets/slimdealzlogo2.png';
 
@@ -18,13 +19,12 @@ type HeaderProps = {
 };
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
-  const [searchValue, setSearchValue] = useState('');
-
+  const { searchQuery, setSearchQuery } = useContext(SearchContext); // useContext로 전역 상태 사용
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
+    setSearchQuery(event.target.value); // 전역 상태 업데이트
   };
 
   const handleSearch = (value: string) => {
@@ -89,7 +89,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
           $isSimplePage={isSimplePage}
         >
           <SearchBar
-            searchValue={searchValue}
+            searchValue={searchQuery} // 전역 상태 사용
             onSearchChange={handleSearchChange}
             onSearch={handleSearch}
           />

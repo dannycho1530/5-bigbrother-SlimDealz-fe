@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
+import { SearchContext } from '@/components/utils/searchContext';
 
-const SearchResultsPage = ({ searchQuery }: { searchQuery: string }) => {
+const SearchResultsPage: React.FC = () => {
+  const { searchQuery } = useContext(SearchContext);
   const [data, setData] = useState([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
