@@ -1,17 +1,58 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import IconCategory from '../../components/icon/iconCategory';
 import ProductSlider from '../../components/product/productSlider';
 import { Container, ChickenChestWrapper } from './styles';
 
 const MainPage = () => {
+  const [lowestProducts, setLowestProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchLowestProducts = async () => {
+      try {
+        const response = await axios.get('/api/v1/today-lowest-products');
+        const productData = response.data.map((product: any) => ({
+          id: product.id,
+          image: product.image,
+          originalPrice: product.prices[0].setPrice,
+          salePrice: product.prices[0].discountedPrice,
+          discountRate: Math.round(
+            ((product.prices[0].setPrice - product.prices[0].discountedPrice) /
+              product.prices[0].setPrice) *
+              100
+          )
+        }));
+        setLowestProducts(productData);
+      } catch (error: any) {
+        if (error.response) {
+          // 서버가 응답을 보냈지만 상태 코드가 2xx가 아닌 경우
+          if (error.response.status === 404) {
+            console.error('Product not found', error.response.data.message);
+          } else if (error.response.status === 500) {
+            console.error('Server error', error.response.data.message);
+          } else {
+            console.error('An unexpected error occurred:', error.response.data);
+          }
+        } else if (error.request) {
+          // 요청이 이루어졌으나 서버로부터 응답이 없을 때
+          console.error('No response received from server', error.request);
+        } else {
+          // 오류가 발생하여 요청이 보내지지 않은 경우
+          console.error('Error setting up the request:', error.message);
+        }
+      }
+    };
+
+    fetchLowestProducts();
+  }, []);
+
   return (
     <Container>
       <ChickenChestWrapper>
         <IconCategory />
-        {/* 나중에 map을 통해 IconCategory 컴포넌트를 4개로 늘릴 수 있음 */}
       </ChickenChestWrapper>
-      <ProductSlider title="나의 북마크 제품들" />
-      <ProductSlider title="오늘의 최저가" />
+      <ProductSlider title="MY BOOKMARKS" />
+      <ProductSlider title="오늘의 최저가" products={lowestProducts} />
       <ProductSlider title="고객님 맞춤 상품 추천" />
     </Container>
   );
