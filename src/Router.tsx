@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import OutLetContainer from './pages';
 import MainPage from './pages/main';
@@ -14,33 +15,36 @@ import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 import ComingSoon from './components/utils/comingSoon';
+import { SearchProvider } from './components/utils/searchContext';
 
 const Router = () => {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/main" />} />
-        <Route path="/" element={<OutLetContainer />}>
-          <Route path="/main" element={<MainPage />} />
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/product/:productId" element={<DetailPage />} />
-          <Route
-            path="/searchInitial"
-            element={<SearchInitialPage searchValue={''} />}
-          />
-          <Route path="/searchResults/:query" element={<SearchResultsPage />} />
-          <Route path="/signIn" element={<SignInPage />} />
-          <Route path="/signUp" element={<SignUpPage />} />
-          <Route path="/myPage" element={<MyMainPage />} />
-          <Route path="/alarm" element={<UserAlarmPage />} />
-          <Route path="/bookmark" element={<UserBookmarkPage />} />
-          <Route path="/information" element={<UserInformationPage />} />
-          <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
-          <Route path="/comingSoon" element={<ComingSoon />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <SearchProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/main" />} />
+          <Route path="/" element={<OutLetContainer />}>
+            <Route path="/main" element={<MainPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/product/:productId" element={<DetailPage />} />
+            <Route path="/searchInitial" element={<SearchInitialPage />} />
+            <Route
+              path="/searchResults/:query"
+              element={<SearchResultsPage />}
+            />
+            <Route path="/signIn" element={<SignInPage />} />
+            <Route path="/signUp" element={<SignUpPage />} />
+            <Route path="/myPage" element={<MyMainPage />} />
+            <Route path="/alarm" element={<UserAlarmPage />} />
+            <Route path="/bookmark" element={<UserBookmarkPage />} />
+            <Route path="/information" element={<UserInformationPage />} />
+            <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
+            <Route path="/comingSoon" element={<ComingSoon />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </SearchProvider>
   );
 };
 

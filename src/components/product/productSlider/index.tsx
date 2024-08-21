@@ -12,35 +12,20 @@ import {
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
 
-const mockProducts = [
-  {
-    id: 1,
-    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
-    originalPrice: 10000,
-    discountRate: 30,
-    salePrice: 7000
-  },
-  {
-    id: 2,
-    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
-    originalPrice: 15000,
-    discountRate: 20,
-    salePrice: 12000
-  },
-  {
-    id: 3,
-    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
-    originalPrice: 20000,
-    discountRate: 50,
-    salePrice: 10000
-  }
-];
+type Product = {
+  id: number;
+  image: string;
+  originalPrice: number;
+  salePrice: number;
+  discountRate: number;
+};
 
 type Props = {
   title: string;
+  products?: Product[]; // API로 받은 제품들을 받을 수 있도록 props 추가
 };
 
-const ProductSlider = ({ title }: Props) => {
+const ProductSlider = ({ title, products = [] }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -76,22 +61,26 @@ const ProductSlider = ({ title }: Props) => {
       <ProductSliderContainer>
         <LeftArrow onClick={scrollLeft} />
         <ProductsWrapper ref={scrollRef}>
-          {mockProducts.map((product) => (
-            <ProductItem
-              key={product.id}
-              onClick={() => handleProductClick(product.id)}
-            >
-              <ImageWithSkeleton
-                src={product.image}
-                alt={`Product ${product.id}`}
-              />
-              <PriceInfo>
-                <div>원가: {product.originalPrice.toLocaleString()}원</div>
-                <div>할인율: {product.discountRate}%</div>
-                <div>판매가: {product.salePrice.toLocaleString()}원</div>
-              </PriceInfo>
-            </ProductItem>
-          ))}
+          {products.length > 0 ? (
+            products.map((product) => (
+              <ProductItem
+                key={product.id}
+                onClick={() => handleProductClick(product.id)}
+              >
+                <ImageWithSkeleton
+                  src={product.image}
+                  alt={`Product ${product.id}`}
+                />
+                <PriceInfo>
+                  <div>원가: {product.originalPrice.toLocaleString()}원</div>
+                  <div>할인율: {product.discountRate}%</div>
+                  <div>판매가: {product.salePrice.toLocaleString()}원</div>
+                </PriceInfo>
+              </ProductItem>
+            ))
+          ) : (
+            <div>상품 정보를 불러오는 중입니다...</div>
+          )}
         </ProductsWrapper>
         <RightArrow onClick={scrollRight} />
       </ProductSliderContainer>

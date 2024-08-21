@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -9,6 +9,7 @@ import {
   PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { SearchContext } from '../../../components/utils/searchContext';
 
 const logo = '/assets/logo.png';
 
@@ -18,18 +19,14 @@ type HeaderProps = {
   words: string[]; // words props 추가
 };
 
-const Header = forwardRef<HTMLDivElement, HeaderProps>(
-  ({ pageTitle, words }, ref) => {
-    const navigate = useNavigate();
-    const location = useLocation();
+const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
+  const { searchQuery, setSearchQuery } = useContext(SearchContext); // useContext로 전역 상태 사용
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const handleLogoClick = () => {
-      navigate('/main');
-    };
-
-    const handleBackClick = () => {
-      navigate(-1);
-    };
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
+  };
 
     const isMainPage = location.pathname === '/main';
     const isCategoryPage = location.pathname.startsWith('/category');
@@ -85,12 +82,15 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
             $isSpecialPage={isSpecialPage}
             $isSimplePage={isSimplePage}
           >
-            <SearchBar words={words} />
-          </SearchContainer>
-        )}
-      </HeaderContainer>
-    );
-  }
-);
+          <SearchBar
+            searchValue={searchQuery} // 전역 상태 사용
+            onSearchChange={handleSearchChange}
+            onSearch={handleSearch}
+          />
+        </SearchContainer>
+      )}
+    </HeaderContainer>
+  );
+});
 
 export default React.memo(Header);
