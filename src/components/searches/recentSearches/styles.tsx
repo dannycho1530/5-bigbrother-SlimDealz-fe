@@ -4,8 +4,7 @@ export const RecentSearchesContainer = styled.div`
   width: 390px;
   height: 100px;
   padding: 10px 5px 20px 5px;
-  background-color: #d9d9d9;
-  overflow: hidden; /* 컨테이너를 벗어나지 않도록 설정 */
+  overflow: hidden;
 `;
 
 export const NameContainer = styled.div`

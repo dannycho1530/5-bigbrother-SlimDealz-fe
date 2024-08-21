@@ -42,12 +42,14 @@ const Footer = () => {
       case 0:
         navigate('/main');
         break;
-      // case 1:
-      //   navigate('/recentlyView');
-      //   break;
-      // case 2:
-      //   navigate('/notifications');
-      //   break;
+      case 1:
+        navigate('/comingSoon');
+        // navigate('/recentlyView');
+        break;
+      case 2:
+        navigate('/comingSoon');
+        // navigate('/notifications');
+        break;
       case 3:
         navigate('/bookmark');
         break;
@@ -61,12 +63,24 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <div style={{ width: 390 }}>
+      <div
+        style={{
+          width: 390
+        }}
+      >
         <BottomNavigation
           showLabels
           value={value}
           onChange={(event, newValue) => {
             handleNavigation(newValue);
+          }}
+          sx={{
+            '& .Mui-selected': {
+              color: '#112f08 !important' // 선택된 아이콘과 텍스트 색상 변경
+            },
+            '& .MuiBottomNavigationAction-root': {
+              color: '#5c5b5b' // 기본 아이콘 및 텍스트 색상 변경
+            }
           }}
         >
           <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />

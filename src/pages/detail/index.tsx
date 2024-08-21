@@ -20,10 +20,10 @@ const DetailPage = () => {
         </div>
       </InfoContainer>
       <ProductInfo />
-      <PriceAlertSetting />
+      {/* <PriceAlertSetting /> */}
       <TabsComponent />
-      <Title>리뷰</Title>
-      <ReviewList />
+      {/* <Title>리뷰</Title>
+      <ReviewList /> */}
     </Container>
   );
 };

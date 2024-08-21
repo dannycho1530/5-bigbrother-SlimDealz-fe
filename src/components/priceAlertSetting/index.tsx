@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Typography, Switch, IconButton } from '@mui/material';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { Container } from './styles';
-import PriceAlertModal from '../priceAlertModal';
+import PriceAlertModal from '../modal/priceAlertModal';
 
 const PriceAlertSetting = () => {
   const [price, setPrice] = useState('');

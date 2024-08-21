@@ -4,7 +4,6 @@ export const PopularSearchContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: #d9d9d9;
 `;
 
 export const NameContainer = styled.div`

@@ -2,40 +2,46 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   padding: 20px;
+  background-color: #ffffff;
 `;
 
 export const Section = styled.div`
-  border-radius: 8px;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px 0;
   cursor: pointer;
 `;
 
 export const SectionTitle = styled.div`
-  color: white;
+  font-size: 16px;
   font-weight: bold;
-  padding: 10px;
-  border-radius: 8px 8px 0 0;
+  color: #000000;
 `;
 
-export const Content = styled.div`
-  padding: 10px;
-  font-size: 14px;
+export const ArrowIcon = styled.div`
+  font-size: 35px;
+  color: #808080;
+`;
+
+export const LogoutButtonContainer = styled.div`
+  padding-top: 10px;
+  border-top: 1px solid #e0e0e0;
 `;
 
 export const LogoutButton = styled.button`
   width: 100%;
-  padding: 15px;
-  background-color: #e0e0e0;
-  border: 2px solid #e74c3c;
-  border-radius: 8px;
-  color: black;
-  font-weight: bold;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 20px 0;
+  color: #808080;
   font-size: 16px;
+  font-weight: bold;
   cursor: pointer;
 
   &:hover {
-    background-color: #d3d3d3;
+    text-decoration: underline;
   }
 `;

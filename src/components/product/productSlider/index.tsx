@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -10,6 +10,7 @@ import {
   PriceInfo
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
+import Skeleton from '@mui/material/Skeleton';
 
 type Product = {
   id: number;
@@ -41,8 +42,7 @@ const ProductSlider = ({ title, products = [] }: Props) => {
   };
 
   const handleTitleClick = () => {
-    // title에 따라 다른 페이지로 이동하도록 설정
-    if (title === '나의 북마크 제품들') {
+    if (title === 'MY BOOKMARKS') {
       navigate(`/bookmark`);
     } else if (title === '최저가') {
       navigate(`/lowest-price`);
@@ -52,14 +52,12 @@ const ProductSlider = ({ title, products = [] }: Props) => {
   };
 
   const handleProductClick = (productId: number) => {
-    navigate(`/product/${productId}`); // 해당 아이템의 상세 페이지로 이동
+    navigate(`/product/${productId}`);
   };
 
   return (
     <Container>
-      <Title onClick={handleTitleClick} style={{ cursor: 'pointer' }}>
-        {title}
-      </Title>
+      <Title onClick={handleTitleClick}>{title}</Title>
       <ProductSliderContainer>
         <LeftArrow onClick={scrollLeft} />
         <ProductsWrapper ref={scrollRef}>
@@ -87,6 +85,31 @@ const ProductSlider = ({ title, products = [] }: Props) => {
         <RightArrow onClick={scrollRight} />
       </ProductSliderContainer>
     </Container>
+  );
+};
+
+const ImageWithSkeleton = ({ src, alt }: { src: string; alt: string }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <>
+      {!loaded && (
+        <Skeleton
+          variant="rectangular"
+          width={200}
+          height={200}
+          animation="wave"
+        />
+      )}
+      <ProductImage
+        src={src}
+        alt={alt}
+        style={{ display: loaded ? 'block' : 'none' }}
+        onLoad={() => setLoaded(true)}
+        width={150}
+        height={150}
+      />
+    </>
   );
 };
 
