@@ -49,8 +49,10 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
       '/signIn'
     ].includes(location.pathname);
 
+    const hasLogo = isMainPage || isCategoryPage;
+
     return (
-      <HeaderContainer ref={ref}>
+      <HeaderContainer ref={ref} $hasLogo={hasLogo}>
         {(isSpecialPage || isSimplePage || !isMainPage) && (
           <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
             <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
@@ -61,7 +63,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
           $isSpecialPage={isSpecialPage}
           $isSimplePage={isSimplePage}
         >
-          {(isMainPage || isCategoryPage) && (
+          {hasLogo && (
             <img
               src={slimdealzlogo}
               alt="Slimdealz logo"
@@ -83,9 +85,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
             $isSpecialPage={isSpecialPage}
             $isSimplePage={isSimplePage}
           >
-            <SearchBar
-              words={words} // words props 전달
-            />
+            <SearchBar words={words} />
           </SearchContainer>
         )}
       </HeaderContainer>
