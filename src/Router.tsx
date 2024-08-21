@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import OutLetContainer from './pages';
 import MainPage from './pages/main';
@@ -13,6 +14,7 @@ import UserInformationPage from './pages/user/information';
 import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
+import { SearchProvider } from './components/utils/searchContext';
 
 const Router = () => {
   return (
