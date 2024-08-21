@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -10,25 +10,26 @@ import {
   PriceInfo
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
+import Skeleton from '@mui/material/Skeleton';
 
 const mockProducts = [
   {
     id: 1,
-    image: 'https://via.placeholder.com/200',
+    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
     originalPrice: 10000,
     discountRate: 30,
     salePrice: 7000
   },
   {
     id: 2,
-    image: 'https://via.placeholder.com/200',
+    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
     originalPrice: 15000,
     discountRate: 20,
     salePrice: 12000
   },
   {
     id: 3,
-    image: 'https://via.placeholder.com/200',
+    image: 'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
     originalPrice: 20000,
     discountRate: 50,
     salePrice: 10000
@@ -56,7 +57,6 @@ const ProductSlider = ({ title }: Props) => {
   };
 
   const handleTitleClick = () => {
-    // title에 따라 다른 페이지로 이동하도록 설정
     if (title === 'MY BOOKMARKS') {
       navigate(`/bookmark`);
     } else if (title === '최저가') {
@@ -67,7 +67,7 @@ const ProductSlider = ({ title }: Props) => {
   };
 
   const handleProductClick = (productId: number) => {
-    navigate(`/product/${productId}`); // 해당 아이템의 상세 페이지로 이동
+    navigate(`/product/${productId}`);
   };
 
   return (
@@ -81,7 +81,10 @@ const ProductSlider = ({ title }: Props) => {
               key={product.id}
               onClick={() => handleProductClick(product.id)}
             >
-              <ProductImage src={product.image} alt={`Product ${product.id}`} />
+              <ImageWithSkeleton
+                src={product.image}
+                alt={`Product ${product.id}`}
+              />
               <PriceInfo>
                 <div>원가: {product.originalPrice.toLocaleString()}원</div>
                 <div>할인율: {product.discountRate}%</div>
@@ -93,6 +96,31 @@ const ProductSlider = ({ title }: Props) => {
         <RightArrow onClick={scrollRight} />
       </ProductSliderContainer>
     </Container>
+  );
+};
+
+const ImageWithSkeleton = ({ src, alt }: { src: string; alt: string }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <>
+      {!loaded && (
+        <Skeleton
+          variant="rectangular"
+          width={200}
+          height={200}
+          animation="wave"
+        />
+      )}
+      <ProductImage
+        src={src}
+        alt={alt}
+        style={{ display: loaded ? 'block' : 'none' }}
+        onLoad={() => setLoaded(true)}
+        width={150}
+        height={150}
+      />
+    </>
   );
 };
 
