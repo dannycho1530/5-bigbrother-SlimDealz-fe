@@ -1,6 +1,4 @@
-
-import React, { useState, forwardRef, useContext } from 'react';
-
+import React, { forwardRef, useContext } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -12,37 +10,27 @@ import {
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { SearchContext } from '../../../components/utils/searchContext';
-
 const slimdealzlogo = '/assets/slimdealzlogo2.png';
-
 type HeaderProps = {
   pageTitle?: string;
   onBackNavigation?: () => void;
 };
 
-
-
-  const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
+const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   const { searchQuery, setSearchQuery } = useContext(SearchContext); // useContext로 전역 상태 사용
   const navigate = useNavigate();
   const location = useLocation();
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
   };
-
   const handleSearch = (value: string) => {
     navigate(`/searchResults/${encodeURIComponent(value)}`);
   };
-
   const handleLogoClick = () => {
     navigate('/main');
   };
 
   const handleBackClick = () => {
-    // if (onBackNavigation) {
-    //   onBackNavigation();
-    // }
     navigate(-1);
   };
 
@@ -53,7 +41,6 @@ type HeaderProps = {
     ['/searchInitial', '/searchResults'].some((path) =>
       location.pathname.startsWith(path)
     ) || isProductPage;
-
   const isSimplePage = [
     '/alarm',
     '/bookmark',
@@ -65,7 +52,7 @@ type HeaderProps = {
   ].includes(location.pathname);
 
   return (
-    <HeaderContainer>
+    <HeaderContainer ref={ref}>
       {(isSpecialPage || isSimplePage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
@@ -104,6 +91,6 @@ type HeaderProps = {
       )}
     </HeaderContainer>
   );
-};
+});
 
-export default Header;
+export default React.memo(Header);
