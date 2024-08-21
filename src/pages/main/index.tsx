@@ -10,7 +10,8 @@ const MainPage = () => {
     {
       id: 1,
       name: '훈제 닭가슴살 샌드위치',
-      image: 'https://example.com/image23.jpg',
+      image:
+        'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
       originalPrice: 10000,
       salePrice: 7000,
       discountRate: 30
@@ -18,7 +19,8 @@ const MainPage = () => {
     {
       id: 2,
       name: '그릴드 치킨 샐러드',
-      image: 'https://example.com/image24.jpg',
+      image:
+        'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
       originalPrice: 12000,
       salePrice: 9000,
       discountRate: 25
@@ -26,7 +28,8 @@ const MainPage = () => {
     {
       id: 3,
       name: '닭가슴살 크림 파스타',
-      image: 'https://example.com/image25.jpg',
+      image:
+        'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
       originalPrice: 15000,
       salePrice: 10500,
       discountRate: 30
@@ -34,7 +37,8 @@ const MainPage = () => {
     {
       id: 4,
       name: '치킨 라이스 볼',
-      image: 'https://example.com/image26.jpg',
+      image:
+        'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
       originalPrice: 8000,
       salePrice: 6400,
       discountRate: 20
@@ -42,7 +46,8 @@ const MainPage = () => {
     {
       id: 5,
       name: '닭가슴살 샌드위치',
-      image: 'https://example.com/image27.jpg',
+      image:
+        'https://img.danawa.com//prod_img/500000/813/716/img/18716813_1.jpg',
       originalPrice: 7000,
       salePrice: 5600,
       discountRate: 20
