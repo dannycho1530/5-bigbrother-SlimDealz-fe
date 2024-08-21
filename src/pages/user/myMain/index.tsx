@@ -22,6 +22,8 @@ const MyMainPage = () => {
   const handleLogout = () => {
     // 로그아웃 로직 (예: 토큰 삭제, 상태 초기화 등)
     console.log('Logged out');
+    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('refreshToken');
     navigate('/signIn');
   };
 
