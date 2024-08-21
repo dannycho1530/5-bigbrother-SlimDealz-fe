@@ -4,7 +4,6 @@ import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
 
 const ProductUrl = () => {
   const [copySuccess, setCopySuccess] = useState(false);

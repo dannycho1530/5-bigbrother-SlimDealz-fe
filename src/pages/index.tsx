@@ -44,7 +44,7 @@ const OutLetContainer = () => {
 
   return (
     <>
-      <Header pageTitle={pageTitle} ref={headerRef} words={[]} />
+      <Header pageTitle={pageTitle} ref={headerRef} />
       <Container paddingTop={paddingTop}>
         <Outlet />
       </Container>

@@ -20,37 +20,18 @@ const SearchInitialPage: React.FC<SearchInitialPageProps> = ({
   };
 
   useEffect(() => {
-    // SearchInitialPage로 진입할 때 기록을 남기지 않음
     navigate(location.pathname, { replace: true });
   }, [navigate]);
 
   return (
     <>
       {searchValue ? (
-        <Box>
-          <RecommendSearch onSearch={handleSearch} />
-          <Divider
-            sx={{
-              my: 2,
-              borderColor: 'rgba(0, 0, 0, 0.1)', // 색상 연하게 설정
-              width: '80%', // 길이 80%로 설정
-              mx: 'auto' // 가운데 정렬
-            }}
-          />
-        </Box>
+        <RecommendSearch onSearch={handleSearch} />
       ) : (
-        <Box>
+        <>
           <RecentSearches />
-          <Divider
-            sx={{
-              my: 2,
-              borderColor: 'rgba(0, 0, 0, 0.1)', // 색상 연하게 설정
-              width: '95%', // 길이 80%로 설정
-              mx: 'auto' // 가운데 정렬
-            }}
-          />
           <PopularSearch />
-        </Box>
+        </>
       )}
     </>
   );

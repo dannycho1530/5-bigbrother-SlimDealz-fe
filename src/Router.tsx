@@ -28,7 +28,10 @@ const Router = () => {
             <Route path="/main" element={<MainPage />} />
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/product/:productId" element={<DetailPage />} />
-            <Route path="/searchInitial" element={<SearchInitialPage />} />
+            <Route
+              path="/searchInitial"
+              element={<SearchInitialPage searchValue={''} />}
+            />
             <Route
               path="/searchResults/:query"
               element={<SearchResultsPage />}
