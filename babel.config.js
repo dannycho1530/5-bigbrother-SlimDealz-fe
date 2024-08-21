@@ -14,15 +14,6 @@ module.exports = {
         },
       },
     ],
-    [
-      "dotenv-import",
-      {
-        moduleName: "@env", // 환경 변수 모듈 이름
-        path: ".env", // 환경 변수 파일 경로
-        safe: false, // 안전 모드 사용 여부
-        allowUndefined: true, // 정의되지 않은 변수를 허용할지 여부
-      },
-    ],
     "babel-plugin-styled-components" // styled-components를 위한 Babel 플러그인
   ],
 };

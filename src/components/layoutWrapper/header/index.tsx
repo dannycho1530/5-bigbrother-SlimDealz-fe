@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
   };
 
   const handleLogoClick = () => {
-    navigate('/main');
+    navigate('/');
   };
 
   const handleBackClick = () => {
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle }) => {
     navigate(-1);
   };
 
-  const isMainPage = location.pathname === '/main';
+  const isMainPage = location.pathname === '/';
   const isCategoryPage = location.pathname.startsWith('/category');
   const isProductPage = /^\/product\/\d+$/.test(location.pathname);
   const isSpecialPage =

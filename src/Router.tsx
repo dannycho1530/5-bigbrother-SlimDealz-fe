@@ -19,9 +19,8 @@ const Router = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Navigate replace to="/main" />} />
         <Route path="/" element={<OutLetContainer />}>
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/product/:productId" element={<DetailPage />} />
           <Route path="/searchInitial" element={<SearchInitialPage />} />

@@ -16,7 +16,7 @@ const Footer = () => {
 
   useEffect(() => {
     switch (location.pathname) {
-      case '/main':
+      case '/':
         setValue(0);
         break;
       case '/recentlyView':
@@ -40,7 +40,7 @@ const Footer = () => {
     setValue(newValue);
     switch (newValue) {
       case 0:
-        navigate('/main');
+        navigate('/');
         break;
       // case 1:
       //   navigate('/recentlyView');
@@ -55,7 +55,7 @@ const Footer = () => {
         navigate('/myPage');
         break;
       default:
-        navigate('/main');
+        navigate('/');
     }
   };
 
