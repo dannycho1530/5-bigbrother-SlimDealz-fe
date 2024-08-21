@@ -10,7 +10,7 @@ import {
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const slimdealzlogo = '/assets/slimdealzlogo2.png';
+const logo = '/assets/logo.png';
 
 type HeaderProps = {
   pageTitle?: string;
@@ -65,7 +65,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
         >
           {hasLogo && (
             <img
-              src={slimdealzlogo}
+              src={logo}
               alt="Slimdealz logo"
               onClick={handleLogoClick}
               style={{ cursor: 'pointer' }}

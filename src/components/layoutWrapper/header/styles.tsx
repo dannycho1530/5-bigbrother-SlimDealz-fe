@@ -18,7 +18,7 @@ export const AutoCompleteList = styled.ul`
   overflow-y: auto;
   z-index: 1;
   background-color: #f9f9f9;
-  border: 1px solid #ccc;
+  border: 1px solid #f8ebeb;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
@@ -52,7 +52,7 @@ export const HeaderContainer = styled.div<{
   flex-direction: column;
   align-items: center;
   z-index: 1000;
-  background-color: #112f08;
+  background-color: #f3e6e6;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   padding-bottom: ${({ $hasLogo }) => ($hasLogo ? '10px' : '0')};
 `;

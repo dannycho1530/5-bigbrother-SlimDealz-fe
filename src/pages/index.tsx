@@ -33,9 +33,9 @@ const OutLetContainer = () => {
   }, [location.pathname]);
 
   if (location.pathname.includes('/bookmark')) {
-    pageTitle = '북마크';
+    pageTitle = 'BOOKMARKS';
   } else if (location.pathname.includes('/myPage')) {
-    pageTitle = '마이페이지';
+    pageTitle = 'MY PAGE';
   } else if (location.pathname.includes('/alarm')) {
     pageTitle = '알람';
   } else if (location.pathname.includes('/information')) {
