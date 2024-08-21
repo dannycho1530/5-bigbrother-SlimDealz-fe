@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-const path = require('path');
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@mui/styled-engine': '@mui/styled-engine-sc' // 추가된 코드
+      '@mui/styled-engine': '@mui/styled-engine-sc'
     }
   },
   plugins: [react()],
@@ -15,6 +15,13 @@ export default defineConfig({
     outDir: 'dist'
   },
   server: {
-    port: 3000
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '') // 필요에 따라 경로를 재작성
+      }
+    }
   }
 });
