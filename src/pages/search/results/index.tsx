@@ -7,25 +7,25 @@ import { SearchContext } from '../../../components/utils/searchContext';
 import { useParams } from 'react-router-dom';
 
 const SearchResultsPage: React.FC = () => {
-  const { query } = useParams<{ query: string }>();
+  const { keyword } = useParams<{ keyword: string }>();
   const { setSearchQuery } = useContext(SearchContext);
   const [data, setData] = useState([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (query) {
-      setSearchQuery(query);
+    if (keyword) {
+      setSearchQuery(keyword);
     }
-  }, [query, setSearchQuery]);
+  }, [keyword, setSearchQuery]);
 
   useEffect(() => {
-    if (!query) return;
+    if (!keyword) return;
 
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/v1/search', {
-          params: { query }
+          params: { keyword }
         });
 
         if (response.status === 200) {
@@ -47,7 +47,7 @@ const SearchResultsPage: React.FC = () => {
     };
 
     fetchData();
-  }, [query]);
+  }, [keyword]);
 
   if (loading) {
     return <div>Loading...</div>;

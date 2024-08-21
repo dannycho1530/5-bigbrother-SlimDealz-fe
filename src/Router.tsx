@@ -30,7 +30,7 @@ const Router = () => {
             <Route path="/product/:productId" element={<DetailPage />} />
             <Route path="/searchInitial" element={<SearchInitialPage />} />
             <Route
-              path="/searchResults/:query"
+              path="/searchResults/:keyword"
               element={<SearchResultsPage />}
             />
             <Route path="/signIn" element={<SignInPage />} />
