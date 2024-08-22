@@ -1,4 +1,3 @@
-// styles.tsx
 export const styles = {
   userProfileContainer: {
     padding: '20px',

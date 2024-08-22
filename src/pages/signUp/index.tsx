@@ -4,6 +4,7 @@ import axios from 'axios';
 import { styles } from './styles';
 
 const SignUpPage: React.FC = () => {
+
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState('');
