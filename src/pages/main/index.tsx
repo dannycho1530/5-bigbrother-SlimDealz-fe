@@ -6,14 +6,13 @@ import { Container, ChickenChestWrapper } from './styles';
 import Banner from '../../components/layoutWrapper/banner';
 import ThirdSlider from '@/components/product/slider/thirdSlider';
 
-
 const MainPage = () => {
   useEffect(() => {
     // URL에서 jwtToken과 refreshToken 추출
     const urlParams = new URLSearchParams(window.location.search);
     const jwtToken = urlParams.get('jwtToken');
     const refreshToken = urlParams.get('refreshToken');
-  
+
     if (jwtToken && refreshToken) {
       // 토큰을 localStorage에 저장
       localStorage.setItem('jwtToken', jwtToken);
@@ -24,7 +23,7 @@ const MainPage = () => {
       window.history.replaceState(null, '', newUrl);
     }
   }, []);
-  
+
   const [lowestProducts, setLowestProducts] = useState([]);
 
   useEffect(() => {
@@ -65,7 +64,7 @@ const MainPage = () => {
 
     fetchLowestProducts();
   }, []);
-  
+
   const recommendedItems = [
     {
       id: 1,
@@ -115,15 +114,18 @@ const MainPage = () => {
   ];
 
   return (
-    <Container>
-      <ChickenChestWrapper>
+    <>
+      <Banner></Banner>
+      <Container>
+        <ChickenChestWrapper>
           {/* 나중에 map을 통해 IconCategory 컴포넌트를 4개로 늘릴 수 있음 */}
-        <IconCategory />
-      </ChickenChestWrapper>
-      <ProductSlider title="MY BOOKMARKS" />
-      <ProductSlider title="오늘의 최저가" products={lowestProducts} />
-      <ThirdSlider items={recommendedItems} title="고객님 맞춤 상품 추천" />
-    </Container>
+          <IconCategory />
+        </ChickenChestWrapper>
+        <ProductSlider title="MY BOOKMARKS" />
+        <ProductSlider title="오늘의 최저가" products={lowestProducts} />
+        <ThirdSlider items={recommendedItems} title="고객님 맞춤 상품 추천" />
+      </Container>
+    </>
   );
 };
 

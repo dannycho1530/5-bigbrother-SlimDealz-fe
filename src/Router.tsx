@@ -15,34 +15,37 @@ import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 import ComingSoon from './components/utils/comingSoon';
-import { SearchProvider } from './components/utils/searchContext';
+import { SearchProvider } from './components/utils/context/searchContext';
+import { HeaderHeightProvider } from './components/utils/\bcontext/headerHeightContext';
 
 const Router = () => {
   return (
     <SearchProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<OutLetContainer />}>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/category" element={<CategoryPage />} />
-            <Route path="/product/:productId" element={<DetailPage />} />
-            <Route path="/searchInitial" element={<SearchInitialPage />} />
-            <Route
-              path="/searchResults/:keyword"
-              element={<SearchResultsPage />}
-            />
-            <Route path="/signIn" element={<SignInPage />} />
-            <Route path="/signUp" element={<SignUpPage />} />
-            <Route path="/myPage" element={<MyMainPage />} />
-            <Route path="/alarm" element={<UserAlarmPage />} />
-            <Route path="/bookmark" element={<UserBookmarkPage />} />
-            <Route path="/information" element={<UserInformationPage />} />
-            <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
-            <Route path="/comingSoon" element={<ComingSoon />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <HeaderHeightProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<OutLetContainer />}>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/category" element={<CategoryPage />} />
+              <Route path="/product/:productId" element={<DetailPage />} />
+              <Route path="/searchInitial" element={<SearchInitialPage />} />
+              <Route
+                path="/searchResults/:keyword"
+                element={<SearchResultsPage />}
+              />
+              <Route path="/signIn" element={<SignInPage />} />
+              <Route path="/signUp" element={<SignUpPage />} />
+              <Route path="/myPage" element={<MyMainPage />} />
+              <Route path="/alarm" element={<UserAlarmPage />} />
+              <Route path="/bookmark" element={<UserBookmarkPage />} />
+              <Route path="/information" element={<UserInformationPage />} />
+              <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
+              <Route path="/comingSoon" element={<ComingSoon />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </HeaderHeightProvider>
     </SearchProvider>
   );
 };

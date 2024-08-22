@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
-import { SearchContext } from '../../../components/utils/searchContext';
+import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams } from 'react-router-dom';
 
 const SearchResultsPage: React.FC = () => {

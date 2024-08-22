@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -9,6 +9,7 @@ import {
   PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useHeaderHeight } from '@/components/utils/\bcontext/headerHeightContext';
 
 const logo = '/assets/logo.png';
 
@@ -18,8 +19,29 @@ type HeaderProps = {
 };
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
+  const { setHeight } = useHeaderHeight();
   const navigate = useNavigate();
   const location = useLocation();
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      if (headerRef.current) {
+        const headerHeight = headerRef.current.offsetHeight;
+        setHeight(headerHeight);
+      }
+    });
+
+    if (headerRef.current) {
+      resizeObserver.observe(headerRef.current);
+    }
+
+    return () => {
+      if (headerRef.current) {
+        resizeObserver.unobserve(headerRef.current);
+      }
+    };
+  }, [location.pathname, setHeight]);
 
   const isMainPage = location.pathname === '/';
   const isCategoryPage = location.pathname.startsWith('/category');
@@ -41,6 +63,13 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
 
   const hasLogo = isMainPage || isCategoryPage;
 
+  useEffect(() => {
+    if (headerRef.current) {
+      const headerHeight = headerRef.current.offsetHeight;
+      setHeight(headerHeight);
+    }
+  }, [location.pathname, setHeight]);
+
   const handleLogoClick = () => {
     navigate('/');
   };
@@ -50,7 +79,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   };
 
   return (
-    <HeaderContainer ref={ref} $hasLogo={hasLogo}>
+    <HeaderContainer ref={headerRef} $hasLogo={hasLogo}>
       {(isSpecialPage || isSimplePage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
