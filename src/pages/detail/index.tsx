@@ -9,8 +9,6 @@ import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
 
 const DetailPage = () => {
-  const { productId } = useParams<{ productId: string }>();
-
   return (
     <Container>
       <ImageView />

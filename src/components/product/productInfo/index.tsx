@@ -15,10 +15,10 @@ import {
 const ProductInfo = () => {
   return (
     <ProductInfoContainer>
-      <RateInfoContainer>
+      {/* <RateInfoContainer>
         <ProductRating />
         <ReviewCount count={1000} />
-      </RateInfoContainer>
+      </RateInfoContainer> */}
       <PriceInfoContainer>
         <ProductPrice
           discountRate={10}
