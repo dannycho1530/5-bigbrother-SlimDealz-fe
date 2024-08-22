@@ -1,48 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import InputBase from '@mui/material/InputBase';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { AutoCompleteItem, AutoCompleteList, CustomInput } from './styles';
+import { SearchContext } from '../../../components/utils/searchContext';
 
-type SearchBarProps = {
-  searchValue: string;
-  onSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (value: string) => void;
-};
+const words = ['example', 'search', 'terms', 'list', 'of', 'words']; // 검색어를 필터링하기 위한 단어 목록
 
-const SearchBar: React.FC<SearchBarProps> = ({
-  searchValue,
-  onSearchChange,
-  onSearch
-}) => {
+const SearchBar: React.FC = () => {
+  const { searchQuery, setSearchQuery } = useContext(SearchContext);
   const [previousSearchValue, setPreviousSearchValue] = useState('');
   const [filteredWords, setFilteredWords] = useState<string[]>([]);
+  const [prevPathname, setPrevPathname] = useState('');
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setPreviousSearchValue('');
+    setPrevPathname(location.pathname);
+
+    if (!location.pathname.startsWith('/searchResults')) {
+      setSearchQuery('');
+    }
+  }, [location.pathname, setSearchQuery]);
 
   useEffect(() => {
     if (location.pathname.startsWith('/searchResults')) {
       const searchTermFromURL = decodeURIComponent(
         location.pathname.split('/searchResults/')[1] || ''
       );
-      if (searchTermFromURL && searchTermFromURL !== searchValue) {
-        onSearchChange({
-          target: { value: searchTermFromURL }
-        } as React.ChangeEvent<HTMLInputElement>);
+      if (searchTermFromURL && searchTermFromURL !== searchQuery) {
+        setSearchQuery(searchTermFromURL);
       }
     }
-  }, [location.pathname, searchValue, onSearchChange]);
+  }, [location.pathname, searchQuery, setSearchQuery]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    onSearchChange(event);
+    setSearchQuery(value);
 
     if (value && value !== previousSearchValue) {
-      const filtered = searchValue
-        .split(' ')
-        .filter((word) => word.toLowerCase().includes(value.toLowerCase()));
+      const filtered = words.filter((word) =>
+        word.toLowerCase().includes(value.toLowerCase())
+      );
       setFilteredWords(filtered);
     } else {
       setFilteredWords([]);
@@ -50,7 +53,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleSearch = (value: string) => {
-    if (previousSearchValue === value) return;
+    if (previousSearchValue === value && location.pathname === prevPathname)
+      return;
 
     setPreviousSearchValue(value);
     setFilteredWords([]);
@@ -65,59 +69,61 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      handleSearch(searchValue);
+      handleSearch(searchQuery);
     }
   };
 
   const handleSearchClick = () => {
-    handleSearch(searchValue);
+    handleSearch(searchQuery);
   };
 
   const handleInputClick = () => {
     navigate('/searchInitial');
   };
 
-  useEffect(() => {
-    setPreviousSearchValue('');
-  }, [location.pathname]);
-
   return (
-    <Paper
-      component="form"
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        width: 320,
-        height: 35,
-        border: '0.1px solid #ccc',
-        boxShadow: 'none'
-      }}
-      onSubmit={(event) => {
-        event.preventDefault();
-        handleSearchClick();
-      }}
-    >
-      <InputBase
+    <>
+      <Paper
+        component="form"
         sx={{
-          ml: 1,
-          flex: 1,
-          width: '100%',
-          height: '20px'
+          display: 'flex',
+          alignItems: 'center',
+          width: 300,
+          height: 35,
+          border: '0.1px solid #ccc',
+          boxShadow: 'none',
+          paddingLeft: '10px'
         }}
-        value={searchValue}
-        onChange={handleSearchChange}
-        onKeyPress={handleKeyPress}
-        onClick={handleInputClick}
-      />
-      <IconButton
-        type="button"
-        sx={{ p: '10px', marginLeft: 'auto' }}
-        aria-label="search"
-        onClick={handleSearchClick}
+        onSubmit={(event) => {
+          event.preventDefault();
+          handleSearchClick();
+        }}
       >
-        <SearchIcon />
-      </IconButton>
-    </Paper>
+        <CustomInput
+          value={searchQuery}
+          onChange={handleSearchChange}
+          onKeyPress={handleKeyPress}
+          onClick={handleInputClick}
+        />
+        <IconButton
+          type="button"
+          sx={{ p: '10px' }}
+          aria-label="search"
+          onClick={handleSearchClick}
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
+      {filteredWords.length > 0 && (
+        <AutoCompleteList>
+          {filteredWords.map((word, index) => (
+            <AutoCompleteItem key={index} onClick={() => handleSearch(word)}>
+              {word}
+            </AutoCompleteItem>
+          ))}
+        </AutoCompleteList>
+      )}
+    </>
   );
 };
 
