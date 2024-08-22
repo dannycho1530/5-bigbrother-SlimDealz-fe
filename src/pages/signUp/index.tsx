@@ -4,7 +4,6 @@ import axios from 'axios';
 import { styles } from './styles';
 
 const SignUpPage: React.FC = () => {
-
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState('');
@@ -81,7 +80,7 @@ const SignUpPage: React.FC = () => {
         }
       );
       console.log('회원 정보 저장 성공:', response.data);
-      navigate('/main'); // 저장 후 리다이렉트할 경로
+      navigate('/'); // 저장 후 리다이렉트할 경로
     } catch (error) {
       console.error('회원 정보 저장 실패:', error);
     }

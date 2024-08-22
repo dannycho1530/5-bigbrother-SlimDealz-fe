@@ -21,7 +21,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isMainPage = location.pathname === '/main';
+  const isMainPage = location.pathname === '/';
   const isCategoryPage = location.pathname.startsWith('/category');
   const isProductPage = /^\/product\/\d+$/.test(location.pathname);
   const isSpecialPage =
@@ -42,7 +42,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   const hasLogo = isMainPage || isCategoryPage;
 
   const handleLogoClick = () => {
-    navigate('/main');
+    navigate('/');
   };
 
   const handleBackClick = () => {
@@ -87,4 +87,4 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   );
 });
 
-export default React.memo(Header);
+export default Header;

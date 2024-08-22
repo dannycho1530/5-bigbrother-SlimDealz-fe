@@ -24,9 +24,7 @@ const OutLetContainer = () => {
   let pageTitle = '';
 
   useLayoutEffect(() => {
-    if (location.pathname === '/main') {
-      setPaddingTop(120);
-    } else if (headerRef.current) {
+    if (headerRef.current) {
       const headerHeight = headerRef.current.offsetHeight;
       setPaddingTop(headerHeight);
     }
