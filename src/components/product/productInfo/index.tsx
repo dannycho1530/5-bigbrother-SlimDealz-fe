@@ -12,7 +12,17 @@ import {
   ProductUrlContainer
 } from './styles';
 
-const ProductInfo = () => {
+interface ProductInfoProps {
+  discountRate: number;
+  discountedPrice: number;
+  originalPrice: number;
+}
+
+const ProductInfo: React.FC<ProductInfoProps> = ({
+  discountRate,
+  discountedPrice,
+  originalPrice
+}) => {
   return (
     <ProductInfoContainer>
       {/* <RateInfoContainer>
@@ -21,9 +31,9 @@ const ProductInfo = () => {
       </RateInfoContainer> */}
       <PriceInfoContainer>
         <ProductPrice
-          discountRate={10}
-          discountedPrice={10000}
-          originalPrice={11000}
+          discountRate={discountRate}
+          discountedPrice={discountedPrice}
+          originalPrice={originalPrice}
         />
         <ProductInfoOptionContainer>
           <ProductBookmarkContainer>
