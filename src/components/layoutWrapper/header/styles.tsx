@@ -1,6 +1,46 @@
 import styled from 'styled-components';
+import InputBase from '@mui/material/InputBase';
 
-export const HeaderContainer = styled.div`
+export const CustomInput = styled(InputBase)(({ theme }) => ({
+  '& .MuiInputBase-input': {
+    width: '250px'
+  }
+}));
+
+export const AutoCompleteList = styled.ul`
+  margin-top: 10px;
+  padding: 10px;
+  list-style-type: none;
+  position: absolute;
+  width: 300px;
+  height: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+  background-color: #f9f9f9;
+  border: 1px solid #f8ebeb;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const AutoCompleteItem = styled.li`
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #f2f2f7;
+  margin-bottom: 5px;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+export const HeaderContainer = styled.div<{
+  $hasLogo: boolean;
+}>`
   position: fixed;
   top: 0;
   left: 50%;
@@ -12,14 +52,14 @@ export const HeaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   z-index: 1000;
-  background-color: white;
+  background-color: #f3e6e6;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  padding-bottom: 10px;
+  padding-bottom: ${({ $hasLogo }) => ($hasLogo ? '10px' : '0')};
 `;
 
 export const IconContainer = styled.div<{
   $isHidden: boolean;
-  $isSpecialPage?: boolean; // 이 부분을 수정하여 선택적 props로 만듦
+  $isSpecialPage?: boolean;
 }>`
   display: ${({ $isHidden }) => ($isHidden ? 'none' : 'flex')};
   align-items: center;
@@ -27,8 +67,7 @@ export const IconContainer = styled.div<{
   margin: 5px;
   position: absolute;
   padding-top: 5px;
-  left: ${({ $isSpecialPage }) =>
-    $isSpecialPage ? '20px' : '10px'}; /* 간격 조정 */
+  left: ${({ $isSpecialPage }) => ($isSpecialPage ? '20px' : '10px')};
   top: 15px;
 `;
 
@@ -58,9 +97,9 @@ export const SearchContainer = styled.div<{
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 10px 20px 0px; /* 패딩을 조정하여 검색바 위치 조정 */
+  padding: 10px 20px 0px;
   box-sizing: border-box;
-  margin-top: 10px; /* 로고와의 간격을 조정 */
+  margin-top: 10px;
 
   ${({ $isSpecialPage }) =>
     $isSpecialPage &&
@@ -79,11 +118,9 @@ export const PageTitle = styled.div<{
   justify-content: center;
   width: 100%;
   max-width: 380px;
-  height: 30px;
-  font-size: 20px;
-  font-weight: 20px;
-  padding-top: 35px;
-  padding-bottom: 20px;
+  height: 60px;
+  font-size: 30px;
+  font-weight: bold;
   margin: 5px;
 
   ${({ $isSimplePage }) =>

@@ -1,4 +1,4 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import SearchBar from './SearchBar';
 import {
@@ -9,9 +9,8 @@ import {
   PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { SearchContext } from '../../../components/utils/searchContext';
 
-const slimdealzlogo = '/assets/slimdealzlogo2.png';
+const logo = '/assets/logo.png';
 
 type HeaderProps = {
   pageTitle?: string;
@@ -19,27 +18,10 @@ type HeaderProps = {
 };
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
-  const { searchQuery, setSearchQuery } = useContext(SearchContext); // useContext로 전역 상태 사용
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handleSearch = (value: string) => {
-    navigate(`/searchResults/${encodeURIComponent(value)}`);
-  };
-
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-
-  const handleBackClick = () => {
-    navigate(-1);
-  };
-
-  const isMainPage = location.pathname === '/';
+  const isMainPage = location.pathname === '/main';
   const isCategoryPage = location.pathname.startsWith('/category');
   const isProductPage = /^\/product\/\d+$/.test(location.pathname);
   const isSpecialPage =
@@ -57,8 +39,18 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
     '/signIn'
   ].includes(location.pathname);
 
+  const hasLogo = isMainPage || isCategoryPage;
+
+  const handleLogoClick = () => {
+    navigate('/main');
+  };
+
+  const handleBackClick = () => {
+    navigate(-1);
+  };
+
   return (
-    <HeaderContainer ref={ref}>
+    <HeaderContainer ref={ref} $hasLogo={hasLogo}>
       {(isSpecialPage || isSimplePage || !isMainPage) && (
         <IconContainer onClick={handleBackClick} $isHidden={isMainPage}>
           <ArrowBackRoundedIcon style={{ cursor: 'pointer' }} />
@@ -69,9 +61,9 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
         $isSpecialPage={isSpecialPage}
         $isSimplePage={isSimplePage}
       >
-        {(isMainPage || isCategoryPage) && (
+        {hasLogo && (
           <img
-            src={slimdealzlogo}
+            src={logo}
             alt="Slimdealz logo"
             onClick={handleLogoClick}
             style={{ cursor: 'pointer' }}
@@ -80,7 +72,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
       </LogoContainer>
       {isSimplePage && !isCategoryPage && (
         <PageTitle $isSpecialPage={isSpecialPage} $isSimplePage={isSimplePage}>
-          {pageTitle || 'Page Title'}
+          {pageTitle}
         </PageTitle>
       )}
       {(isMainPage || isCategoryPage || isSpecialPage) && (
@@ -88,11 +80,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
           $isSpecialPage={isSpecialPage}
           $isSimplePage={isSimplePage}
         >
-          <SearchBar
-            searchValue={searchQuery} // 전역 상태 사용
-            onSearchChange={handleSearchChange}
-            onSearch={handleSearch}
-          />
+          <SearchBar />
         </SearchContainer>
       )}
     </HeaderContainer>

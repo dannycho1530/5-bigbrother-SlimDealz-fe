@@ -23,7 +23,7 @@ const SearchWord = ({
   if (!isVisible) return null;
 
   const displayedWord =
-    searchWord.length > 10 ? searchWord.slice(0, 10) + '...' : searchWord;
+    searchWord.length > 16 ? searchWord.slice(0, 16) + '...' : searchWord;
 
   const Container = isPopular ? RankWordContainer : SearchWordContainer;
 

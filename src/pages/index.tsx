@@ -7,18 +7,13 @@ import { useLayoutEffect, useRef, useState } from 'react';
 const Container = styled.div<{ paddingTop: number }>`
   width: 390px;
   height: auto;
-  min-height: 100vh;
+  min-height: 100dvh; //현재 보여지는 뷰포트 높이를 동적으로 가져오기
   margin: 0 auto;
   padding-top: ${({ paddingTop }) => `${paddingTop}px`};
   padding-bottom: 50px;
   box-sizing: border-box;
   overflow-x: hidden;
   background-color: var(--background-color);
-  border-left: 1px solid #dcdcdc;
-  border-right: 1px solid #dcdcdc;
-  box-shadow:
-    -2px 0px 4px rgba(0, 0, 0, 0.1),
-    2px 0px 4px rgba(0, 0, 0, 0.1);
 `;
 
 const OutLetContainer = () => {
@@ -38,11 +33,13 @@ const OutLetContainer = () => {
   }, [location.pathname]);
 
   if (location.pathname.includes('/bookmark')) {
-    pageTitle = '북마크';
+    pageTitle = 'BOOKMARKS';
   } else if (location.pathname.includes('/myPage')) {
-    pageTitle = '마이페이지';
+    pageTitle = 'MY PAGE';
   } else if (location.pathname.includes('/alarm')) {
     pageTitle = '알람';
+  } else if (location.pathname.includes('/information')) {
+    pageTitle = '회원가입 추가 정보';
   }
 
   return (
