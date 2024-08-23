@@ -10,7 +10,8 @@ import {
   ItemName,
   OriginalPrice,
   DiscountRate,
-  SalePrice
+  SalePrice,
+  StyledSwiperContainer
 } from './styles';
 import { Title } from '../productSlider/styles';
 import { useNavigate } from 'react-router-dom';
@@ -54,34 +55,38 @@ const ThirdSlider: React.FC<ThirdSliderProps> = ({ items, title }) => {
       }}
     >
       <Title onClick={handleTitleClick}>{title}</Title>
-      <Swiper
-        effect={'cards'}
-        grabCursor={true}
-        modules={[EffectCards]}
-        className="mySwiper"
-        style={{ width: '300px', height: '360px', overflow: 'hidden' }} // Updated to hide overflow
-      >
-        {items.map((item) => (
-          <SwiperSlide
-            key={item.id}
-            style={{ display: 'flex', justifyContent: 'center' }}
-          >
-            <SwiperSlideStyled>
-              <ItemImage src={item.image} alt={item.name} />
-              <ItemDetails>
-                <ItemName>{item.name}</ItemName>
-                <OriginalPrice>
-                  원가: {item.originalPrice.toLocaleString()}원
-                </OriginalPrice>
-                <DiscountRate>할인율: {item.discountRate}%</DiscountRate>
-                <SalePrice>
-                  판매가: {item.salePrice.toLocaleString()}원
-                </SalePrice>
-              </ItemDetails>
-            </SwiperSlideStyled>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <StyledSwiperContainer>
+        <Swiper
+          effect={'cards'}
+          grabCursor={true}
+          modules={[EffectCards]}
+          style={{
+            width: '280px',
+            height: '350px'
+          }}
+        >
+          {items.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              onClick={() => handleProductClick(item.id)}
+            >
+              <SwiperSlideStyled>
+                <ItemImage src={item.image} alt={item.name} />
+                <ItemDetails>
+                  <ItemName>{item.name}</ItemName>
+                  <OriginalPrice>
+                    원가: {item.originalPrice.toLocaleString()}원
+                  </OriginalPrice>
+                  <DiscountRate>할인율: {item.discountRate}%</DiscountRate>
+                  <SalePrice>
+                    판매가: {item.salePrice.toLocaleString()}원
+                  </SalePrice>
+                </ItemDetails>
+              </SwiperSlideStyled>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </StyledSwiperContainer>
     </div>
   );
 };
