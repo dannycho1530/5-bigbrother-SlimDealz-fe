@@ -31,7 +31,7 @@ const UserInformationPage: React.FC = () => {
   const fetchUserProfile = async (kakao_Id: string, jwtToken: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/users/${encodeURIComponent(kakao_Id)}/profile`,
+        `/api/v1/users/${encodeURIComponent(kakao_Id)}/profile`,
         {
           headers: {
             Authorization: `Bearer ${jwtToken}`
