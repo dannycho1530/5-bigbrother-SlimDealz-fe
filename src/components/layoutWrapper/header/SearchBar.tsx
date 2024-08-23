@@ -103,7 +103,7 @@ const SearchBar: React.FC = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
-          onClick={handleInputClick}
+          // onClick={handleInputClick}
         />
         <IconButton
           type="button"
