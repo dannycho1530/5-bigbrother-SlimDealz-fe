@@ -61,10 +61,10 @@ const UserBookmarkPage: React.FC = () => {
       {bookmarks.map((bookmark: any, index: number) => (
         <CategoryList
           key={index}
-          id={bookmark.id} // productId
-          image={bookmark.image} // 이미지 URL
-          name={bookmark.name} // 제품 이름
-          shipping={bookmark.shippingFee} // 배송 정보
+          id={bookmark.productId[index]?.id} // productId
+          image={bookmark.productId[index]?.image} // 이미지 URL
+          name={bookmark.productId[index]?.name} // 제품 이름
+          shipping={bookmark.productId[index]?.shippingFee} // 배송 정보
           price={bookmark.prices[index]?.setPrice} // setPrice 값 전달
         />
       ))}
