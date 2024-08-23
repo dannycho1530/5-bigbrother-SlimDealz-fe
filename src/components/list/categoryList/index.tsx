@@ -17,7 +17,7 @@ import {
 
 type Props = {
   id: number;
-  image: string;
+  //  image: string;
   name: string;
   price: number;
   // per100gPrice: string;
@@ -28,7 +28,7 @@ type Props = {
 
 const CategoryList = ({
   id,
-  image,
+  // image,
   name,
   price,
   // per100gPrice,
@@ -92,7 +92,7 @@ const CategoryList = ({
     <Container onClick={() => handleClick(id)}>
       <ImageContainer>
         <img
-          src={image}
+          //  src={image}
           alt={name}
           style={{ width: '100%', height: '100%', borderRadius: '10px' }}
         />
