@@ -14,6 +14,7 @@ import {
   // BookmarkCount,
   BookmarkCountWrapper
 } from './styles';
+import { getNumberWithComma } from '@/components/utils/conversion';
 
 type Props = {
   id: number;
@@ -100,7 +101,7 @@ const CategoryList = ({
       <InfoContainer>
         <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{name}</div>
         <PriceContainer>
-          <PriceText>{price.toLocaleString()}원</PriceText>
+          <PriceText>{getNumberWithComma(price)}원</PriceText>
         </PriceContainer>
         {/* <SmallText>[100g 당 {per100gPrice}원]</SmallText> */}
         <SmallText>{'배송비 : ' + shipping}</SmallText>

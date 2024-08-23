@@ -7,6 +7,7 @@ import {
   MallPrice,
   Coupon
 } from './styles';
+import { getNumberWithComma } from '@/components/utils/conversion';
 
 const mockData = [
   {
@@ -40,7 +41,7 @@ const MallList = () => {
           <MallLogo src={item.logo} alt={item.name} />
           <MallInfo>
             <div>{item.name}</div>
-            <MallPrice>{item.price.toLocaleString()}원</MallPrice>
+            <MallPrice>{getNumberWithComma(item.price)}원</MallPrice>
           </MallInfo>
           {item.coupon && <Coupon>{item.coupon}</Coupon>}
         </MallItem>

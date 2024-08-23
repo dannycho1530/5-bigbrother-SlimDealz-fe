@@ -15,8 +15,8 @@ import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 import ComingSoon from './components/utils/comingSoon';
-import { SearchProvider } from './components/utils/\bcontext/searchContext';
-import { HeaderHeightProvider } from './components/utils/\bcontext/headerHeightContext';
+import { SearchProvider } from './components/utils/context/searchContext';
+import { HeaderHeightProvider } from './components/utils/context/headerHeightContext';
 
 const Router = () => {
   return (
