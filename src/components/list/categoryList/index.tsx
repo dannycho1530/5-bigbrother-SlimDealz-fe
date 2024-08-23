@@ -85,12 +85,8 @@ const CategoryList = ({
     }
   };
 
-  const handleClick = (productId: number) => {
-    navigate(`/product/${productId}`);
-  };
-
   return (
-    <Container onClick={() => handleClick(id)}>
+    <Container>
       <ImageContainer>
         <img
           //  src={image}
