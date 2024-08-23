@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Container,
-  BackButton,
-  Header,
-  Section,
-  Description,
-  KakaoButton,
-} from './styles';
+import { Container, Header, Section, Description, KakaoButton } from './styles';
 import axios from 'axios';
-
 
 const SignInPage: React.FC = () => {
   const [kakaoAuthUrl, setKakaoAuthUrl] = useState('');
 
+  const logo = '/assets/logo.png';
 
   useEffect(() => {
-    axios.get('/api/v1/login/kakao-url')
-      .then(response => {
+    axios
+      .get('/api/v1/login/kakao-url')
+      .then((response) => {
         console.log(response.data); // 서버 응답을 콘솔에 출력하여 확인
         if (typeof response.data === 'string') {
           setKakaoAuthUrl(response.data); // 문자열인 경우 그대로 사용
@@ -24,7 +18,7 @@ const SignInPage: React.FC = () => {
           setKakaoAuthUrl(response.data.url); // JSON 객체라면 'url' 속성을 사용
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Failed to fetch Kakao auth URL', error);
       });
   }, []);
@@ -39,12 +33,15 @@ const SignInPage: React.FC = () => {
 
   return (
     <Container>
-      <BackButton>←</BackButton>
-      <Header>로그인</Header>
+      <Header>
+        <img src={logo} alt="Slimdealz logo" />
+      </Header>
 
       <Section>
-        <h3>SNS 간편 로그인</h3>
-        <Description>SNS 간편 로그인을 통해 빠르게 서비스를 이용하실 수 있습니다!</Description>
+        <Description>
+          간편하게 로그인하고 <br />
+          다양한 서비스를 이용해보세요.
+        </Description>
         <KakaoButton className="kakao-login" onClick={handleLogin}>
           <span>🗨️</span> 카카오 로그인
         </KakaoButton>
