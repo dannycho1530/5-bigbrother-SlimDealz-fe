@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IconButton } from '@mui/material';
 import { BookmarkBorder, Bookmark } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import {
   Container,
   ImageContainer,
@@ -17,9 +18,9 @@ import {
 type Props = {
   id: number;
   image: string;
-  price: number; // 가격변수 고치기
-  // per100gPrice: string; // 주석 처리: API에서 제공되지 않음
   name: string;
+  price: number;
+  // per100gPrice: string;
   shipping: string;
   // rating: number; // 주석 처리: 하드코딩된 값이므로 주석 처리
   // bookmarkCount: number; // 주석 처리: 하드코딩된 값이므로 주석 처리
@@ -38,12 +39,49 @@ const CategoryList = ({
   const [bookmarked, setBookmarked] = useState(false);
   // const [bookmarkCount, setBookmarkCount] = useState<number>(0);
   const navigate = useNavigate();
+  const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옴 (필요시 구현)
 
-  const handleBookmarkClick = () => {
-    setBookmarked((prev) => !prev);
+  const handleBookmarkClick = async () => {
     // setBookmarkCount((prevCount) =>
     //   bookmarked ? prevCount - 1 : prevCount + 1
     // );
+    try {
+      if (bookmarked) {
+        // 북마크 삭제
+        await axios.delete(`/api/v1/users/${userId}/bookmarks/${id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+          }
+        });
+        setBookmarked(false);
+        alert('북마크가 삭제되었습니다.');
+      } else {
+        // 북마크 추가
+        await axios.post(
+          `/api/v1/users/${userId}/bookmarks`,
+          { userId, productId: id },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+            }
+          }
+        );
+        setBookmarked(true);
+        alert('북마크가 추가되었습니다.');
+      }
+    } catch (error: any) {
+      if (error.response) {
+        if (error.response.status === 400) {
+          alert('유효하지 않은 데이터입니다.');
+        } else if (error.response.status === 401) {
+          alert('로그인이 필요합니다.');
+        } else if (error.response.status === 500) {
+          alert('서버 오류가 발생했습니다.');
+        }
+      } else {
+        alert('네트워크 오류가 발생했습니다.');
+      }
+    }
   };
 
   const handleClick = (productId: number) => {
@@ -69,14 +107,16 @@ const CategoryList = ({
 
         <BookmarkCountWrapper>
           <IconButton
-            onClick={handleBookmarkClick}
+            onClick={(e) => {
+              e.stopPropagation(); // 클릭 이벤트가 부모로 전달되는 것을 방지
+              handleBookmarkClick();
+            }}
             style={{ paddingLeft: '10px' }}
           >
             {bookmarked ? <Bookmark /> : <BookmarkBorder />}
           </IconButton>
           {/* <BookmarkCount>{bookmarkCount}</BookmarkCount> */}
         </BookmarkCountWrapper>
-
         {/* <BookmarkContainer onClick={(e) => e.stopPropagation()}>
           <Rating value={rating} readOnly />
         </BookmarkContainer> */}
