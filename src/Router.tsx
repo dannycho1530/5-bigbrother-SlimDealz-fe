@@ -10,12 +10,12 @@ import SignInPage from './pages/signIn';
 import SignUpPage from './pages/signUp';
 import UserAlarmPage from './pages/user/alarm';
 import UserBookmarkPage from './pages/user/bookmark';
-import UserInformationPage from './pages/user/information';
+// import UserInformationPage from './pages/user/information';
 import UserRecentlyViewPage from './pages/user/recentlyView';
 import MyMainPage from './pages/user/myMain';
 import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 import ComingSoon from './components/utils/comingSoon';
-import { SearchProvider } from './components/utils/context/searchContext';
+import { SearchProvider } from './components/utils/\bcontext/searchContext';
 import { HeaderHeightProvider } from './components/utils/\bcontext/headerHeightContext';
 
 const Router = () => {
@@ -39,7 +39,7 @@ const Router = () => {
               <Route path="/myPage" element={<MyMainPage />} />
               <Route path="/alarm" element={<UserAlarmPage />} />
               <Route path="/bookmark" element={<UserBookmarkPage />} />
-              <Route path="/information" element={<UserInformationPage />} />
+              {/* <Route path="/information" element={<UserInformationPage />} /> */}
               <Route path="/recentlyView" element={<UserRecentlyViewPage />} />
               <Route path="/comingSoon" element={<ComingSoon />} />
             </Route>
