@@ -82,6 +82,7 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
       navigate('/', { replace: true }); // 히스토리가 없으면 메인 페이지로 이동하고, 이동된 히스토리를 삭제
     }
   };
+
   return (
     <HeaderContainer ref={headerRef} $hasLogo={hasLogo}>
       {(isSpecialPage || isSimplePage || !isMainPage) && (

@@ -15,7 +15,7 @@ const SearchBar: React.FC = () => {
   const [prevPathname, setPrevPathname] = useState('');
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     setPreviousSearchValue('');
@@ -26,16 +26,16 @@ const SearchBar: React.FC = () => {
     }
   }, [location.pathname, setSearchQuery]);
 
-  useEffect(() => {
-    if (location.pathname.startsWith('/searchResults')) {
-      const searchTermFromURL = decodeURIComponent(
-        location.pathname.split('/searchResults/')[1] || ''
-      );
-      if (searchTermFromURL && searchTermFromURL !== searchQuery) {
-        setSearchQuery(searchTermFromURL);
-      }
-    }
-  }, [location.pathname, searchQuery, setSearchQuery]);
+  // useEffect(() => {
+  //   if (location.pathname.startsWith('/searchResults')) {
+  //     const searchTermFromURL = decodeURIComponent(
+  //       location.pathname.split('/searchResults/')[1] || ''
+  //     );
+  //     if (searchTermFromURL && searchTermFromURL !== searchQuery) {
+  //       setSearchQuery(searchTermFromURL);
+  //     }
+  //   }
+  // }, [location.pathname, searchQuery, setSearchQuery]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -52,8 +52,8 @@ const SearchBar: React.FC = () => {
   };
 
   const handleSearch = (value: string) => {
-    if (previousSearchValue === value && location.pathname === prevPathname)
-      return;
+    // if (previousSearchValue === value && location.pathname === prevPathname)
+    //   return;
 
     setPreviousSearchValue(value);
     setFilteredWords([]);
@@ -77,7 +77,8 @@ const SearchBar: React.FC = () => {
   };
 
   const handleInputClick = () => {
-    navigate('/searchInitial');
+    // navigate('/searchInitial');
+    setSearchQuery('');
   };
 
   return (
@@ -102,7 +103,7 @@ const SearchBar: React.FC = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
-          // onClick={handleInputClick}
+          onClick={handleInputClick}
         />
         <IconButton
           type="button"
