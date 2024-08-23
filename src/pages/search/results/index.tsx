@@ -69,7 +69,7 @@ const SearchResultsPage: React.FC = () => {
           >
             <CategoryList
               id={item.id}
-              image={item.image}
+              //  image={item.image}
               name={item.name}
               // price={item.price} // 주석 처리: API에서 제공되지 않음
               // per100gPrice="N/A" // 주석 처리: API에서 제공되지 않음
