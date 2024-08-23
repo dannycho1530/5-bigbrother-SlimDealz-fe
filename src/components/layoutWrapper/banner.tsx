@@ -81,9 +81,9 @@ const ControlIcon = styled.span<{ isPrev?: boolean }>`
 `;
 
 const images = [
-  'https://ichef.bbci.co.uk/images/ic/960x960/p08634k6.jpg',
-  'http://s9.favim.com/orig/130806/flower-flowers-photography-pink-Favim.com-833641.jpg',
-  'https://4.bp.blogspot.com/-pxMLcrD3N7I/UjAMNkqM43I/AAAAAAAAABQ/2-etadUS_48/s640/flowers.jpg'
+  '/assets/banner1.png',
+  '/assets/banner2.png',
+  '/assets/banner3.png'
 ];
 
 const Banner: React.FC = () => {
