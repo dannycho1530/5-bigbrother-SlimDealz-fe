@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
+import { getNumberWithComma } from '@/components/utils/conversion';
 
 type Product = {
   id: number;

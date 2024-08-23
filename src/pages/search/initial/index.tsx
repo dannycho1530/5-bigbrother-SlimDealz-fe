@@ -5,7 +5,7 @@ import RecentSearches from '../../../components/searches/recentSearches';
 import RecommendSearch from '../../../components/searches/recommendSearches';
 import Divider from '@mui/material/Divider';
 import Box from '../../../components/box/styles';
-import { SearchContext } from '../../../components/utils/\bcontext/searchContext'; // SearchContext import
+import { SearchContext } from '../../../components/utils/context/searchContext'; // SearchContext import
 
 const SearchInitialPage: React.FC = () => {
   const { searchQuery } = useContext(SearchContext); // searchQuery 전역 상태로 사용

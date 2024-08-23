@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AutoCompleteItem, AutoCompleteList, CustomInput } from './styles';
-import { SearchContext } from '../../utils/context/searchContext';
+import { SearchContext } from '../../utils/context/searchContext';
 
 const words = ['example', 'search', 'terms', 'list', 'of', 'words']; // 검색어를 필터링하기 위한 단어 목록
 
@@ -103,7 +103,7 @@ const SearchBar: React.FC = () => {
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
-          onClick={handleInputClick}
+          // onClick={handleInputClick}
         />
         <IconButton
           type="button"
