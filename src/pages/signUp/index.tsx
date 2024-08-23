@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { styles } from './styles';
+import axios from 'axios'; // Axios를 이용해 API 호출
+import { styles } from './styles'; // styles.tsx 파일에서 스타일 가져오기
 
 const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
   const [nickname, setNickname] = useState('');
   const [profileImageUrl, setProfileImageUrl] = useState('');
   const [role, setRole] = useState('');
-  const [socialId, setSocialId] = useState('');
+  const [kakao_Id, setKakao_Id] = useState('');
   const [name, setName] = useState('');
-  const [cardInfo, setCardInfo] = useState('');
-  const [receiveNotification, setReceiveNotification] = useState(false); // 알림 설정
+  const [card, setCard] = useState(''); // 카드 정보
+  const [notification_agree, setNotification_Agree] = useState(false); // 알림 설정
 
   useEffect(() => {
     // URL에서 jwtToken과 refreshToken 추출
@@ -27,9 +27,9 @@ const SignUpPage: React.FC = () => {
       // 토큰 파싱 및 상태 설정
       const decodedToken = parseJwt(jwtToken);
       setName(decodedToken.name);
-      setProfileImageUrl(decodedToken.profile_image);
       setRole(decodedToken.role);
-      setSocialId(decodedToken.socialId);
+      setKakao_Id(decodedToken.kakao_Id);
+      setProfileImageUrl(decodedToken.profile_image);
 
       // 토큰이 URL에 있을 경우, URL을 정리 (토큰이 없는 상태로 URL을 유지)
       const newUrl = window.location.origin + window.location.pathname;
@@ -61,17 +61,17 @@ const SignUpPage: React.FC = () => {
     const memberData = {
       name,
       nickname,
-      socialId,
+      kakao_Id,
       profileImage: profileImageUrl,
       role,
-      cardInfo,
-      receiveNotification
+      card,
+      notification_agree
     };
 
     try {
       const jwtToken = localStorage.getItem('jwtToken'); // JWT 토큰을 로컬 스토리지에서 가져옴
       const response = await axios.post(
-        '/api/v1/users/kakaologin',
+        'http://localhost:8080/api/v1/users/kakaologin',
         memberData,
         {
           headers: {
@@ -80,7 +80,7 @@ const SignUpPage: React.FC = () => {
         }
       );
       console.log('회원 정보 저장 성공:', response.data);
-      navigate('/'); // 저장 후 리다이렉트할 경로
+      navigate('/main'); // 저장 후 리다이렉트할 경로
     } catch (error) {
       console.error('회원 정보 저장 실패:', error);
     }
@@ -111,7 +111,7 @@ const SignUpPage: React.FC = () => {
           <strong>역할:</strong> {role}
         </p>
         <p>
-          <strong>소셜 ID:</strong> {socialId}
+          <strong>소셜 ID:</strong> {kakao_Id}
         </p>
       </div>
 
@@ -132,8 +132,8 @@ const SignUpPage: React.FC = () => {
           <input
             type="text"
             style={styles.formGroupInput}
-            value={cardInfo}
-            onChange={(e) => setCardInfo(e.target.value)}
+            value={card}
+            onChange={(e) => setCard(e.target.value)}
             placeholder="카드 정보를 입력하세요"
           />
         </div>
@@ -141,8 +141,8 @@ const SignUpPage: React.FC = () => {
           <label>
             <input
               type="checkbox"
-              checked={receiveNotification}
-              onChange={(e) => setReceiveNotification(e.target.checked)}
+              checked={notification_agree}
+              onChange={(e) => setNotification_Agree(e.target.checked)}
             />
             알림 수신 동의
           </label>
