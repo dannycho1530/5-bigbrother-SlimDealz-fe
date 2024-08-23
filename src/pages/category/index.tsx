@@ -48,7 +48,7 @@ const CategoryPage = () => {
         <IconCategory />
       </ChickenChestWrapper>
       <PageNameTag pageName="추천 페이지" />
-      {products.map((product: any) => (
+      {products.map((product: any, index: number) => (
         <Link
           to={`/product/${encodeURIComponent(product.name)}`}
           key={product.id}
@@ -58,6 +58,7 @@ const CategoryPage = () => {
             image={product.image}
             name={product.name}
             shipping={product.shippingFee}
+            price={product.prices[index]?.setPrice} // setPrice 값 전달
           />
         </Link>
       ))}
