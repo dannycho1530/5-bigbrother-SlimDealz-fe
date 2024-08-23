@@ -5,6 +5,7 @@ import CategoryList from '../../components/list/categoryList';
 import { ChickenChestWrapper } from '../main/styles';
 import IconCategory from '../../components/icon/iconCategory';
 import PageNameTag from '../../components/tag/pageNameTag';
+import { Link } from 'react-router-dom';
 
 const CategoryPage = () => {
   const [products, setProducts] = useState([]);
@@ -48,13 +49,17 @@ const CategoryPage = () => {
       </ChickenChestWrapper>
       <PageNameTag pageName="추천 페이지" />
       {products.map((product: any) => (
-        <CategoryList
+        <Link
+          to={`/product/${encodeURIComponent(product.name)}`}
           key={product.id}
-          id={product.id}
-          image={product.image}
-          name={product.name}
-          shipping={product.shippingFee}
-        />
+        >
+          <CategoryList
+            id={product.id}
+            image={product.image}
+            name={product.name}
+            shipping={product.shippingFee}
+          />
+        </Link>
       ))}
     </Container>
   );

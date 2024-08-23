@@ -17,10 +17,9 @@ const DetailPage = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await axios.get(`/api/v1/products`, {
-          params: { productName }
-        });
-
+        const response = await axios.get(
+          `/api/v1/product-detail?productName=${encodeURIComponent(productName as string)}`
+        );
         setProductData(response.data);
       } catch (err: any) {
         if (err.response) {
