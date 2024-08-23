@@ -1,13 +1,19 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ItemContainer, ChickenImage, Label } from './styles';
 import chickenChest from '/public/assets/chickenChest.png';
 
 const IconCategory = () => {
+  const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = () => {
-    navigate('/category');
+    const nextPath = '/category';
+    if (!isClicked && location.pathname !== nextPath) {
+      setIsClicked(true);
+      navigate(nextPath);
+    }
   };
 
   return (

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Container, Title } from './styles';
 import { useParams } from 'react-router-dom';
 import PriceAlertSetting from '../../components/priceAlertSetting';
@@ -9,17 +10,58 @@ import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
 
 const DetailPage = () => {
-  const { productId } = useParams<{ productId: string }>();
+  const { productName } = useParams<{ productName: string }>();
+  const [productData, setProductData] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(
+          `/api/v1/product-detail?productName=${encodeURIComponent(productName as string)}`
+        );
+        setProductData(response.data);
+      } catch (err: any) {
+        if (err.response) {
+          if (err.response.status === 404) {
+            setError('Product not found');
+          } else {
+            setError('Server error');
+          }
+        } else {
+          setError('Network error');
+        }
+      }
+    };
+
+    fetchProductData();
+  }, [productName]);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!productData) {
+    return <div>Loading...</div>;
+  }
+
+  const { image, name, prices } = productData;
+  const { discountedPrice, setPrice } = prices[0];
+  const discountRate = Math.round(
+    ((setPrice - discountedPrice) / setPrice) * 100
+  );
 
   return (
     <Container>
-      <ImageView />
+      <ImageView src={image} alt={name} />
       <InfoContainer>
-        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
-          바르닭 5가지맛
-        </div>
+        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{name}</div>
       </InfoContainer>
-      <ProductInfo />
+      <ProductInfo
+        discountedPrice={discountedPrice}
+        originalPrice={setPrice}
+        discountRate={discountRate}
+      />
       {/* <PriceAlertSetting /> */}
       <TabsComponent />
       {/* <Title>리뷰</Title>

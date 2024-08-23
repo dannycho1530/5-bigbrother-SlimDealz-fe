@@ -1,15 +1,16 @@
+import React from 'react';
 import styled from 'styled-components';
 import Footer from '../components/layoutWrapper/footer';
 import Header from '../components/layoutWrapper/header';
 import { Outlet, useLocation } from 'react-router-dom';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useHeaderHeight } from '@/components/utils/\bcontext/headerHeightContext';
 
-const Container = styled.div<{ paddingTop: number }>`
+const Container = styled.div<{ $paddingTop: number }>`
   width: 390px;
   height: auto;
-  min-height: 100dvh; //현재 보여지는 뷰포트 높이를 동적으로 가져오기
+  min-height: 100dvh;
   margin: 0 auto;
-  padding-top: ${({ paddingTop }) => `${paddingTop}px`};
+  padding-top: ${({ $paddingTop }) => `${$paddingTop}px`};
   padding-bottom: 50px;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -18,19 +19,9 @@ const Container = styled.div<{ paddingTop: number }>`
 
 const OutLetContainer = () => {
   const location = useLocation();
-  const [paddingTop, setPaddingTop] = useState(120);
-  const headerRef = useRef<HTMLDivElement>(null);
+  const { height } = useHeaderHeight();
 
   let pageTitle = '';
-
-  useLayoutEffect(() => {
-    if (location.pathname === '/main') {
-      setPaddingTop(120);
-    } else if (headerRef.current) {
-      const headerHeight = headerRef.current.offsetHeight;
-      setPaddingTop(headerHeight);
-    }
-  }, [location.pathname]);
 
   if (location.pathname.includes('/bookmark')) {
     pageTitle = 'BOOKMARKS';
@@ -44,8 +35,8 @@ const OutLetContainer = () => {
 
   return (
     <>
-      <Header pageTitle={pageTitle} ref={headerRef} />
-      <Container paddingTop={paddingTop}>
+      <Header pageTitle={pageTitle} />
+      <Container $paddingTop={height}>
         <Outlet />
       </Container>
       <Footer />

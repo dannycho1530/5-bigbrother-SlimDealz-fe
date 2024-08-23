@@ -36,6 +36,11 @@ const Footer = () => {
     }
   }, [location.pathname]);
 
+  const isAuthenticated = () => {
+    const token = localStorage.getItem('jwtToken');
+    return token !== null;
+  };
+
   const handleNavigation = (newValue: number) => {
     setValue(newValue);
     switch (newValue) {
@@ -54,7 +59,11 @@ const Footer = () => {
         navigate('/bookmark');
         break;
       case 4:
-        navigate('/myPage');
+        if (isAuthenticated()) {
+          navigate('/myPage');
+        } else {
+          navigate('/signIn');
+        }
         break;
       default:
         navigate('/');

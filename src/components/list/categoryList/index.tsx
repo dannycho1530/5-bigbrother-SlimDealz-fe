@@ -17,9 +17,9 @@ import {
 type Props = {
   id: number;
   image: string;
-  name: string;
   // price: number; // 주석 처리: API에서 제공되지 않음
   // per100gPrice: string; // 주석 처리: API에서 제공되지 않음
+  name: string;
   shipping: string;
   // rating: number; // 주석 처리: 하드코딩된 값이므로 주석 처리
   // bookmarkCount: number; // 주석 처리: 하드코딩된 값이므로 주석 처리
@@ -63,7 +63,7 @@ const CategoryList = ({
           <PriceText>{price.toLocaleString()}원</PriceText>
         </PriceContainer>
         <SmallText>[100g 당 {per100gPrice}원]</SmallText> */}
-        <SmallText>{shipping}</SmallText>
+        <SmallText>{'배송비 : ' + shipping}</SmallText>
         {/* <BookmarkContainer onClick={(e) => e.stopPropagation()}> */}
         {/* <Rating value={rating} readOnly /> */}
         {/* <BookmarkCountWrapper> */}
