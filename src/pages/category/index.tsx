@@ -71,10 +71,6 @@ const CategoryPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore]);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
     <Container>
       <ChickenChestWrapper>
@@ -102,22 +98,6 @@ const CategoryPage = () => {
           {loading && <LoadingSpinner />} {/* 추가 로딩 시 로딩 스피너 표시 */}
         </>
       )}
-      <Fab
-        color="primary"
-        aria-label="scroll back to top"
-        onClick={scrollToTop}
-        sx={{
-          position: 'absolute',
-          bottom: 80,
-          right: 16,
-          backgroundColor: '#FFC0CB', // 연핑크색
-          '&:hover': {
-            backgroundColor: '#FFB6C1' // 호버 시 연핑크색
-          }
-        }}
-      >
-        <NavigationIcon />
-      </Fab>
     </Container>
   );
 };
