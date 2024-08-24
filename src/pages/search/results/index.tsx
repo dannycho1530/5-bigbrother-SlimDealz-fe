@@ -17,6 +17,9 @@ const SearchResultsPage: React.FC = () => {
   useEffect(() => {
     if (keyword) {
       setSearchQuery(keyword);
+      // Reset data and loading state when a new search is initiated
+      setData([]);
+      setLoading(true);
     }
   }, [keyword, setSearchQuery]);
 
@@ -33,15 +36,7 @@ const SearchResultsPage: React.FC = () => {
           setData(response.data);
         }
       } catch (err: any) {
-        if (err.response) {
-          if (err.response.status === 404) {
-            console.log('Keyword not found.');
-          } else if (err.response.status === 500) {
-            console.log('Server error occurred.');
-          }
-        } else {
-          console.log('Network error.');
-        }
+        console.log('An error occurred:', err.message);
       } finally {
         setLoading(false);
       }
