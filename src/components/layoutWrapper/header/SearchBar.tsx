@@ -12,36 +12,21 @@ const SearchBar: React.FC = () => {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
   const [previousSearchValue, setPreviousSearchValue] = useState('');
   const [filteredWords, setFilteredWords] = useState<string[]>([]);
-  const [prevPathname, setPrevPathname] = useState('');
-
+  const location = useLocation();
   const navigate = useNavigate();
-  // const location = useLocation();
 
+  // 첫 로드 시 location.state에서 검색어를 설정
   useEffect(() => {
-    setPreviousSearchValue('');
-    setPrevPathname(location.pathname);
-
-    if (!location.pathname.startsWith('/searchResults')) {
-      setSearchQuery('');
+    if (location.state?.searchQuery) {
+      setSearchQuery(location.state.searchQuery);
     }
-  }, [location.pathname, setSearchQuery]);
-
-  // useEffect(() => {
-  //   if (location.pathname.startsWith('/searchResults')) {
-  //     const searchTermFromURL = decodeURIComponent(
-  //       location.pathname.split('/searchResults/')[1] || ''
-  //     );
-  //     if (searchTermFromURL && searchTermFromURL !== searchQuery) {
-  //       setSearchQuery(searchTermFromURL);
-  //     }
-  //   }
-  // }, [location.pathname, searchQuery, setSearchQuery]);
+  }, [location.state, setSearchQuery]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchQuery(value);
 
-    if (value && value !== previousSearchValue) {
+    if (value) {
       const filtered = words.filter((word) =>
         word.toLowerCase().includes(value.toLowerCase())
       );
@@ -52,15 +37,11 @@ const SearchBar: React.FC = () => {
   };
 
   const handleSearch = (value: string) => {
-    // if (previousSearchValue === value && location.pathname === prevPathname)
-    //   return;
-
-    setPreviousSearchValue(value);
     setFilteredWords([]);
 
     if (value.trim() !== '') {
       navigate(`/searchResults/${encodeURIComponent(value)}`, {
-        replace: true
+        state: { searchQuery: value } // 검색어를 location.state에 저장
       });
     }
   };
@@ -77,7 +58,6 @@ const SearchBar: React.FC = () => {
   };
 
   const handleInputClick = () => {
-    // navigate('/searchInitial');
     setSearchQuery('');
   };
 

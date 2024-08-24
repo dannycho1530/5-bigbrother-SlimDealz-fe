@@ -10,6 +10,7 @@ import {
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useHeaderHeight } from '@/components/utils/context/headerHeightContext';
+import { SearchContext } from '@/components/utils/context/searchContext';
 
 const logo = '/assets/logo.png';
 
@@ -20,6 +21,7 @@ type HeaderProps = {
 
 const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   const { setHeight } = useHeaderHeight();
+  const { setSearchQuery } = React.useContext(SearchContext);
   const navigate = useNavigate();
   const location = useLocation();
   const headerRef = useRef<HTMLDivElement>(null);
@@ -68,7 +70,12 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
       const headerHeight = headerRef.current.offsetHeight;
       setHeight(headerHeight);
     }
-  }, [location.pathname, setHeight]);
+
+    // Clear search query if on the main page
+    if (isMainPage) {
+      setSearchQuery('');
+    }
+  }, [location.pathname, setHeight, setSearchQuery, isMainPage]);
 
   const handleLogoClick = () => {
     navigate('/');

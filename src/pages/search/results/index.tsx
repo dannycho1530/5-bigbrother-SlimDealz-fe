@@ -60,18 +60,13 @@ const SearchResultsPage: React.FC = () => {
           <Link
             to={`/product/${encodeURIComponent(item.name)}`}
             key={index}
-            style={{ textDecoration: 'none', color: 'inherit' }} // 기본 링크 스타일 제거
+            style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <CategoryList
               id={item.id}
-              //  image={item.image}
               name={item.name}
-              // price={item.price} // 주석 처리: API에서 제공되지 않음
-              // per100gPrice="N/A" // 주석 처리: API에서 제공되지 않음
               shipping={item.shippingFee}
-              // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              price={item.prices[0]?.setPrice} // setPrice 값 전달
+              price={item.prices[0]?.setPrice}
             />
           </Link>
         ))
