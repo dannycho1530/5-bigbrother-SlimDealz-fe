@@ -10,7 +10,6 @@ const words = ['example', 'search', 'terms', 'list', 'of', 'words']; // 검색�
 
 const SearchBar: React.FC = () => {
   const { searchQuery, setSearchQuery } = useContext(SearchContext);
-  const [previousSearchValue, setPreviousSearchValue] = useState('');
   const [filteredWords, setFilteredWords] = useState<string[]>([]);
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,6 +39,10 @@ const SearchBar: React.FC = () => {
     setFilteredWords([]);
 
     if (value.trim() !== '') {
+      // Blur the input to remove the cursor after searching
+      const inputElement = document.getElementById('search-input');
+      inputElement?.blur();
+
       navigate(`/searchResults/${encodeURIComponent(value)}`, {
         state: { searchQuery: value } // 검색어를 location.state에 저장
       });
@@ -80,6 +83,7 @@ const SearchBar: React.FC = () => {
         }}
       >
         <CustomInput
+          id="search-input"
           value={searchQuery}
           onChange={handleSearchChange}
           onKeyPress={handleKeyPress}
