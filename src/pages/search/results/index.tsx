@@ -5,7 +5,8 @@ import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams, Link } from 'react-router-dom';
-import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
+import LoadingSpinner from '@/components/utils/loadingSpinner';
+import NoResultsSpinner from '@/components/utils/noResultsSpinner';
 
 const SearchResultsPage: React.FC = () => {
   const { keyword } = useParams<{ keyword: string }>();
@@ -75,7 +76,7 @@ const SearchResultsPage: React.FC = () => {
           </Link>
         ))
       ) : (
-        <div>No results found.</div>
+        <NoResultsSpinner />
       )}
     </Container>
   );

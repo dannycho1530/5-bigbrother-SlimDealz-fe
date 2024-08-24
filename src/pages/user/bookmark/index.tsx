@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, CenteredBox, CustomButton } from './styles';
+import { Container, CustomBox, CustomButton } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 import { Typography } from '@mui/material';
+import LoadingSpinner from '@/components/utils/loadingSpinner';
 
 const UserBookmarkPage: React.FC = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -52,7 +52,7 @@ const UserBookmarkPage: React.FC = () => {
   if (!isAuthenticated) {
     return (
       <Container>
-        <CenteredBox>
+        <CustomBox>
           <Typography variant="h6" gutterBottom>
             북마크한 상품이 없습니다
           </Typography>
@@ -62,7 +62,7 @@ const UserBookmarkPage: React.FC = () => {
           <CustomButton onClick={() => navigate('/signIn')}>
             로그인하기
           </CustomButton>
-        </CenteredBox>
+        </CustomBox>
       </Container>
     );
   }

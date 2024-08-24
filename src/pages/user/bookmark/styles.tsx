@@ -5,7 +5,7 @@ export const Container = styled.div`
   background-color: var(--background-color);
 `;
 
-export const CenteredBox = styled.div`
+export const CustomBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

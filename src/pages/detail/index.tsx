@@ -8,7 +8,7 @@ import ReviewList from '../../components/list/reviewList';
 import ImageView from '../../components/image/productImage';
 import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
-import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
+import LoadingSpinner from '@/components/utils/loadingSpinner';
 
 const DetailPage = () => {
   const { productName } = useParams<{ productName: string }>();
