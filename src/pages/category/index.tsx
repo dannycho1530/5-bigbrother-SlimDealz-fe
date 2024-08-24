@@ -6,8 +6,6 @@ import { ChickenChestWrapper } from '../main/styles';
 import IconCategory from '../../components/icon/iconCategory';
 import PageNameTag from '../../components/tag/pageNameTag';
 import { Link } from 'react-router-dom';
-import Fab from '@mui/material/Fab';
-import NavigationIcon from '@mui/icons-material/Navigation';
 import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 type Product = {
@@ -20,7 +18,6 @@ type Product = {
 
 const CategoryPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -41,12 +38,12 @@ const CategoryPage = () => {
       setLoading(false);
       if (err.response) {
         if (err.response.status === 404) {
-          setError('Products not found');
+          console.log('Products not found');
         } else {
-          setError('Server error');
+          console.log('Server error');
         }
       } else {
-        setError('Network error');
+        console.log('Network error');
       }
     }
   }, [page]);

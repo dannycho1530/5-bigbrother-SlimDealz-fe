@@ -11,7 +11,6 @@ const SearchResultsPage: React.FC = () => {
   const { keyword } = useParams<{ keyword: string }>();
   const { setSearchQuery } = useContext(SearchContext);
   const [data, setData] = useState([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -35,12 +34,12 @@ const SearchResultsPage: React.FC = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 404) {
-            setError('Keyword not found.');
+            console.log('Keyword not found.');
           } else if (err.response.status === 500) {
-            setError('Server error occurred.');
+            console.log('Server error occurred.');
           }
         } else {
-          setError('Network error.');
+          console.log('Network error.');
         }
       } finally {
         setLoading(false);
@@ -49,10 +48,6 @@ const SearchResultsPage: React.FC = () => {
 
     fetchData();
   }, [keyword]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <Container>

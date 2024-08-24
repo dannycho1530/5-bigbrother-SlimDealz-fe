@@ -13,7 +13,6 @@ import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 const DetailPage = () => {
   const { productName } = useParams<{ productName: string }>();
   const [productData, setProductData] = useState(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -25,22 +24,18 @@ const DetailPage = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 404) {
-            setError('Product not found');
+            console.log('Product not found');
           } else {
-            setError('Server error');
+            console.log('Server error');
           }
         } else {
-          setError('Network error');
+          console.log('Network error');
         }
       }
     };
 
     fetchProductData();
   }, [productName]);
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   if (!productData) {
     return <LoadingSpinner />;

@@ -8,7 +8,6 @@ import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const UserBookmarkPage: React.FC = () => {
   const [bookmarks, setBookmarks] = useState([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
@@ -30,15 +29,15 @@ const UserBookmarkPage: React.FC = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 400) {
-            setError('Invalid data.');
+            console.log('Invalid data.');
           } else if (err.response.status === 401) {
-            setError('Unauthorized access.');
+            console.log('Unauthorized access.');
             navigate('/login'); // 로그인 페이지로 이동
           } else if (err.response.status === 500) {
-            setError('Server error occurred.');
+            console.log('Server error occurred.');
           }
         } else {
-          setError('Network error.');
+          console.log('Network error.');
         }
       } finally {
         setLoading(false);
@@ -50,10 +49,6 @@ const UserBookmarkPage: React.FC = () => {
 
   if (loading) {
     return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
   }
 
   return (
