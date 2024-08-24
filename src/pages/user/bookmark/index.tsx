@@ -4,6 +4,7 @@ import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const UserBookmarkPage: React.FC = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -48,7 +49,7 @@ const UserBookmarkPage: React.FC = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (error) {

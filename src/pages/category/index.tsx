@@ -8,6 +8,7 @@ import PageNameTag from '../../components/tag/pageNameTag';
 import { Link } from 'react-router-dom';
 import Fab from '@mui/material/Fab';
 import NavigationIcon from '@mui/icons-material/Navigation';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 type Product = {
   id: number;
@@ -71,7 +72,7 @@ const CategoryPage = () => {
   }, [loading, hasMore]);
 
   if (loading && page === 1) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (error) {
@@ -102,7 +103,7 @@ const CategoryPage = () => {
           />
         </Link>
       ))}
-      {loading && <div>Loading more products...</div>}
+      {loading && <LoadingSpinner />}
       <Fab
         color="primary"
         aria-label="scroll back to top"

@@ -8,6 +8,7 @@ import ReviewList from '../../components/list/reviewList';
 import ImageView from '../../components/image/productImage';
 import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const DetailPage = () => {
   const { productName } = useParams<{ productName: string }>();
@@ -42,7 +43,7 @@ const DetailPage = () => {
   }
 
   if (!productData) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   const { image, name, prices } = productData;
