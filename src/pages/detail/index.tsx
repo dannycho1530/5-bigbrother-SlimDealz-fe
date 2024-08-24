@@ -52,7 +52,7 @@ const DetailPage = () => {
           {name}
         </div>
       </InfoContainer>
-      <ProductInfo originalPrice={setPrice} />
+      <ProductInfo originalPrice={setPrice} productName={name} />
       {/* <PriceAlertSetting /> */}
       <TabsComponent />
       {/* <Title>리뷰</Title>

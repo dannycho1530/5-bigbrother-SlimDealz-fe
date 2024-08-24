@@ -58,7 +58,7 @@ const CategoryList = ({
         // 북마크 추가
         await axios.post(
           `/api/v1/users/${userId}/bookmarks`,
-          { userId, productId: id },
+          { userId, productName: name },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('jwtToken')}`

@@ -1,11 +1,9 @@
+import React, { useState, useEffect } from 'react';
 import ProductBookmark from './infoUtils/productBookmark';
 import ProductPrice from './infoUtils/productPrice';
-import ProductRating from './infoUtils/productRating';
 import ProductUrl from './infoUtils/productUrl';
-import ReviewCount from './infoUtils/reviewCount';
 import {
   ProductInfoContainer,
-  RateInfoContainer,
   PriceInfoContainer,
   ProductInfoOptionContainer,
   ProductBookmarkContainer,
@@ -14,9 +12,22 @@ import {
 
 interface ProductInfoProps {
   originalPrice: number;
+  productName: number;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({ originalPrice }) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({
+  originalPrice,
+  productName
+}) => {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+
+  useEffect(() => {
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (jwtToken) {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   return (
     <ProductInfoContainer>
       {/* <RateInfoContainer>
@@ -26,9 +37,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ originalPrice }) => {
       <PriceInfoContainer>
         <ProductPrice originalPrice={originalPrice} />
         <ProductInfoOptionContainer>
-          <ProductBookmarkContainer>
-            <ProductBookmark />
-          </ProductBookmarkContainer>
+          {isAuthenticated && (
+            <ProductBookmarkContainer>
+              <ProductBookmark productName={productName} />
+            </ProductBookmarkContainer>
+          )}
           <ProductUrlContainer>
             <ProductUrl />
           </ProductUrlContainer>
