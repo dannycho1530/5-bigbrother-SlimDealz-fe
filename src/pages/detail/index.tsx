@@ -53,7 +53,7 @@ const DetailPage = () => {
     <Container>
       <ImageView src={image} alt={name} />
       <InfoContainer>
-        <div style={{ fontSize: '16px', fontWeight: 'bold', width: '250px' }}>
+        <div style={{ fontSize: '20px', fontWeight: 'bold', width: '300px' }}>
           {name}
         </div>
       </InfoContainer>
