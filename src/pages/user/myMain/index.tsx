@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -15,6 +15,13 @@ const MyMainPage = () => {
   const navigate = useNavigate();
   const [isPreModalOpen, setIsPreModalOpen] = useState(false);
   const [isLogModalOpen, setIsLogModalOpen] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwtToken');
+    if (!token) {
+      navigate('/signIn');
+    }
+  }, [navigate]);
 
   const closePreModal = () => {
     setIsPreModalOpen(false);
