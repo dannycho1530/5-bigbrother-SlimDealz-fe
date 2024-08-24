@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton } from '@mui/material';
 import { BookmarkBorder, Bookmark } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
   Container,
@@ -39,7 +38,6 @@ const CategoryList = ({
 }: Props) => {
   const [bookmarked, setBookmarked] = useState(false);
   // const [bookmarkCount, setBookmarkCount] = useState<number>(0);
-  const navigate = useNavigate();
   const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옴 (필요시 구현)
 
   const handleBookmarkClick = async () => {
