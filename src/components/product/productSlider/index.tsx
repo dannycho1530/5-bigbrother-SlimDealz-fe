@@ -11,10 +11,10 @@ import {
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
-import { getNumberWithComma } from '@/components/utils/conversion';
 
 type Product = {
   id: number;
+  name: string;
   image: string;
   originalPrice: number;
   salePrice: number;
@@ -52,8 +52,8 @@ const ProductSlider = ({ title, products = [] }: Props) => {
     }
   };
 
-  const handleProductClick = (productId: number) => {
-    navigate(`/product/${productId}`);
+  const handleProductClick = (productName: string) => {
+    navigate(`/product/${productName}`);
   };
 
   return (
@@ -66,11 +66,11 @@ const ProductSlider = ({ title, products = [] }: Props) => {
             products.map((product) => (
               <ProductItem
                 key={product.id}
-                onClick={() => handleProductClick(product.id)}
+                onClick={() => handleProductClick(product.name)}
               >
                 <ImageWithSkeleton
                   src={product.image}
-                  alt={`Product ${product.id}`}
+                  alt={`Product ${product.name}`}
                 />
                 <PriceInfo>
                   <div>원가: {product.originalPrice.toLocaleString()}원</div>
