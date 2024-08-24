@@ -50,10 +50,6 @@ const SearchResultsPage: React.FC = () => {
     fetchData();
   }, [keyword]);
 
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
   if (error) {
     return <div>{error}</div>;
   }
@@ -61,7 +57,9 @@ const SearchResultsPage: React.FC = () => {
   return (
     <Container>
       <PageNameTag pageName="Search Results" />
-      {data.length > 0 ? (
+      {loading ? (
+        <LoadingSpinner />
+      ) : data.length > 0 ? (
         data.map((item: any, index: number) => (
           <Link
             to={`/product/${encodeURIComponent(item.name)}`}

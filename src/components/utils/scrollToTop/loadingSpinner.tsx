@@ -7,7 +7,7 @@ const LoadingSpinner: React.FC = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '70vh'
+        height: '50vh'
       }}
     >
       <video autoPlay loop muted style={{ width: '50%' }}>

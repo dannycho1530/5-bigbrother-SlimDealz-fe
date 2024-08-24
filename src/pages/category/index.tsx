@@ -34,7 +34,7 @@ const CategoryPage = () => {
       if (Array.isArray(newProducts) && newProducts.length > 0) {
         setProducts((prevProducts) => [...prevProducts, ...newProducts]);
       } else {
-        setHasMore(false); // 더 이상 불러올 데이터가 없음
+        setHasMore(false);
       }
       setLoading(false);
     } catch (err: any) {
@@ -71,14 +71,6 @@ const CategoryPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading, hasMore]);
 
-  if (loading && page === 1) {
-    return <LoadingSpinner />;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -89,26 +81,40 @@ const CategoryPage = () => {
         <IconCategory />
       </ChickenChestWrapper>
       <PageNameTag pageName="추천 페이지" />
-      {products.map((product: any, index: number) => (
-        <Link
-          to={`/product/${encodeURIComponent(product.name)}`}
-          key={`${product.id}-${index}`}
-        >
-          <CategoryList
-            id={product.id}
-            //image={product.image}
-            name={product.name}
-            shipping={product.shippingFee}
-            price={product.prices?.[0]?.setPrice || '가격 없음'}
-          />
-        </Link>
-      ))}
-      {loading && <LoadingSpinner />}
+      {loading && page === 1 ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {products.map((product: any, index: number) => (
+            <Link
+              to={`/product/${encodeURIComponent(product.name)}`}
+              key={`${product.id}-${index}`}
+            >
+              <CategoryList
+                id={product.id}
+                //image={product.image}
+                name={product.name}
+                shipping={product.shippingFee}
+                price={product.prices?.[0]?.setPrice || '가격 없음'}
+              />
+            </Link>
+          ))}
+          {loading && <LoadingSpinner />} {/* 추가 로딩 시 로딩 스피너 표시 */}
+        </>
+      )}
       <Fab
         color="primary"
         aria-label="scroll back to top"
         onClick={scrollToTop}
-        sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        sx={{
+          position: 'absolute',
+          bottom: 80,
+          right: 16,
+          backgroundColor: '#FFC0CB', // 연핑크색
+          '&:hover': {
+            backgroundColor: '#FFB6C1' // 호버 시 연핑크색
+          }
+        }}
       >
         <NavigationIcon />
       </Fab>
