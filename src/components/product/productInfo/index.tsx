@@ -9,6 +9,8 @@ import {
   ProductBookmarkContainer,
   ProductUrlContainer
 } from './styles';
+import { useNavigate } from 'react-router-dom';
+import LoginRequiredModal from '@/components/modal/logInModal';
 
 interface ProductInfoProps {
   originalPrice: number;
@@ -20,6 +22,8 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
   productName
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const jwtToken = localStorage.getItem('jwtToken');
@@ -27,6 +31,20 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
       setIsAuthenticated(true);
     }
   }, []);
+
+  const handleBookmarkClick = () => {
+    if (!isAuthenticated) {
+      setIsModalOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const goToLogin = () => {
+    navigate('/signIn');
+  };
 
   return (
     <ProductInfoContainer>
@@ -37,16 +55,19 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
       <PriceInfoContainer>
         <ProductPrice originalPrice={originalPrice} />
         <ProductInfoOptionContainer>
-          {isAuthenticated && (
-            <ProductBookmarkContainer>
-              <ProductBookmark productName={productName} />
-            </ProductBookmarkContainer>
-          )}
+          <ProductBookmarkContainer onClick={handleBookmarkClick}>
+            <ProductBookmark productName={productName} />
+          </ProductBookmarkContainer>
           <ProductUrlContainer>
             <ProductUrl />
           </ProductUrlContainer>
         </ProductInfoOptionContainer>
       </PriceInfoContainer>
+      <LoginRequiredModal
+        open={isModalOpen}
+        onClose={closeModal}
+        onLogin={goToLogin}
+      />
     </ProductInfoContainer>
   );
 };
