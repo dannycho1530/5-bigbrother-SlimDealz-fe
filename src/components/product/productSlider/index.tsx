@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
+import { getNumberWithComma } from '@/components/utils/conversion';
 
 type Product = {
   id: number;
@@ -73,8 +74,6 @@ const ProductSlider = ({ title, products = [] }: Props) => {
                 />
                 <PriceInfo>
                   <div>원가: {product.originalPrice.toLocaleString()}원</div>
-                  <div>할인율: {product.discountRate}%</div>
-                  <div>판매가: {product.salePrice.toLocaleString()}원</div>
                 </PriceInfo>
               </ProductItem>
             ))

@@ -7,24 +7,32 @@ import Banner from '../../components/layoutWrapper/banner';
 import ThirdSlider from '@/components/product/slider/thirdSlider';
 
 const MainPage = () => {
+  const [jwtToken, setJwtToken] = useState<string | null>(null);
+  const [lowestProducts, setLowestProducts] = useState([]);
+
   useEffect(() => {
     // URL에서 jwtToken과 refreshToken 추출
     const urlParams = new URLSearchParams(window.location.search);
-    const jwtToken = urlParams.get('jwtToken');
+    const token = urlParams.get('jwtToken');
     const refreshToken = urlParams.get('refreshToken');
 
-    if (jwtToken && refreshToken) {
+    if (token && refreshToken) {
       // 토큰을 localStorage에 저장
-      localStorage.setItem('jwtToken', jwtToken);
+      localStorage.setItem('jwtToken', token);
       localStorage.setItem('refreshToken', refreshToken);
+      setJwtToken(token);
 
       // 토큰이 URL에 있을 경우, URL을 정리 (토큰이 없는 상태로 URL을 유지)
       const newUrl = window.location.origin + window.location.pathname;
       window.history.replaceState(null, '', newUrl);
+    } else {
+      // 만약 localStorage에 토큰이 있으면 설정
+      const storedToken = localStorage.getItem('jwtToken');
+      if (storedToken) {
+        setJwtToken(storedToken);
+      }
     }
   }, []);
-
-  const [lowestProducts, setLowestProducts] = useState([]);
 
   useEffect(() => {
     const fetchLowestProducts = async () => {
@@ -44,7 +52,6 @@ const MainPage = () => {
         setLowestProducts(productData);
       } catch (error: any) {
         if (error.response) {
-          // 서버가 응답을 보냈지만 상태 코드가 2xx가 아닌 경우
           if (error.response.status === 404) {
             console.error('Product not found', error.response.data.message);
           } else if (error.response.status === 500) {
@@ -53,10 +60,8 @@ const MainPage = () => {
             console.error('An unexpected error occurred:', error.response.data);
           }
         } else if (error.request) {
-          // 요청이 이루어졌으나 서버로부터 응답이 없을 때
           console.error('No response received from server', error.request);
         } else {
-          // 오류가 발생하여 요청이 보내지지 않은 경우
           console.error('Error setting up the request:', error.message);
         }
       }
@@ -115,13 +120,13 @@ const MainPage = () => {
 
   return (
     <>
-      <Banner></Banner>
+      <Banner />
       <Container>
         <ChickenChestWrapper>
           {/* 나중에 map을 통해 IconCategory 컴포넌트를 4개로 늘릴 수 있음 */}
           <IconCategory />
         </ChickenChestWrapper>
-        <ProductSlider title="MY BOOKMARKS" />
+        {jwtToken && <ProductSlider title="MY BOOKMARKS" />}
         <ProductSlider title="오늘의 최저가" products={lowestProducts} />
         <ThirdSlider items={recommendedItems} title="고객님 맞춤 상품 추천" />
       </Container>

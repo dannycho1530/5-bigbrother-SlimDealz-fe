@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AutoCompleteItem, AutoCompleteList, CustomInput } from './styles';
-import { SearchContext } from '../../utils/context/searchContext';
+import { SearchContext } from '../../utils/context/searchContext';
 
 const words = ['example', 'search', 'terms', 'list', 'of', 'words']; // 검색어를 필터링하기 위한 단어 목록
 
@@ -16,7 +15,7 @@ const SearchBar: React.FC = () => {
   const [prevPathname, setPrevPathname] = useState('');
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     setPreviousSearchValue('');
@@ -27,16 +26,16 @@ const SearchBar: React.FC = () => {
     }
   }, [location.pathname, setSearchQuery]);
 
-  useEffect(() => {
-    if (location.pathname.startsWith('/searchResults')) {
-      const searchTermFromURL = decodeURIComponent(
-        location.pathname.split('/searchResults/')[1] || ''
-      );
-      if (searchTermFromURL && searchTermFromURL !== searchQuery) {
-        setSearchQuery(searchTermFromURL);
-      }
-    }
-  }, [location.pathname, searchQuery, setSearchQuery]);
+  // useEffect(() => {
+  //   if (location.pathname.startsWith('/searchResults')) {
+  //     const searchTermFromURL = decodeURIComponent(
+  //       location.pathname.split('/searchResults/')[1] || ''
+  //     );
+  //     if (searchTermFromURL && searchTermFromURL !== searchQuery) {
+  //       setSearchQuery(searchTermFromURL);
+  //     }
+  //   }
+  // }, [location.pathname, searchQuery, setSearchQuery]);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -53,8 +52,8 @@ const SearchBar: React.FC = () => {
   };
 
   const handleSearch = (value: string) => {
-    if (previousSearchValue === value && location.pathname === prevPathname)
-      return;
+    // if (previousSearchValue === value && location.pathname === prevPathname)
+    //   return;
 
     setPreviousSearchValue(value);
     setFilteredWords([]);
@@ -78,7 +77,8 @@ const SearchBar: React.FC = () => {
   };
 
   const handleInputClick = () => {
-    navigate('/searchInitial');
+    // navigate('/searchInitial');
+    setSearchQuery('');
   };
 
   return (

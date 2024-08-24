@@ -1,71 +1,72 @@
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
+import { useNavigate } from 'react-router-dom';
 
-const UserBookmarkPage = () => {
-  const mockData = [
-    {
-      id: 1,
-      image: '/path/to/image1.jpg',
-      name: '바르닭 수비드 닭가슴살 (5가지맛) 30종 허닭',
-      brand: '바르닭',
-      price: 999999,
-      per100gPrice: '2,130',
-      shipping: '무료 배송',
-      rating: 4,
-      bookmarkCount: 2145
-    },
-    {
-      id: 2,
-      image: '/path/to/image2.jpg',
-      name: '바르닭 소금구이 닭가슴살',
-      brand: '바르닭',
-      price: 150000,
-      per100gPrice: '2,500',
-      shipping: '무료 배송',
-      rating: 5,
-      bookmarkCount: 500
-    },
-    {
-      id: 3,
-      image: '/path/to/image3.jpg',
-      name: '허닭 닭가슴살 스테이크',
-      brand: '허닭',
-      price: 120000,
-      per100gPrice: '1,800',
-      shipping: '무료 배송',
-      rating: 3,
-      bookmarkCount: 350
-    },
-    {
-      id: 4,
-      image: '/path/to/image4.jpg',
-      name: '맛있는 닭가슴살',
-      brand: '맛닭',
-      price: 100000,
-      per100gPrice: '2,000',
-      shipping: '유료 배송',
-      rating: 4,
-      bookmarkCount: 1200
-    },
-    {
-      id: 5,
-      image: '/path/to/image5.jpg',
-      name: '다이어트용 닭가슴살',
-      brand: '다이어트',
-      price: 130000,
-      per100gPrice: '2,100',
-      shipping: '무료 배송',
-      rating: 5,
-      bookmarkCount: 800
-    }
-  ];
+const UserBookmarkPage: React.FC = () => {
+  const [bookmarks, setBookmarks] = useState([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) throw new Error('JWT 토큰이 없습니다.');
+
+        const response = await axios.get(`/api/v1/users/{userId}/bookmarks`, {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`
+          }
+        });
+
+        if (response.status === 200) {
+          setBookmarks(response.data);
+        }
+      } catch (err: any) {
+        if (err.response) {
+          if (err.response.status === 400) {
+            setError('Invalid data.');
+          } else if (err.response.status === 401) {
+            setError('Unauthorized access.');
+            navigate('/login'); // 로그인 페이지로 이동
+          } else if (err.response.status === 500) {
+            setError('Server error occurred.');
+          }
+        } else {
+          setError('Network error.');
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBookmarks();
+  }, [navigate]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Container>
-      <PageNameTag pageName="전체 0개" />
-      {mockData.map((item, index) => (
-        <CategoryList key={index} {...item} />
+      <PageNameTag pageName={`전체 ${bookmarks.length}개`} />
+      {bookmarks.map((bookmark: any, index: number) => (
+        <CategoryList
+          key={index}
+          id={bookmark.productId[index]?.id} // productId
+          // image={bookmark.productId[index]?.image} // 이미지 URL
+          name={bookmark.productId[index]?.name} // 제품 이름
+          shipping={bookmark.productId[index]?.shippingFee} // 배송 정보
+          price={bookmark.prices[index]?.setPrice} // setPrice 값 전달
+        />
       ))}
     </Container>
   );

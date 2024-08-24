@@ -9,7 +9,7 @@ import {
   PageTitle
 } from './styles';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useHeaderHeight } from '@/components/utils/\bcontext/headerHeightContext';
+import { useHeaderHeight } from '@/components/utils/context/headerHeightContext';
 
 const logo = '/assets/logo.png';
 
@@ -75,7 +75,12 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(({ pageTitle }, ref) => {
   };
 
   const handleBackClick = () => {
-    navigate(-1);
+    if (window.history.length > 2) {
+      // 뒤로 갈 히스토리가 있는 경우
+      window.history.back();
+    } else {
+      navigate('/', { replace: true }); // 히스토리가 없으면 메인 페이지로 이동하고, 이동된 히스토리를 삭제
+    }
   };
 
   return (

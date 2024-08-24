@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 const CategoryPage = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,7 +19,9 @@ const CategoryPage = () => {
           params: { category: '닭가슴살' }
         });
         setProducts(response.data);
+        setLoading(false); // 데이터 로딩 완료
       } catch (err: any) {
+        setLoading(false); // 데이터 로딩 완료
         if (err.response) {
           if (err.response.status === 404) {
             setError('Products not found');
@@ -34,12 +37,12 @@ const CategoryPage = () => {
     fetchProducts();
   }, []);
 
-  if (error) {
-    return <div>{error}</div>;
+  if (loading) {
+    return <div>Loading...</div>; // 로딩 스피너 추가 가능
   }
 
-  if (products.length === 0) {
-    return <div>Loading...</div>;
+  if (error) {
+    return <div>{error}</div>;
   }
 
   return (
@@ -55,9 +58,10 @@ const CategoryPage = () => {
         >
           <CategoryList
             id={product.id}
-            image={product.image}
+            //  image={product.image}
             name={product.name}
             shipping={product.shippingFee}
+            price={product.prices?.[0]?.setPrice || '가격 없음'} // 안전한 가격 접근
           />
         </Link>
       ))}

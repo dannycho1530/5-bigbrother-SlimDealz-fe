@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
-import { SearchContext } from '../../../components/utils/context/searchContext';
+import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams, Link } from 'react-router-dom';
 
 const SearchResultsPage: React.FC = () => {
@@ -69,13 +69,14 @@ const SearchResultsPage: React.FC = () => {
           >
             <CategoryList
               id={item.id}
-              image={item.image}
+              //  image={item.image}
               name={item.name}
               // price={item.price} // 주석 처리: API에서 제공되지 않음
               // per100gPrice="N/A" // 주석 처리: API에서 제공되지 않음
               shipping={item.shippingFee}
               // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
               // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
+              price={item.prices[index]?.setPrice} // setPrice 값 전달
             />
           </Link>
         ))
