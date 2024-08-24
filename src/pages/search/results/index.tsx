@@ -5,12 +5,12 @@ import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams, Link } from 'react-router-dom';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const SearchResultsPage: React.FC = () => {
   const { keyword } = useParams<{ keyword: string }>();
   const { setSearchQuery } = useContext(SearchContext);
   const [data, setData] = useState([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -34,12 +34,12 @@ const SearchResultsPage: React.FC = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 404) {
-            setError('Keyword not found.');
+            console.log('Keyword not found.');
           } else if (err.response.status === 500) {
-            setError('Server error occurred.');
+            console.log('Server error occurred.');
           }
         } else {
-          setError('Network error.');
+          console.log('Network error.');
         }
       } finally {
         setLoading(false);
@@ -49,18 +49,12 @@ const SearchResultsPage: React.FC = () => {
     fetchData();
   }, [keyword]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   return (
     <Container>
       <PageNameTag pageName="Search Results" />
-      {data.length > 0 ? (
+      {loading ? (
+        <LoadingSpinner />
+      ) : data.length > 0 ? (
         data.map((item: any, index: number) => (
           <Link
             to={`/product/${encodeURIComponent(item.name)}`}
@@ -76,7 +70,7 @@ const SearchResultsPage: React.FC = () => {
               shipping={item.shippingFee}
               // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
               // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              price={item.prices[index]?.setPrice} // setPrice 값 전달
+              price={item.prices[0]?.setPrice} // setPrice 값 전달
             />
           </Link>
         ))

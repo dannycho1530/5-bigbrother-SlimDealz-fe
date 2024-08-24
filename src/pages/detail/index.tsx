@@ -8,11 +8,11 @@ import ReviewList from '../../components/list/reviewList';
 import ImageView from '../../components/image/productImage';
 import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const DetailPage = () => {
   const { productName } = useParams<{ productName: string }>();
   const [productData, setProductData] = useState(null);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProductData = async () => {
@@ -24,12 +24,12 @@ const DetailPage = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 404) {
-            setError('Product not found');
+            console.log('Product not found');
           } else {
-            setError('Server error');
+            console.log('Server error');
           }
         } else {
-          setError('Network error');
+          console.log('Network error');
         }
       }
     };
@@ -37,31 +37,22 @@ const DetailPage = () => {
     fetchProductData();
   }, [productName]);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   if (!productData) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   const { image, name, prices } = productData;
-  const { discountedPrice, setPrice } = prices[0];
-  const discountRate = Math.round(
-    ((setPrice - discountedPrice) / setPrice) * 100
-  );
+  const { setPrice } = prices[0];
 
   return (
     <Container>
       <ImageView src={image} alt={name} />
       <InfoContainer>
-        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{name}</div>
+        <div style={{ fontSize: '20px', fontWeight: 'bold', width: '300px' }}>
+          {name}
+        </div>
       </InfoContainer>
-      <ProductInfo
-        discountedPrice={discountedPrice}
-        originalPrice={setPrice}
-        discountRate={discountRate}
-      />
+      <ProductInfo originalPrice={setPrice} />
       {/* <PriceAlertSetting /> */}
       <TabsComponent />
       {/* <Title>리뷰</Title>

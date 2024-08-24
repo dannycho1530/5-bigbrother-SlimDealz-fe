@@ -40,6 +40,7 @@ const MainPage = () => {
         const response = await axios.get('/api/v1/today-lowest-products');
         const productData = response.data.map((product: any) => ({
           id: product.id,
+          name: product.name,
           image: product.image,
           originalPrice: product.prices[0].setPrice,
           salePrice: product.prices[0].discountedPrice,

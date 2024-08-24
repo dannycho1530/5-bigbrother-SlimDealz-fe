@@ -4,10 +4,10 @@ import { Container } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
 
 const UserBookmarkPage: React.FC = () => {
   const [bookmarks, setBookmarks] = useState([]);
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
@@ -29,15 +29,15 @@ const UserBookmarkPage: React.FC = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 400) {
-            setError('Invalid data.');
+            console.log('Invalid data.');
           } else if (err.response.status === 401) {
-            setError('Unauthorized access.');
+            console.log('Unauthorized access.');
             navigate('/login'); // 로그인 페이지로 이동
           } else if (err.response.status === 500) {
-            setError('Server error occurred.');
+            console.log('Server error occurred.');
           }
         } else {
-          setError('Network error.');
+          console.log('Network error.');
         }
       } finally {
         setLoading(false);
@@ -48,11 +48,7 @@ const UserBookmarkPage: React.FC = () => {
   }, [navigate]);
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -61,11 +57,11 @@ const UserBookmarkPage: React.FC = () => {
       {bookmarks.map((bookmark: any, index: number) => (
         <CategoryList
           key={index}
-          id={bookmark.productId[index]?.id} // productId
-          // image={bookmark.productId[index]?.image} // 이미지 URL
-          name={bookmark.productId[index]?.name} // 제품 이름
-          shipping={bookmark.productId[index]?.shippingFee} // 배송 정보
-          price={bookmark.prices[index]?.setPrice} // setPrice 값 전달
+          id={bookmark.productId[0]?.id} // productId
+          // image={bookmark.productId[0]?.image} // 이미지 URL
+          name={bookmark.productId[0]?.name} // 제품 이름
+          shipping={bookmark.productId[0]?.shippingFee} // 배송 정보
+          price={bookmark.prices[0]?.setPrice} // setPrice 값 전달
         />
       ))}
     </Container>

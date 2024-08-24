@@ -3,14 +3,16 @@ import { Container, Header, Section, Description, KakaoButton } from './styles';
 import { useNavigate } from 'react-router-dom';
 
 const SignInPage: React.FC = () => {
-
   const navigate = useNavigate();
 
   // 카카오 로그인 URL을 생성합니다.
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${import.meta.env.VITE_KAKAO_API_KEY}&redirect_uri=${encodeURIComponent(import.meta.env.VITE_KAKAO_REDIRECT_URI)}&response_type=code`;
 
   // 환경 변수가 설정되지 않은 경우 처리
-  if (!import.meta.env.VITE_KAKAO_API_KEY || !import.meta.env.VITE_KAKAO_REDIRECT_URI) {
+  if (
+    !import.meta.env.VITE_KAKAO_API_KEY ||
+    !import.meta.env.VITE_KAKAO_REDIRECT_URI
+  ) {
     console.error('Kakao API Key or Redirect URI is missing.');
     return (
       <Container>
@@ -30,7 +32,7 @@ const SignInPage: React.FC = () => {
 
   const handleLogin = () => {
     window.location.href = KAKAO_AUTH_URL;
-    navigate('/signUp');
+    // navigate('/signUp');
   };
 
   return (
@@ -45,7 +47,10 @@ const SignInPage: React.FC = () => {
           다양한 서비스를 이용해보세요.
         </Description>
         <KakaoButton className="kakao-login" onClick={handleLogin}>
-          <span role="img" aria-label="kakao-logo">🗨️</span> 카카오 로그인
+          <span role="img" aria-label="kakao-logo">
+            🗨️
+          </span>{' '}
+          카카오 로그인
         </KakaoButton>
       </Section>
     </Container>
