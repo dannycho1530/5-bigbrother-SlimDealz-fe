@@ -47,22 +47,17 @@ const DetailPage = () => {
   }
 
   const { image, name, prices } = productData;
-  const { discountedPrice, setPrice } = prices[0];
-  const discountRate = Math.round(
-    ((setPrice - discountedPrice) / setPrice) * 100
-  );
+  const { setPrice } = prices[0];
 
   return (
     <Container>
       <ImageView src={image} alt={name} />
       <InfoContainer>
-        <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{name}</div>
+        <div style={{ fontSize: '16px', fontWeight: 'bold', width: '250px' }}>
+          {name}
+        </div>
       </InfoContainer>
-      <ProductInfo
-        discountedPrice={discountedPrice}
-        originalPrice={setPrice}
-        discountRate={discountRate}
-      />
+      <ProductInfo originalPrice={setPrice} />
       {/* <PriceAlertSetting /> */}
       <TabsComponent />
       {/* <Title>리뷰</Title>

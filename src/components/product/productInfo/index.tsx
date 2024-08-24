@@ -13,16 +13,10 @@ import {
 } from './styles';
 
 interface ProductInfoProps {
-  discountRate: number;
-  discountedPrice: number;
   originalPrice: number;
 }
 
-const ProductInfo: React.FC<ProductInfoProps> = ({
-  discountRate,
-  discountedPrice,
-  originalPrice
-}) => {
+const ProductInfo: React.FC<ProductInfoProps> = ({ originalPrice }) => {
   return (
     <ProductInfoContainer>
       {/* <RateInfoContainer>
@@ -30,11 +24,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
         <ReviewCount count={1000} />
       </RateInfoContainer> */}
       <PriceInfoContainer>
-        <ProductPrice
-          discountRate={discountRate}
-          discountedPrice={discountedPrice}
-          originalPrice={originalPrice}
-        />
+        <ProductPrice originalPrice={originalPrice} />
         <ProductInfoOptionContainer>
           <ProductBookmarkContainer>
             <ProductBookmark />
