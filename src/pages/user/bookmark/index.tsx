@@ -61,11 +61,11 @@ const UserBookmarkPage: React.FC = () => {
       {bookmarks.map((bookmark: any, index: number) => (
         <CategoryList
           key={index}
-          id={bookmark.productId[index]?.id} // productId
-          // image={bookmark.productId[index]?.image} // 이미지 URL
-          name={bookmark.productId[index]?.name} // 제품 이름
-          shipping={bookmark.productId[index]?.shippingFee} // 배송 정보
-          price={bookmark.prices[index]?.setPrice} // setPrice 값 전달
+          id={bookmark.productId[0]?.id} // productId
+          // image={bookmark.productId[0]?.image} // 이미지 URL
+          name={bookmark.productId[0]?.name} // 제품 이름
+          shipping={bookmark.productId[0]?.shippingFee} // 배송 정보
+          price={bookmark.prices[0]?.setPrice} // setPrice 값 전달
         />
       ))}
     </Container>

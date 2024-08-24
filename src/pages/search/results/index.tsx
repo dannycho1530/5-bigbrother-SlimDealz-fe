@@ -76,7 +76,7 @@ const SearchResultsPage: React.FC = () => {
               shipping={item.shippingFee}
               // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
               // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              price={item.prices[index]?.setPrice} // setPrice 값 전달
+              price={item.prices[0]?.setPrice} // setPrice 값 전달
             />
           </Link>
         ))
