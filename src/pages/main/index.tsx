@@ -9,6 +9,7 @@ import ThirdSlider from '@/components/product/slider/thirdSlider';
 const MainPage = () => {
   const [jwtToken, setJwtToken] = useState<string | null>(null);
   const [lowestProducts, setLowestProducts] = useState([]);
+  const [bookmarkProducts, setBookmarkProducts] = useState([]);
 
   useEffect(() => {
     // URL에서 jwtToken과 refreshToken 추출
@@ -68,7 +69,32 @@ const MainPage = () => {
       }
     };
 
+    const fetchBookmarkProducts = async () => {
+      try {
+        const jwtToken = localStorage.getItem('jwtToken');
+        if (!jwtToken) return;
+
+        const response = await axios.get('/api/v1/users/bookmarks', {
+          headers: {
+            Authorization: `Bearer ${jwtToken}`
+          }
+        });
+        const bookmarkData = response.data.map((product: any) => ({
+          id: product.productId,
+          name: product.name,
+          image: product.image,
+          originalPrice: product.prices[0]?.setPrice,
+          salePrice: product.prices[0]?.discountedPrice,
+          discountRate: product.discountRate
+        }));
+        setBookmarkProducts(bookmarkData);
+      } catch (error) {
+        console.error('Error fetching bookmarks:', error);
+      }
+    };
+
     fetchLowestProducts();
+    fetchBookmarkProducts();
   }, []);
 
   const recommendedItems = [
@@ -127,7 +153,9 @@ const MainPage = () => {
           {/* 나중에 map을 통해 IconCategory 컴포넌트를 4개로 늘릴 수 있음 */}
           <IconCategory />
         </ChickenChestWrapper>
-        {jwtToken && <ProductSlider title="MY BOOKMARKS" />}
+        {jwtToken && (
+          <ProductSlider title="MY BOOKMARKS" products={bookmarkProducts} />
+        )}
         <ProductSlider title="오늘의 최저가" products={lowestProducts} />
         <ThirdSlider items={recommendedItems} title="고객님 맞춤 상품 추천" />
       </Container>

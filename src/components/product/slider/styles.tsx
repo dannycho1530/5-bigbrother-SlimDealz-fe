@@ -7,9 +7,9 @@ export const SwiperSlideStyled = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fdf9ff;
+  background-color: #fcf6ff;
   border-radius: 18px;
-  border: 1px solid #e1e1e1;
+  border: 5px solid #fdf9ff;
 `;
 
 export const StyledSwiperContainer = styled.div`

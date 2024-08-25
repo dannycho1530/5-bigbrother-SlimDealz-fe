@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { IconButton } from '@mui/material';
-import { BookmarkBorder, Bookmark } from '@mui/icons-material';
 import axios from 'axios';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import {
   Container,
   ImageContainer,
@@ -58,7 +59,7 @@ const CategoryList = ({
         // 북마크 추가
         await axios.post(
           `/api/v1/users/${userId}/bookmarks`,
-          { userId, productId: id },
+          { userId, productName: name },
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
@@ -108,7 +109,11 @@ const CategoryList = ({
             }}
             style={{ paddingLeft: '10px' }}
           >
-            {bookmarked ? <Bookmark /> : <BookmarkBorder />}
+            {bookmarked ? (
+              <BookmarkOutlinedIcon />
+            ) : (
+              <BookmarkBorderOutlinedIcon />
+            )}
           </IconButton>
           {/* <BookmarkCount>{bookmarkCount}</BookmarkCount> */}
         </BookmarkCountWrapper>

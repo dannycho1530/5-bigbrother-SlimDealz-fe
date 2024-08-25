@@ -5,7 +5,8 @@ import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams, Link } from 'react-router-dom';
-import LoadingSpinner from '@/components/utils/scrollToTop/loadingSpinner';
+import LoadingSpinner from '@/components/utils/loadingSpinner';
+import NoResultsSpinner from '@/components/utils/noResultsSpinner';
 
 const SearchResultsPage: React.FC = () => {
   const { keyword } = useParams<{ keyword: string }>();
@@ -16,6 +17,9 @@ const SearchResultsPage: React.FC = () => {
   useEffect(() => {
     if (keyword) {
       setSearchQuery(keyword);
+      // Reset data and loading state when a new search is initiated
+      setData([]);
+      setLoading(true);
     }
   }, [keyword, setSearchQuery]);
 
@@ -32,15 +36,7 @@ const SearchResultsPage: React.FC = () => {
           setData(response.data);
         }
       } catch (err: any) {
-        if (err.response) {
-          if (err.response.status === 404) {
-            console.log('Keyword not found.');
-          } else if (err.response.status === 500) {
-            console.log('Server error occurred.');
-          }
-        } else {
-          console.log('Network error.');
-        }
+        console.log('An error occurred:', err.message);
       } finally {
         setLoading(false);
       }
@@ -59,23 +55,18 @@ const SearchResultsPage: React.FC = () => {
           <Link
             to={`/product/${encodeURIComponent(item.name)}`}
             key={index}
-            style={{ textDecoration: 'none', color: 'inherit' }} // 기본 링크 스타일 제거
+            style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <CategoryList
               id={item.id}
-              //  image={item.image}
               name={item.name}
-              // price={item.price} // 주석 처리: API에서 제공되지 않음
-              // per100gPrice="N/A" // 주석 처리: API에서 제공되지 않음
               shipping={item.shippingFee}
-              // rating={4} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              // bookmarkCount={2145} // 주석 처리: 하드코딩된 값이므로 주석 처리
-              price={item.prices[0]?.setPrice} // setPrice 값 전달
+              price={item.prices[0]?.setPrice}
             />
           </Link>
         ))
       ) : (
-        <div>No results found.</div>
+        <NoResultsSpinner />
       )}
     </Container>
   );

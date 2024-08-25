@@ -73,7 +73,7 @@ const ProductSlider = ({ title, products = [] }: Props) => {
                   alt={`Product ${product.name}`}
                 />
                 <PriceInfo>
-                  <div>원가: {product.originalPrice.toLocaleString()}원</div>
+                  <div>판매가: {product.originalPrice.toLocaleString()}원</div>
                 </PriceInfo>
               </ProductItem>
             ))
