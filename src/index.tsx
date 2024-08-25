@@ -7,7 +7,7 @@ import GlobalStyles from './styles/globalStyles';
 import * as Sentry from '@sentry/react';
 
 Sentry.init({
-  dsn: process.env.SENTRY_AUTH_TOKEN,
+  dsn: import.meta.env.SENTRY_AUTH_TOKEN,
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.browserProfilingIntegration(),
