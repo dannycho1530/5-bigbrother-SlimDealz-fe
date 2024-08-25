@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton } from '@mui/material';
 import axios from 'axios';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
 import {
   Container,
   ImageContainer,
@@ -15,6 +13,8 @@ import {
   BookmarkCountWrapper
 } from './styles';
 import { getNumberWithComma } from '@/components/utils/conversion';
+import Bookmark from '@mui/icons-material/Bookmark';
+import BookmarkBorder from '@mui/icons-material/BookmarkBorder';
 
 type Props = {
   id: number;
@@ -109,11 +109,7 @@ const CategoryList = ({
             }}
             style={{ paddingLeft: '10px' }}
           >
-            {bookmarked ? (
-              <BookmarkOutlinedIcon />
-            ) : (
-              <BookmarkBorderOutlinedIcon />
-            )}
+            {bookmarked ? <Bookmark /> : <BookmarkBorder />}
           </IconButton>
           {/* <BookmarkCount>{bookmarkCount}</BookmarkCount> */}
         </BookmarkCountWrapper>
