@@ -29,7 +29,16 @@ export default defineConfig(({ command, mode }) => {
     ].filter(Boolean), // 플러그인 리스트에서 false 값을 제거
     build: {
       outDir: 'dist',
-      sourcemap: isProduction // 프로덕션 빌드에서만 sourcemap 생성
+      sourcemap: isProduction, // 프로덕션 빌드에서만 sourcemap 생성
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            // react와 react-dom을 별도의 청크로 분리
+            react: ['react', 'react-dom'],
+            vendor: ['axios']
+          }
+        }
+      }
     },
     server: {
       port: 3000,
