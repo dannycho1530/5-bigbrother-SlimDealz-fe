@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -10,9 +11,13 @@ export default defineConfig({
       '@mui/styled-engine': '@mui/styled-engine-sc'
     }
   },
-  plugins: [react()],
+  plugins: [react(), sentryVitePlugin({
+    org: "slimdealz",
+    project: "slimdealz"
+  })],
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    sourcemap: true
   },
   server: {
     port: 3000,
