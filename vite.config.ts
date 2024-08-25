@@ -35,7 +35,8 @@ export default defineConfig(({ command, mode }) => {
           manualChunks: {
             // react와 react-dom을 별도의 청크로 분리
             react: ['react', 'react-dom'],
-            vendor: ['axios']
+            vendor: ['axios'],
+            mui: ['@mui/material', '@mui/icons-material', '@mui/system']
           }
         }
       }

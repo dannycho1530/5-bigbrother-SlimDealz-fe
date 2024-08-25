@@ -5,21 +5,21 @@ import ScrollToTop from './components/utils/scrollToTop/scrollToTop';
 import { SearchProvider } from './components/utils/context/searchContext';
 import { HeaderHeightProvider } from './components/utils/context/headerHeightContext';
 import MainPage from './pages/main';
+import MyMainPage from './pages/user/myMain';
+import SignInPage from './pages/signIn';
+import UserBookmarkPage from './pages/user/bookmark';
+import ComingSoon from './components/utils/comingSoon';
 
 // 동적 import()를 사용한 페이지 컴포넌트 로드
 const CategoryPage = React.lazy(() => import('./pages/category'));
 const DetailPage = React.lazy(() => import('./pages/detail'));
 const SearchInitialPage = React.lazy(() => import('./pages/search/initial'));
 const SearchResultsPage = React.lazy(() => import('./pages/search/results'));
-const SignInPage = React.lazy(() => import('./pages/signIn'));
 const SignUpPage = React.lazy(() => import('./pages/signUp'));
 const UserAlarmPage = React.lazy(() => import('./pages/user/alarm'));
-const UserBookmarkPage = React.lazy(() => import('./pages/user/bookmark'));
 const UserRecentlyViewPage = React.lazy(
   () => import('./pages/user/recentlyView')
 );
-const MyMainPage = React.lazy(() => import('./pages/user/myMain'));
-const ComingSoon = React.lazy(() => import('./components/utils/comingSoon'));
 // const UserInformationPage = React.lazy(() => import('./pages/user/information'));
 
 const Loading = () => (
