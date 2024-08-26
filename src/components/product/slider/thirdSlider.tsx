@@ -23,8 +23,8 @@ interface ThirdSliderProps {
     name: string;
     image: string;
     originalPrice: number;
-    salePrice: number;
-    discountRate: number;
+    // salePrice: number;
+    // discountRate: number;
   }[];
   title: string;
 }
@@ -75,12 +75,12 @@ const ThirdSlider: React.FC<ThirdSliderProps> = ({ items, title }) => {
                 <ItemImage src={item.image} alt={item.name} />
                 <ItemDetails>
                   <ItemName>{item.name}</ItemName>
-                  <OriginalPrice>
+                  {/* <OriginalPrice>
                     원가: {getNumberWithComma(item.originalPrice)}원
                   </OriginalPrice>
-                  <DiscountRate>할인율: {item.discountRate}%</DiscountRate>
+                  <DiscountRate>할인율: {item.discountRate}%</DiscountRate> */}
                   <SalePrice>
-                    판매가: {getNumberWithComma(item.salePrice)}원
+                    판매가: {getNumberWithComma(item.originalPrice)}원
                   </SalePrice>
                 </ItemDetails>
               </SwiperSlideStyled>
