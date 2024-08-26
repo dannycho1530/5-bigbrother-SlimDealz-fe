@@ -16,6 +16,7 @@ import {
 import { Title } from '../productSlider/styles';
 import { useNavigate } from 'react-router-dom';
 import { getNumberWithComma } from '@/components/utils/conversion';
+import LoadingSpinner from '@/components/loading/loadingSpinner';
 
 interface ThirdSliderProps {
   items: {
@@ -57,17 +58,18 @@ const ThirdSlider: React.FC<ThirdSliderProps> = ({ items, title }) => {
     >
       <Title onClick={handleTitleClick}>{title}</Title>
       <StyledSwiperContainer>
-        <Swiper
-          effect={'cards'}
-          grabCursor={true}
-          modules={[EffectCards]}
-          style={{
-            width: '280px',
-            height: '350px'
-          }}
-        >
-          {items.map((item) => (
-            <SwiperSlide
+        {items.length > 0 ? (
+          <Swiper
+            effect={'cards'}
+            grabCursor={true}
+            modules={[EffectCards]}
+            style={{
+              width: '280px',
+              height: '350px'
+            }}
+          >
+            {items.map((item) => (
+               <SwiperSlide
               key={item.id}
               onClick={() => handleProductClick(item.name)}
             >
@@ -85,8 +87,12 @@ const ThirdSlider: React.FC<ThirdSliderProps> = ({ items, title }) => {
                 </ItemDetails>
               </SwiperSlideStyled>
             </SwiperSlide>
-          ))}
-        </Swiper>
+            ))}
+          </Swiper>
+        ) : (
+          <div>서버 오류</div>
+          // <LoadingSpinner />
+        )}
       </StyledSwiperContainer>
     </div>
   );

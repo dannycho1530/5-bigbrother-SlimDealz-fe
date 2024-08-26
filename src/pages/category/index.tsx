@@ -6,7 +6,7 @@ import { ChickenChestWrapper } from '../main/styles';
 import IconCategory from '../../components/icon/iconCategory';
 import PageNameTag from '../../components/tag/pageNameTag';
 import { Link } from 'react-router-dom';
-import LoadingSpinner from '@/components/utils/loadingSpinner';
+import LoadingProduct from '@/components/loading/loadingProduct';
 
 type Product = {
   id: number;
@@ -75,7 +75,7 @@ const CategoryPage = () => {
       </ChickenChestWrapper>
       <PageNameTag pageName="추천 페이지" />
       {loading && page === 1 ? (
-        <LoadingSpinner />
+        <LoadingProduct />
       ) : (
         <>
           {products.map((product: any, index: number) => (
@@ -92,7 +92,7 @@ const CategoryPage = () => {
               />
             </Link>
           ))}
-          {loading && <LoadingSpinner />} {/* 추가 로딩 시 로딩 스피너 표시 */}
+          {loading && <LoadingProduct />} {/* 추가 로딩 시 로딩 스피너 표시 */}
         </>
       )}
     </Container>
