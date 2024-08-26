@@ -11,7 +11,7 @@ import { LoadingProduct } from '@/components/loading';
 type Product = {
   id: number;
   name: string;
-  image: string;
+  imageUrl: string;
   shippingFee: string;
   prices: { setPrice: number }[];
 };
@@ -85,14 +85,14 @@ const CategoryPage = () => {
             >
               <CategoryList
                 id={product.id}
-                //image={product.image}
+                image={product.imageUrl}
                 name={product.name}
                 shipping={product.shippingFee}
                 price={product.prices?.[0]?.setPrice || '가격 없음'}
               />
             </Link>
           ))}
-          {loading && <LoadingProduct />} {/* 추가 로딩 시 로딩 스피너 표시 */}
+          {loading && <LoadingProduct />}
         </>
       )}
     </Container>

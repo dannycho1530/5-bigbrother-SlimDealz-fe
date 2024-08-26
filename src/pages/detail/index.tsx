@@ -41,12 +41,12 @@ const DetailPage = () => {
     return <LoadingProduct />;
   }
 
-  const { image, name, prices } = productData;
+  const { imageUrl, name, prices } = productData;
   const { setPrice } = prices[0];
 
   return (
     <Container>
-      <ImageView src={image} alt={name} />
+      <ImageView src={imageUrl} alt={name} />
       <InfoContainer>
         <div style={{ fontSize: '20px', fontWeight: 'bold', width: '300px' }}>
           {name}

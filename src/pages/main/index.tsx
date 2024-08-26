@@ -43,7 +43,7 @@ const MainPage = () => {
         const productData = response.data.map((product: any) => ({
           id: product.id,
           name: product.name,
-          image: product.image,
+          imageUrl: product.imageUrl,
           originalPrice: product.prices[0].setPrice,
           salePrice: product.prices[0].discountedPrice,
           discountRate: Math.round(
@@ -83,7 +83,7 @@ const MainPage = () => {
         const bookmarkData = response.data.map((product: any) => ({
           id: product.productId,
           name: product.name,
-          image: product.image,
+          imageUrl: product.imageUrl,
           originalPrice: product.prices[0]?.setPrice,
           salePrice: product.prices[0]?.discountedPrice,
           discountRate: product.discountRate
@@ -100,7 +100,7 @@ const MainPage = () => {
         const productData = response.data.map((product: any) => ({
           id: product.id,
           name: product.name,
-          image: product.image,
+          imageUrl: product.imageUrl,
           originalPrice: product.prices[0].setPrice,
           salePrice: product.prices[0].discountedPrice,
           discountRate: Math.round(

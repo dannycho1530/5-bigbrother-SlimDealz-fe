@@ -132,6 +132,7 @@ const UserBookmarkPage: React.FC = () => {
         <CategoryList
           key={index}
           id={bookmark.productId}
+          image={bookmark.imageUrl}
           name={bookmark.name}
           shipping={bookmark.shippingFee}
           price={bookmark.prices[0]?.setPrice}

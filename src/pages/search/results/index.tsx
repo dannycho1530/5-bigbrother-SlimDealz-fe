@@ -59,6 +59,7 @@ const SearchResultsPage: React.FC = () => {
           >
             <CategoryList
               id={item.id}
+              image={item.imageUrl}
               name={item.name}
               shipping={item.shippingFee}
               price={item.prices[0]?.setPrice}

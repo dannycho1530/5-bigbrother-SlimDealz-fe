@@ -22,10 +22,8 @@ interface ThirdSliderProps {
   items: {
     id: number;
     name: string;
-    image: string;
+    imageUrl: string;
     originalPrice: number;
-    // salePrice: number;
-    // discountRate: number;
   }[];
   title: string;
 }
@@ -74,7 +72,7 @@ const ThirdSlider: React.FC<ThirdSliderProps> = ({ items, title }) => {
                 onClick={() => handleProductClick(item.name)}
               >
                 <SwiperSlideStyled>
-                  <ItemImage src={item.image} alt={item.name} />
+                  <ItemImage src={item.imageUrl} alt={item.name} />
                   <ItemDetails>
                     <ItemName>{item.name}</ItemName>
                     {/* <OriginalPrice>
