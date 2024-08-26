@@ -11,7 +11,7 @@ import {
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
-import LoadingSpinner from '@/components/loading/loadingSpinner';
+import { LoadingSearch } from '@/components/loading';
 
 type Product = {
   id: number;
@@ -61,11 +61,11 @@ const ProductSlider = ({ title, products = [] }: Props) => {
     <Container>
       <Title onClick={handleTitleClick}>{title}</Title>
       <ProductSliderContainer>
+        <LeftArrow onClick={scrollLeft} />
         <ProductsWrapper ref={scrollRef}>
           {products.length > 0 ? (
             products.map((product) => (
               <>
-                <LeftArrow onClick={scrollLeft} />
                 <ProductItem
                   key={product.id}
                   onClick={() => handleProductClick(product.name)}
@@ -80,13 +80,12 @@ const ProductSlider = ({ title, products = [] }: Props) => {
                     </div>
                   </PriceInfo>
                 </ProductItem>
-                <RightArrow onClick={scrollRight} />
               </>
             ))
           ) : (
-            <div>서버 오류</div>
-            // <LoadingSpinner />
+            <LoadingSearch />
           )}
+          <RightArrow onClick={scrollRight} />
         </ProductsWrapper>
       </ProductSliderContainer>
     </Container>

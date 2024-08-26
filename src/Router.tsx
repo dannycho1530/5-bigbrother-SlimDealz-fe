@@ -9,7 +9,7 @@ import MyMainPage from './pages/user/myMain';
 import SignInPage from './pages/signIn';
 import UserBookmarkPage from './pages/user/bookmark';
 import ComingSoon from './components/utils/comingSoon';
-import LoadingSpinner from './components/loading/loadingSpinner';
+import { LoadingSpinner } from './components/loading';
 
 // 동적 import()를 사용한 페이지 컴포넌트 로드
 const CategoryPage = React.lazy(() => import('./pages/category'));

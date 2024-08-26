@@ -8,12 +8,12 @@ export const styles = {
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.8)', // Add background color if needed
-    zIndex: 9999 // Adjust z-index if needed
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    zIndex: 9999
   },
   loadingVideo: {
-    maxWidth: '80%', // Set max width of the video
-    maxHeight: '80%' // Set max height of the video
+    maxWidth: '80%',
+    maxHeight: '80%'
   },
   productContainer: {
     display: 'flex',
@@ -23,5 +23,14 @@ export const styles = {
   },
   productVideo: {
     width: '50%'
+  },
+  searchContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '30vh'
+  },
+  searchVideo: {
+    width: '100%'
   }
 };

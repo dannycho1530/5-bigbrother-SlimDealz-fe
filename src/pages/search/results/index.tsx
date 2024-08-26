@@ -6,7 +6,7 @@ import CategoryList from '../../../components/list/categoryList';
 import { SearchContext } from '../../../components/utils/context/searchContext';
 import { useParams, Link } from 'react-router-dom';
 import NoResultsSpinner from '@/components/utils/noResultsSpinner';
-import LoadingProduct from '@/components/loading/loadingProduct';
+import { LoadingProduct } from '@/components/loading';
 
 const SearchResultsPage: React.FC = () => {
   const { keyword } = useParams<{ keyword: string }>();

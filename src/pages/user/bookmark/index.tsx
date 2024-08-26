@@ -5,7 +5,7 @@ import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import LoadingProduct from '@/components/loading/loadingProduct';
+import { LoadingProduct } from '@/components/loading';
 
 const UserBookmarkPage: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);

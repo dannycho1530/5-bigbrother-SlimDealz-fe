@@ -8,7 +8,7 @@ import ReviewList from '../../components/list/reviewList';
 import ImageView from '../../components/image/productImage';
 import ProductInfo from '../../components/product/productInfo';
 import { InfoContainer } from '../../components/list/categoryList/styles';
-import LoadingProduct from '@/components/loading/loadingProduct';
+import { LoadingProduct } from '@/components/loading';
 
 const DetailPage = () => {
   const { productName } = useParams<{ productName: string }>();
@@ -54,7 +54,7 @@ const DetailPage = () => {
       </InfoContainer>
       <ProductInfo originalPrice={setPrice} productName={name} />
       {/* <PriceAlertSetting /> */}
-      <TabsComponent productData={productData} />
+      <TabsComponent productName={name} />
       {/* <Title>리뷰</Title>
       <ReviewList /> */}
     </Container>

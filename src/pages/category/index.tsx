@@ -6,7 +6,7 @@ import { ChickenChestWrapper } from '../main/styles';
 import IconCategory from '../../components/icon/iconCategory';
 import PageNameTag from '../../components/tag/pageNameTag';
 import { Link } from 'react-router-dom';
-import LoadingProduct from '@/components/loading/loadingProduct';
+import { LoadingProduct } from '@/components/loading';
 
 type Product = {
   id: number;
