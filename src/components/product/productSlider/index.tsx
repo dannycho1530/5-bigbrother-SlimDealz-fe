@@ -11,6 +11,7 @@ import {
 } from './styles';
 import { LeftArrow, RightArrow } from '../../../components/utils/arrow';
 import Skeleton from '@mui/material/Skeleton';
+import LoadingSpinner from '@/components/loading/loadingSpinner';
 
 type Product = {
   id: number;
@@ -60,28 +61,33 @@ const ProductSlider = ({ title, products = [] }: Props) => {
     <Container>
       <Title onClick={handleTitleClick}>{title}</Title>
       <ProductSliderContainer>
-        <LeftArrow onClick={scrollLeft} />
         <ProductsWrapper ref={scrollRef}>
           {products.length > 0 ? (
             products.map((product) => (
-              <ProductItem
-                key={product.id}
-                onClick={() => handleProductClick(product.name)}
-              >
-                <ImageWithSkeleton
-                  src={product.image}
-                  alt={`Product ${product.name}`}
-                />
-                <PriceInfo>
-                  <div>판매가: {product.originalPrice.toLocaleString()}원</div>
-                </PriceInfo>
-              </ProductItem>
+              <>
+                <LeftArrow onClick={scrollLeft} />
+                <ProductItem
+                  key={product.id}
+                  onClick={() => handleProductClick(product.name)}
+                >
+                  <ImageWithSkeleton
+                    src={product.image}
+                    alt={`Product ${product.name}`}
+                  />
+                  <PriceInfo>
+                    <div>
+                      판매가: {product.originalPrice.toLocaleString()}원
+                    </div>
+                  </PriceInfo>
+                </ProductItem>
+                <RightArrow onClick={scrollRight} />
+              </>
             ))
           ) : (
-            <div>상품 정보를 불러오는 중입니다...</div>
+            <div>서버 오류</div>
+            // <LoadingSpinner />
           )}
         </ProductsWrapper>
-        <RightArrow onClick={scrollRight} />
       </ProductSliderContainer>
     </Container>
   );

@@ -4,8 +4,8 @@ import { Container, CustomBox, CustomButton } from './styles';
 import PageNameTag from '../../../components/tag/pageNameTag';
 import CategoryList from '../../../components/list/categoryList';
 import { useNavigate } from 'react-router-dom';
-import LoadingSpinner from '@/components/utils/loadingSpinner';
 import { Typography } from '@mui/material';
+import LoadingProduct from '@/components/loading/loadingProduct';
 
 const UserBookmarkPage: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
@@ -21,7 +21,7 @@ const UserBookmarkPage: React.FC = () => {
       const jwtToken = localStorage.getItem('jwtToken');
       if (!jwtToken) {
         setIsAuthenticated(false);
-        setError('JWT 토큰이 없습니다.');
+        console.log('JWT 토큰이 없습니다.');
         setLoading(false);
         return;
       }
@@ -29,7 +29,7 @@ const UserBookmarkPage: React.FC = () => {
       const kakao_Id = extractKakaoIdFromToken(jwtToken);
       if (!kakao_Id) {
         setIsAuthenticated(false);
-        setError('Kakao_ID를 찾을 수 없습니다.');
+        console.log('Kakao_ID를 찾을 수 없습니다.');
         setLoading(false);
         return;
       }
@@ -67,14 +67,14 @@ const UserBookmarkPage: React.FC = () => {
       } catch (err: any) {
         if (err.response) {
           if (err.response.status === 400) {
-            setError('Invalid data.');
+            console.log('Invalid data.');
           } else if (err.response.status === 401) {
-            setError('Unauthorized access.');
+            console.log('Unauthorized access.');
           } else if (err.response.status === 500) {
-            setError('Server error occurred.');
+            console.log('Server error occurred.');
           }
         } else {
-          setError('Network error.');
+          console.log('Network error.');
         }
       } finally {
         setLoading(false);
@@ -104,7 +104,7 @@ const UserBookmarkPage: React.FC = () => {
   };
 
   if (loading) {
-    return <LoadingSpinner />;
+    return <LoadingProduct />;
   }
 
   if (!isAuthenticated) {
