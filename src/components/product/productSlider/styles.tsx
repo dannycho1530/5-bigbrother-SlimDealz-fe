@@ -131,6 +131,7 @@ export const PriceInfo = styled.div`
   text-align: center;
   font-size: 18px;
   margin-top: 20px;
+  font-weight: bold;
 `;
 
 export const SkeletonWrapper = styled(Skeleton)`

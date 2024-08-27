@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IconButton } from '@mui/material';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import BookmarkBorder from '@mui/icons-material/BookmarkBorder';
+import Bookmark from '@mui/icons-material/Bookmark';
 import axios from 'axios';
 
 interface ProductBookmarkProps {
@@ -67,7 +67,7 @@ const ProductBookmark: React.FC<ProductBookmarkProps> = ({ productName }) => {
 
   return (
     <IconButton onClick={handleBookmarkClick}>
-      {bookmarked ? <BookmarkOutlinedIcon /> : <BookmarkBorderOutlinedIcon />}
+      {bookmarked ? <Bookmark /> : <BookmarkBorder />}
     </IconButton>
   );
 };

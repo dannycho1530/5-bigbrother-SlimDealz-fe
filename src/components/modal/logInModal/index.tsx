@@ -22,11 +22,12 @@ const LoginRequiredModal: React.FC<LoginRequiredModalProps> = ({
             style={{ width: '50px', margin: '10px auto', borderColor: 'white' }}
           />
           <ModalMessage>
-            북마크는 로그인이 필요한 서비스입니다. 로그인하시겠습니까?
+            북마크는 로그인이 필요한 서비스입니다. <br />
+            로그인하시겠습니까?
           </ModalMessage>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <ActionButton onClick={onClose}>취소</ActionButton>
-            <ActionButton onClick={onLogin}>로그인하러가기</ActionButton>
+            <ActionButton onClick={onLogin}>로그인</ActionButton>
           </div>
         </ModalContent>
       </ModalOverlay>
